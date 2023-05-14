@@ -25,7 +25,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
+              <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
+=======
               <EmptySpace min="0" pref="39" max="32767" attributes="0"/>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
           </Group>
       </Group>
     </DimensionLayout>
@@ -182,11 +186,19 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+                          <Component id="curso_cli" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="matricula_cli" min="-2" pref="205" max="-2" attributes="0"/>
+                          <Component id="nome_cli" min="-2" pref="205" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="11" max="32767" attributes="0"/>
+=======
                           <Component id="professor_id" min="-2" pref="205" max="-2" attributes="0"/>
                           <Component id="codigo_cli" min="-2" pref="205" max="-2" attributes="0"/>
                           <Component id="nomedis_cli" min="-2" pref="205" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
                   </Group>
               </Group>
             </DimensionLayout>
@@ -195,17 +207,29 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace pref="81" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+                          <Component id="nome_cli" min="-2" max="-2" attributes="0"/>
+=======
                           <Component id="nomedis_cli" min="-2" max="-2" attributes="0"/>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+<<<<<<< HEAD
+                          <Component id="matricula_cli" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
                           <Component id="codigo_cli" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+<<<<<<< HEAD
+                          <Component id="curso_cli" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
                           <Component id="professor_id" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -214,7 +238,11 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
+<<<<<<< HEAD
+            <Component class="javax.swing.JTextField" name="nome_cli">
+=======
             <Component class="javax.swing.JTextField" name="nomedis_cli">
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -232,7 +260,11 @@
                 <Property name="text" type="java.lang.String" value="C&#xd2;DIGO DA DISCIPLINA"/>
               </Properties>
             </Component>
+<<<<<<< HEAD
+            <Component class="javax.swing.JTextField" name="matricula_cli">
+=======
             <Component class="javax.swing.JTextField" name="codigo_cli">
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -242,7 +274,11 @@
                 <Property name="text" type="java.lang.String" value="PROFESSOR RESPONSAVEL"/>
               </Properties>
             </Component>
+<<<<<<< HEAD
+            <Component class="javax.swing.JTextField" name="curso_cli">
+=======
             <Component class="javax.swing.JTextField" name="professor_id">
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
             </Component>
           </SubComponents>
         </Container>
@@ -254,15 +290,26 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jTextField4" min="-2" pref="324" max="-2" attributes="0"/>
+=======
                       <EmptySpace pref="18" max="32767" attributes="0"/>
                       <Component id="pesquisa_nomedis_cli" min="-2" pref="324" max="-2" attributes="0"/>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
+<<<<<<< HEAD
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+=======
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" max="32767" attributes="0"/>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -273,19 +320,53 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
+<<<<<<< HEAD
+                              <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
                               <Component id="pesquisa_nomedis_cli" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jButton6" min="-2" max="-2" attributes="0"/>
                       </Group>
+<<<<<<< HEAD
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="123" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+=======
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" pref="142" max="32767" attributes="0"/>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
+<<<<<<< HEAD
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTable1">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="3" rowCount="4">
+                        <Column editable="true" title="Disciplina" type="java.lang.Object"/>
+                        <Column editable="true" title="C&#xf2;digo" type="java.lang.Object"/>
+                        <Column editable="true" title="Professor" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JTextField" name="jTextField4">
+=======
             <Component class="javax.swing.JTextField" name="pesquisa_nomedis_cli">
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -302,6 +383,8 @@
                 </Property>
               </Properties>
             </Component>
+<<<<<<< HEAD
+=======
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
@@ -319,6 +402,7 @@
                 </Component>
               </SubComponents>
             </Container>
+>>>>>>> 4a397c1a4239188d19497063769400fc3a4ec4a4
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel2">

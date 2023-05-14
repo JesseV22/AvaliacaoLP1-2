@@ -1,12 +1,14 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/Application.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/MDIApplication.java to edit this template
  */
 package br.com.avaliacao_2.view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author izbel
+ * @author Jesse
  */
 public class PrincipalVIEW extends javax.swing.JFrame {
 
@@ -27,7 +29,8 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon imageicon = new ImageIcon(getClass().getResource("imagens/Aluno.png"));
+        desktopPane = new javax.swing.JDesktopPane();
+        ImageIcon imageicon = new ImageIcon(getClass().getResource("imagens/tela_inicial.jpg"));
         Image image = imageicon.getImage();
 
         jPanel1 = new javax.swing.JDesktopPane(){
@@ -39,11 +42,9 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         ;
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menuAluno = new javax.swing.JMenuItem();
+        menuCurso = new javax.swing.JMenuItem();
+        menuMatricula = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,44 +53,45 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 965, Short.MAX_VALUE)
+            .addGap(0, 1230, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 685, Short.MAX_VALUE)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
 
+        desktopPane.add(jPanel1);
+        jPanel1.setBounds(0, 0, 1230, 640);
+
         fileMenu.setMnemonic('f');
-        fileMenu.setText("Inicio");
+        fileMenu.setText("Sistema de Gerenciamento");
 
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Matricula");
-        fileMenu.add(openMenuItem);
+        menuAluno.setMnemonic('o');
+        menuAluno.setText("Aluno");
+        fileMenu.add(menuAluno);
 
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Curso");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Aluno");
-        fileMenu.add(saveAsMenuItem);
-
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Disciplina");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        menuCurso.setMnemonic('s');
+        menuCurso.setText("Curso");
+        menuCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
+                menuCursoActionPerformed(evt);
             }
         });
-        fileMenu.add(exitMenuItem);
+        fileMenu.add(menuCurso);
 
-        jMenuItem1.setText("Professor");
-        fileMenu.add(jMenuItem1);
+        menuMatricula.setMnemonic('a');
+        menuMatricula.setText("Matricula");
+        fileMenu.add(menuMatricula);
 
         menuBar.add(fileMenu);
 
         menuSair.setMnemonic('h');
         menuSair.setText("Sair");
+        menuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuSairMouseClicked(evt);
+            }
+        });
         menuBar.add(menuSair);
 
         setJMenuBar(menuBar);
@@ -98,20 +100,40 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 554, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
+    private void menuCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCursoActionPerformed
 
+    private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
+     sair();
+    }//GEN-LAST:event_menuSairMouseClicked
+
+    
+    
+    /**
+     * Método para fechar o sistema.
+     */ 
+    private void sair(){
+        Object[] options = { "Sair", "Cancelar" };
+        if(JOptionPane.showOptionDialog(null, "Deseja Sair do Sistema", "Informação", 
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 0){
+            System.exit(0);
+        } 
+    }
     /**
      * @param args the command line arguments
      */
@@ -148,15 +170,14 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem menuAluno;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem menuCurso;
+    private javax.swing.JMenuItem menuMatricula;
     private javax.swing.JMenu menuSair;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }

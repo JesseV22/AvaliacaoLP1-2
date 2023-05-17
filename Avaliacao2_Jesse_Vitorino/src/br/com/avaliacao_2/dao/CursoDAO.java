@@ -7,6 +7,8 @@ package br.com.avaliacao_2.dao;
 import br.com.avaliacao_2.dto.CursoDTO;
 import br.com.avaliacao_2.dao.CursoDAO;
 import br.com.avaliacao_2.dto.AlunoDTO;
+import br.com.avaliacao_2.dao.ConexaoDAO;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -130,7 +132,10 @@ public class CursoDAO {
         } finally {
             ConexaoDAO.CloseDB();
         }
-        public List<AlunoDTO> obterAlunosDoCurso(int idCurso) {
+
+    }
+
+    public List<AlunoDTO> obterAlunosDoCurso(int idCurso) {
     List<AlunoDTO> listaAlunos = new ArrayList<>();
     try {
         // Estabelecer a conexão com o banco de dados (assumindo que já existe uma classe de conexão)
@@ -139,7 +144,7 @@ public class CursoDAO {
         String consulta = "SELECT * FROM aluno WHERE curso_id = ?";
 
         // Preparar a declaração SQL
-        PreparedStatement stmt = conexao.prepareStatement(consulta);
+        PreparedStatement stmt = ConexaoDAO.con.prepareStatement(consulta);
         stmt.setInt(1, idCurso);
 
         // Executar a consulta e obter o resultado
@@ -149,8 +154,8 @@ public class CursoDAO {
         while (rs.next()) {
             AlunoDTO aluno = new AlunoDTO();
             aluno.setId(rs.getInt("id"));
-            aluno.setNome(rs.getString("nome"));
-            // Preencher outros atributos do aluno, se necessário v
+            aluno.setNome_al(rs.getString("nome"));
+            // Preencher outros atributos do aluno, se necessário
 
             // Adicionar o aluno à lista de alunos
             listaAlunos.add(aluno);
@@ -166,7 +171,5 @@ public class CursoDAO {
     }
     return listaAlunos;
 }
-
-    
 
 }

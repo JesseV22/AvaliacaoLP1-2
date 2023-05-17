@@ -17,6 +17,10 @@ public class ConexaoDAO {
     //com o banco de dados
     public static Connection con = null;
 
+    static PreparedStatement prepareStatement(String consulta) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     /**
      * Método construtor da classe
      *

@@ -134,6 +134,6 @@ public class CursoCTR {
         }
         
         return listaAlunos;
-    }
+    }//Fecha o método lista
 
 }//Fecha classe CursoCTR

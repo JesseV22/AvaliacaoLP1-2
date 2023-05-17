@@ -272,4 +272,8 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField nome_cur;
     // End of variables declaration//GEN-END:variables
+
+    void setPosicao() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

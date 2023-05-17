@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class MatriculaDTO {
     private  String aluno_mar , curso_mar ;
-    private int id_mar ;
+    private int id ;
     private Date data_mar;
 
     /**
@@ -42,19 +42,7 @@ public class MatriculaDTO {
         this.curso_mar = curso_mar;
     }
 
-    /**
-     * @return the id_mar
-     */
-    public int getId_mar() {
-        return id_mar;
-    }
 
-    /**
-     * @param id_mar the id_mar to set
-     */
-    public void setId_mar(int id_mar) {
-        this.id_mar = id_mar;
-    }
 
     /**
      * @return the data_mar
@@ -68,6 +56,20 @@ public class MatriculaDTO {
      */
     public void setData_mar(Date data_mar) {
         this.data_mar = data_mar;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
     

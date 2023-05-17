@@ -1,13 +1,16 @@
  
 package br.com.avaliacao_2.dto;
 
+import java.util.List;
+
 /**
  *
  * @author Jesse
  */
 public class CursoDTO {
     private String nome_cur ,descri_cur  ;
-    private int  id_cur;
+    private int  id;
+    private List<AlunoDTO> alunos; // atributo que representa o relacionamento 1-N com a tabela aluno
 
     /**
      * @return the nome_cur
@@ -36,19 +39,34 @@ public class CursoDTO {
     public void setDescri_cur(String descri_cur) {
         this.descri_cur = descri_cur;
     }
+  
 
     /**
-     * @return the id_cur
+     * @return the alunos
      */
-    public int getId_cur() {
-        return id_cur;
+    public List<AlunoDTO> getAlunos() {
+        return alunos;
     }
 
     /**
-     * @param id_cur the id_cur to set
+     * @param alunos the alunos to set
      */
-    public void setId_cur(int id_cur) {
-        this.id_cur = id_cur;
+    public void setAlunos(List<AlunoDTO> alunos) {
+        this.alunos = alunos;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
   

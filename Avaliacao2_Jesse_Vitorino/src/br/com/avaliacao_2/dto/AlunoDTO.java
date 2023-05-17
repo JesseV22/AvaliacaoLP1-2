@@ -12,8 +12,9 @@ import java.util.Date;
  */
 public class AlunoDTO {
     private String nome_al,email_al;
-    private int id_al ,curso_id;
+    private int id ,curso_id;
     private Date data_al;
+    private CursoDTO curso; // atributo que representa a chave estrangeira para a tabela curso
 
     /**
      * @return the nome_al
@@ -43,19 +44,7 @@ public class AlunoDTO {
         this.email_al = email_al;
     }
 
-    /**
-     * @return the id_al
-     */
-    public int getId_al() {
-        return id_al;
-    }
 
-    /**
-     * @param id_al the id_al to set
-     */
-    public void setId_al(int id_al) {
-        this.id_al = id_al;
-    }
 
     /**
      * @return the curso_id
@@ -84,5 +73,34 @@ public class AlunoDTO {
     public void setData_al(Date data_al) {
         this.data_al = data_al;
     }
-    
-            }
+
+    /**
+     * @return the curso
+     */
+    public CursoDTO getCurso() {
+        return curso;
+    }
+
+    /**
+     * @param curso the curso to set
+     */
+    public void setCurso(CursoDTO curso) {
+        this.curso = curso;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+}

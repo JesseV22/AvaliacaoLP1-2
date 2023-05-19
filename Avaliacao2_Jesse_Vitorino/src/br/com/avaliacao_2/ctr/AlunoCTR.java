@@ -106,7 +106,8 @@ public class AlunoCTR {
         //É criado um atributo do tipo ResultSet, pois este método recebe o resultado de uma consulta.
         ResultSet rs = null;
         //O atributo rs recebe a consulta realizada pelo método da classe DAO
-        rs = alunoDAO.consultarAluno(alunoDTO, opcao);
+        rs = (ResultSet) alunoDAO.consultarAluno(opcao);
+
         return rs;
     }
 

@@ -1,78 +1,83 @@
 package br.com.avaliacao_2.dao;
 
-/**
- * Importando as classes necessárias para trabalhar nesta classe
- */
 import java.sql.*;
 
-/**
- * Essa classe contém os métodos para abrir e fechar o banco de dados
- * Disciplina de LP1S3 - BSI
- *
- * @author Andre Luis Gobbi Primo/Ivan Oliveira Lopes
- */
 public class ConexaoDAO {
-
-    //Criando um atributo do tipo Connection que servira para guardar a conexao 
-    //com o banco de dados
     public static Connection con = null;
 
-    static PreparedStatement prepareStatement(String consulta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    /**
-     * Método construtor da classe
-     *
-     * @param Não recebe nenhum parametro
-     */
     public ConexaoDAO() {
     }
 
-    /**
-     * Método que abre a conexão com o banco de dados é do tipo static para que
-     * não seja necessário instanciar um objeto da classe, chamando os metodos
-     * de forma direta.Ex: classe.nome_do_metodo
-     */
     public static void ConectDB() {
         try {
-            //Dados para conectar com o banco de dados Postgres
-            String dsn = "avaliacao_2"; //nome do banco de dados(igual ao criado no Postgres)
-            String user = "postgres"; //nome do usuario utilizado para se conectar
-            String senha = "postdba"; //senha do usuario acima informado
-          
+            // Dados para conectar com o banco de dados Postgres
+            String dsn = "avaliacao_2"; // nome do banco de dados (igual ao criado no Postgres)
+            String user = "postgres"; // nome do usuário utilizado para se conectar
+            String senha = "postdba"; // senha do usuário acima informado
+
             DriverManager.registerDriver(new org.postgresql.Driver());
 
             String url = "jdbc:postgresql://localhost:5432/" + dsn;
-           
+
             con = DriverManager.getConnection(url, user, senha);
 
             con.setAutoCommit(false);
             if (con == null) {
                 System.out.println("erro ao abrir o banco");
             }
-        }//fecha o try
-        //Caso ocorra problemas para abrir o banco de dados é emitido a mensagem no console.
-        catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Problema ao abrir a base de dados! " + e.getMessage());
-        }//fecha o catch
-    }//Fecha o método ConectDB
+        }
+    }
 
-    /**
-     * Método que fecha a conexão com o banco de dados é do tipo static para que
-     * não seja necessário instanciar um objeto da classe, chamando os metodos
-     * de forma direta.Ex: classe.nome_do_metodo
-     */
     public static void CloseDB() {
         try {
             con.close();
-        }//fecha o try
-        //Caso ocorra problemas para fechar o banco de dados é emitido a mensagem no console.
-        catch (Exception e) {
-            System.out.println("Problema ao fechar a base de dados! " + 
-                e.getMessage());
-        }//fecha o catch
-    }//Fecha o método CloseDB
+        } catch (Exception e) {
+            System.out.println("Problema ao fechar a base de dados! " + e.getMessage());
+        }
+    }
     
-    
-}//Fecha a Classe ConexaoDAO
+    // Método para realizar a ligação entre os alunos do cursoVIEW e do AlunoVIEW
+    public void realizarLigacaoAlunos() {
+        try {
+            // Consulta para obter a lista de alunos do cursoVIEW
+            String cursoviewQuery = "SELECT * FROM cursoview_alunos";
+            PreparedStatement cursoviewStatement = con.prepareStatement(cursoviewQuery);
+            ResultSet cursoviewResult = cursoviewStatement.executeQuery();
+
+            // Consulta para obter os alunos cadastrados no banco do AlunoVIEW
+            String alunoviewQuery = "SELECT * FROM alunoview_alunos WHERE numero_identificacao = ?";
+            PreparedStatement alunoviewStatement = con.prepareStatement(alunoviewQuery);
+
+            while (cursoviewResult.next()) {
+                int numeroIdentificacao = cursoviewResult.getInt("numero_identificacao");
+
+                // Realiza a ligação utilizando o número de identificação do aluno
+                alunoviewStatement.setInt(1, numeroIdentificacao);
+                ResultSet alunoviewResult = alunoviewStatement.executeQuery();
+
+                // Exibe os resultados da ligação
+                while (alunoviewResult.next()) {
+                    int alunoCursoViewId = cursoviewResult.getInt("id");
+                    String alunoCursoViewNome = cursoviewResult.getString("nome");
+
+                    int alunoAlunoViewId = alunoviewResult.getInt("id");
+                    String alunoAlunoViewNome = alunoviewResult.getString("nome");
+
+                    System.out.println("Aluno do cursoVIEW: " + alunoCursoViewId + " - " + alunoCursoViewNome);
+                    System.out.println("Aluno do AlunoVIEW: " + alunoAlunoViewId + " - " + alunoAlunoViewNome);
+                    System.out.println("---------------------------------------");
+                }
+
+                alunoviewResult.close();
+            }
+
+            cursoviewResult.close();
+            alunoviewStatement.close();
+            cursoviewStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

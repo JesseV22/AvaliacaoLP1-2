@@ -9,9 +9,11 @@ import br.com.avaliacao_2.dto.CursoDTO;
 import br.com.avaliacao_2.dao.CursoDAO;
 import br.com.avaliacao_2.dao.ConexaoDAO;
 import br.com.avaliacao_2.dto.AlunoDTO;
+import br.com.avaliacao_2.dao.AlunoDAO;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.SQLException;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -20,6 +22,8 @@ import java.sql.SQLException;
 public class CursoCTR {
 
     CursoDAO cursoDAO = new CursoDAO();
+    AlunoDAO alunoDAO = new AlunoDAO();
+    
 
     /**
      * Método construtor da classe
@@ -120,20 +124,31 @@ public class CursoCTR {
     public void CloseDB() {
         ConexaoDAO.CloseDB();
     }//Fecha o método CloseDB
+
     public List<AlunoDTO> listarAlunosDoCurso(int idCurso) {
         List<AlunoDTO> listaAlunos = new ArrayList<>();
-        
+
         try {
             // Chamar o método da classe DAO para obter os alunos do curso
             List<AlunoDTO> alunosDoCurso = cursoDAO.obterAlunosDoCurso(idCurso);
-            
+
             // Adicionar os alunos à lista de retorno
             listaAlunos.addAll(alunosDoCurso);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return listaAlunos;
     }//Fecha o método lista
+
+    public void carregarAlunosNoComboBox(JComboBox<String> comboBox) {
+        List<AlunoDTO> alunos = alunoDAO.listarAlunos();
+
+        comboBox.removeAllItems();
+
+        for (AlunoDTO aluno : alunos) {
+            comboBox.addItem(aluno.getNome_al());
+        }
+    }
 
 }//Fecha classe CursoCTR

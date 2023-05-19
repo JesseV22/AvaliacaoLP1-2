@@ -4,26 +4,30 @@
  */
 package br.com.avaliacao_2.view;
 
+import br.com.avaliacao_2.view.CursoVIEW;
 import br.com.avaliacao_2.ctr.CursoCTR;
+import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dto.CursoDTO;
+import br.com.avaliacao_2.view.AlunoVIEW;
 import java.awt.Dimension;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author izbel
+ * @author Jesse
  */
 public class CursoVIEW extends javax.swing.JInternalFrame {
 
-   
-   CursoDTO cursoDTO = new CursoDTO(); //Cria um objeto cursoDTO
+    CursoDTO cursoDTO = new CursoDTO(); //Cria um objeto cursoDTO
     CursoCTR cursoCTR = new CursoCTR(); //Cria um objeto cursoCTR
-    
+
     int gravar_alterar; //Variavel usada para saber se esta alterando ou incluindo
-    
-    
+
     ResultSet rs; //Variavel usada para preenchimeto da tabela e dos campos
     DefaultTableModel modelo_jtl_consultar_curso; //Variavel para guardar o modelo da tabela
 
@@ -32,13 +36,14 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
      */
     public CursoVIEW() {
         initComponents();
-        
+
         //Chama todos os métodos liberaCampos
         liberaCampos(false);
         //Chama o método liberaBotoes
         liberaBotoes(true, false, false, false, true);
         modelo_jtl_consultar_curso = (DefaultTableModel) jtl_consultar_curso.getModel();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,18 +54,18 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         nome_cur = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         descri_cur = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBoxAlunos = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
+        pesquisa_nome_cur = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        btnPesquisar_cur = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtl_consultar_curso = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -97,8 +102,13 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/sair.png"))); // NOI18N
-        jButton5.setText("SAIR");
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/sair.png"))); // NOI18N
+        btnSair.setText("SAIR");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -114,7 +124,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnExcluir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(btnSair)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -126,20 +136,20 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar)
                     .addComponent(btnExcluir)
-                    .addComponent(jButton5))
+                    .addComponent(btnSair))
                 .addGap(30, 30, 30))
         );
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel1.setText("NOME ");
+        jLabel1.setText("NOME DO CURSO ");
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel3.setText("DESCRICAO");
+        jLabel3.setText("DESCRIÇÃO");
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel4.setText("LISTA DE ALUNOS");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxAlunos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -159,8 +169,8 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(comboBoxAlunos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,33 +186,44 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        pesquisa_nome_cur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisa_nome_curActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel5.setText("NOME");
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/pesquisar.png"))); // NOI18N
+        btnPesquisar_cur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/pesquisar.png"))); // NOI18N
 
         jtl_consultar_curso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "NOME", "DESCRICAO", "ALUNOS"
+                "ID", "NOME", "DESCRICAO", "ALUNOS"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jtl_consultar_curso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtl_consultar_cursoMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(jtl_consultar_curso);
@@ -211,16 +232,18 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6))))
+                        .addComponent(pesquisa_nome_cur)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPesquisar_cur))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,12 +251,12 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pesquisa_nome_cur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
-                    .addComponent(jButton6))
+                    .addComponent(btnPesquisar_cur))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
@@ -252,12 +275,12 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(340, 340, 340)
-                        .addComponent(jLabel2))
+                        .addGap(123, 123, 123)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGap(450, 450, 450)
+                        .addComponent(jLabel2)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,16 +290,18 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(141, 141, 141)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,20 +312,18 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-if(gravar_alterar == 1){
+        if (gravar_alterar == 1) {
             gravar();
             gravar_alterar = 0;
-        }
-        else{
-            if(gravar_alterar == 2){
+        } else {
+            if (gravar_alterar == 2) {
                 alterar();
                 gravar_alterar = 0;
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Erro no Sistema!!!");
             }
         }
-          
+
         limpaCampos();
         liberaCampos(false);
         liberaBotoes(true, false, false, false, true);    }//GEN-LAST:event_btnSalvarActionPerformed
@@ -313,35 +336,177 @@ if(gravar_alterar == 1){
         modelo_jtl_consultar_curso.setNumRows(0);    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-         limpaCampos();
+        limpaCampos();
         liberaCampos(false);
         modelo_jtl_consultar_curso.setNumRows(0);
         liberaBotoes(true, false, false, false, true);
-        gravar_alterar=0;
+        gravar_alterar = 0;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-    liberaCampos(true);
+        liberaCampos(true);
         liberaBotoes(false, true, true, false, true);
         gravar_alterar = 1;
     }//GEN-LAST:event_btnNovoActionPerformed
- /**
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void jtl_consultar_cursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtl_consultar_cursoMouseClicked
+        //Pega o id do cliente selecionado e chama preencheCampos
+        preencheCampos((int) jtl_consultar_curso.getValueAt(jtl_consultar_curso.getSelectedRow(), 0));
+        liberaBotoes(false, true, true, true, true);
+
+
+    }//GEN-LAST:event_jtl_consultar_cursoMouseClicked
+
+    private void pesquisa_nome_curActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisa_nome_curActionPerformed
+        preencheTabela(pesquisa_nome_cur.getText());
+    }//GEN-LAST:event_pesquisa_nome_curActionPerformed
+    /**
      * Método para centralizar o internalFrame.
      */
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
-        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2); 
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
     }//Fecha método setPosicao()
+
+    private void gravar() {
+        try {
+            cursoDTO.setNome_cur(nome_cur.getText());
+            cursoDTO.setDescri_cur(descri_cur.getText());
+            List<AlunoDTO> AlunoVIEW = null;
+            cursoDTO.setAlunos(AlunoVIEW);
+
+            // Insere um novo registro de curso
+            cursoCTR.inserirCurso(cursoDTO);
+        } catch (Exception e) {
+            // Trata exceções aqui
+        }
+    }//Fecha método gravar()
+
+    private void alterar() {
+        try {
+            cursoDTO.setNome_cur(nome_cur.getText());
+            cursoDTO.setDescri_cur(descri_cur.getText());
+            List<AlunoDTO> AlunoVIEW = null;
+            cursoDTO.setAlunos(AlunoVIEW);
+
+            // Atualiza um registro de curso existente
+            cursoCTR.alterarCurso(cursoDTO);
+        } catch (Exception e) {
+            // Trata exceções aqui
+        }
+    }//Fecha método alterar()
+
+    private void excluir() {
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o curso?", "Aviso",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // Exclui um registro de curso existente
+            cursoCTR.excluirCurso(cursoDTO);
+        }
+    }//Fecha método excluir()
+
+    public void liberaCampos(boolean a) {
+        nome_cur.setEnabled(a);
+        descri_cur.setEnabled(a);
+    }
+
+    /**
+     * Método utilizado para liberar os botões da tela.
+     *
+     * @param a, boolean com true(libera) false(bloqueia) para o btnNovo.
+     * @param b, boolean com true(libera) false(bloqueia) para o btnSalvar.
+     * @param c, boolean com true(libera) false(bloqueia) para o btnCancelar.
+     * @param d, boolean com true(libera) false(bloqueia) para o btnExcluir.
+     * @param e, boolean com true(libera) false(bloqueia) para o btnSair.
+     */
+    private void liberaBotoes(boolean a, boolean b, boolean c, boolean d, boolean e) {
+        btnNovo.setEnabled(a);
+        btnSalvar.setEnabled(b);
+        btnCancelar.setEnabled(c);
+        btnExcluir.setEnabled(d);
+        btnSair.setEnabled(e);
+    }//Fecha método liberaBotoes(boolean a, boolean b, boolean c, boolean d, boolean e)
+
+    /**
+     * Método utilizado para limpar os campos da tela.
+     */
+    private void limpaCampos() {
+        nome_cur.setText("");
+        descri_cur.setText("");
+    }//Fecha método limpaCampos()
+
+    /**
+     * Método utilizado para preencher/contruir a Jtable.
+     *
+     * @param nome, String com o nome do curso
+     */
+    private void preencheTabela(String nome_cur) {
+        try {
+            // Limpa todas as linhas
+            modelo_jtl_consultar_curso.setNumRows(0);
+            // Enquanto tiver linhas - faça
+            CursoDTO cursoDTO = new CursoDTO();
+            cursoDTO.setNome_cur(nome_cur);
+            ResultSet rs = cursoCTR.consultarCurso(cursoDTO, 1); // 1 = é a pesquisa por nome na classe DAO
+            while (rs.next()) {
+                modelo_jtl_consultar_curso.addRow(new Object[]{
+                    rs.getString("id_cli"),
+                    rs.getString("nome_cli"),});
+            }
+        } catch (SQLException erTab) {
+            System.out.println("Erro SQL: " + erTab);
+        } finally {
+            cursoCTR.CloseDB();
+        }
+    }
+//Fecha método preencheTabela(String nome)
+
+    /**
+     * Método utilizado para preencher os campos da tela com valores do CURSO.
+     *
+     * @param id , int com o id do CURSO.
+     */
+    public void preencheCampos(int id) {
+        try {
+            CursoDTO cursoDTO = obterCursoPorId(id);
+            if (cursoDTO != null) {
+                limpaCampos();
+
+                nome_cur.setText(cursoDTO.getNome_cur());
+                descri_cur.setText(cursoDTO.getDescri_cur());
+
+                // Preencher outros campos relacionados ao curso, se houver
+                gravar_alterar = 2;
+                liberaCampos(true);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao preencher campos do curso: " + e.getMessage());
+        }
+    }
+
+    private CursoDTO obterCursoPorId(int id) {
+        // Lógica para obter informações do curso com base no ID fornecido
+        // Retorna um objeto CursoDTO com as informações do curso
+        // Caso o curso não seja encontrado, retorne null  
+        return null;
+        // Lógica para obter informações do curso com base no ID fornecido
+        // Retorna um objeto CursoDTO com as informações do curso
+        // Caso o curso não seja encontrado, retorne null  
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar_cur;
+    private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> comboBoxAlunos;
     private javax.swing.JTextField descri_cur;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -352,9 +517,9 @@ if(gravar_alterar == 1){
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable jtl_consultar_curso;
     private javax.swing.JTextField nome_cur;
+    private javax.swing.JTextField pesquisa_nome_cur;
     // End of variables declaration//GEN-END:variables
 
 }

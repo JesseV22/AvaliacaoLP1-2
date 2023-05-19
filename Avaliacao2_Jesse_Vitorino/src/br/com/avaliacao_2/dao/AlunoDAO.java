@@ -4,9 +4,13 @@
  */
 package br.com.avaliacao_2.dao;
 
+import static br.com.avaliacao_2.dao.ConexaoDAO.con;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -131,8 +135,37 @@ public class AlunoDAO {
     }
 //fecha metodo consultar aluno
 
-    public ResultSet consultarAluno(AlunoDTO alunoDTO, int opcao) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<AlunoDTO> listarAlunos() {
+        List<AlunoDTO> alunos = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM alunoview_alunos";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                AlunoDTO aluno = new AlunoDTO();
+                aluno.setId(rs.getInt("id"));
+                aluno.setNome_al(rs.getString("nome_al"));
+                aluno.setEmail_al(rs.getString("email_al"));
+                aluno.setCurso_id(rs.getInt("curso_id"));
+                aluno.setData_al(rs.getDate("data_al"));
+
+                // Adicionar aluno à lista de alunos
+                alunos.add(aluno);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return alunos;
     }
+
+    
+
+      
 
 }//fecha classe cliente dao

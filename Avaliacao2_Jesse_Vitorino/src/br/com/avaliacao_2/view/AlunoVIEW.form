@@ -60,7 +60,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="email_al" pref="205" max="32767" attributes="0"/>
                               <Component id="nome_al" pref="205" max="32767" attributes="0"/>
-                              <Component id="curso_id" alignment="0" pref="205" max="32767" attributes="0"/>
+                              <Component id="curso_al" alignment="0" pref="205" max="32767" attributes="0"/>
                               <Component id="data_al" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
@@ -118,7 +118,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="curso_id" min="-2" max="-2" attributes="0"/>
+                              <Component id="curso_al" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -176,7 +176,7 @@
             <Property name="text" type="java.lang.String" value="CURSO"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="curso_id">
+        <Component class="javax.swing.JTextField" name="curso_al">
         </Component>
         <Component class="javax.swing.JTextField" name="pesquisa_nome_al">
         </Component>

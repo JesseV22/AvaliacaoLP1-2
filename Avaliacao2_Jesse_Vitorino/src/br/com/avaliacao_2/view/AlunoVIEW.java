@@ -8,9 +8,11 @@ import br.com.avaliacao_2.view.AlunoVIEW;
 import br.com.avaliacao_2.ctr.AlunoCTR;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dto.AlunoDTO;
+import java.awt.Dimension;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -18,8 +20,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AlunoVIEW extends javax.swing.JInternalFrame {
 
-    AlunoDTO cursoDTO = new AlunoDTO(); //Cria um objeto cursoDTO
-    AlunoCTR cursoCTR = new AlunoCTR(); //Cria um objeto cursoCTR
+    SimpleDateFormat data_almat = new SimpleDateFormat("dd/mm/yyyy");
+
+    AlunoDTO alunoDTO = new AlunoDTO(); //Cria um objeto alunoDTO
+    AlunoCTR alunoCTR = new AlunoCTR(); //Cria um objeto alunoCTR
 
     int gravar_alterar; //Variavel usada para saber se esta alterando ou incluindo
 
@@ -29,10 +33,13 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
     public AlunoVIEW() {
         initComponents();
 
-        //Chama todos os métodos liberaCampos
+        // Chama o método liberaCampos
         liberaCampos(false);
-        //Chama o método liberaBotoes
+
+        // Chama o método liberaBotoes
         liberaBotoes(true, false, false, false, true);
+
+        // Inicializa o modelo_jtl_consultar_al
         modelo_jtl_consultar_al = (DefaultTableModel) jtl_consultar_al.getModel();
     }
 
@@ -47,7 +54,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         email_al = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        curso_id = new javax.swing.JTextField();
+        curso_al = new javax.swing.JTextField();
         pesquisa_nome_al = new javax.swing.JTextField();
         btn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -209,7 +216,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(email_al, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                             .addComponent(nome_al, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                            .addComponent(curso_id, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(curso_al, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                             .addComponent(data_al, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(195, 195, 195)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -251,7 +258,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(curso_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(curso_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -304,13 +311,13 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         liberaBotoes(true, false, false, false, true);    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void data_alActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_data_alActionPerformed
-        // TODO acurso_idhandling code here:
+        // TODO aaluno_idhandling code here:
     }//GEN-LAST:event_data_alActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limpaCampos();
         liberaCampos(false);
-        modelo_jtl_consultar_curso.setNumRows(0);
+        modelo_jtl_consultar_al.setNumRows(0);
         liberaBotoes(true, false, false, false, true);
         gravar_alterar = 0;
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -324,50 +331,147 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         liberaBotoes(false, true, true, false, true);
         gravar_alterar = 1;
     }//GEN-LAST:event_btnNovoActionPerformed
+    /**
+     * Método para centralizar o internalFrame.
+     */
+    public void setPosicao() {
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+    }//Fecha método setPosicao()
+
     private void gravar() {
         try {
+            AlunoDTO alunoDTO = new AlunoDTO();
             alunoDTO.setNome_al(nome_al.getText());
             alunoDTO.setEmail_al(email_al.getText());
-            int id_curso = Integer.parseInt(curso_id.getText());
-            alunoDTO.setAluno_id(id_curso);
-            alunoDTO.setData_al(data_al.getDate());
+            alunoDTO.setData_al(data_almat.parse(data_al.getText()));
 
-            // Insere um novo registro de aluno
-            alunoCTR.inserirAluno(alunoDTO);
+            JOptionPane.showMessageDialog(null,
+                    alunoCTR.inserirAluno(alunoDTO)
+            );
         } catch (Exception e) {
-            // Trata exceções aqui
+            System.out.println("Erro ao Gravar: " + e.getMessage());
         }
-    }
+    }// Fecha método gravar()
 
+    /**
+     * Método utilizado para alterar os dados do aluno.
+     */
     private void alterar() {
         try {
+            AlunoDTO alunoDTO = new AlunoDTO();
             alunoDTO.setNome_al(nome_al.getText());
             alunoDTO.setEmail_al(email_al.getText());
-            int id_curso = Integer.parseInt(curso_id.getText());
-            alunoDTO.setAluno_id(id_curso);
-            alunoDTO.setData_al(data_al.getDate());
+            alunoDTO.setData_al(data_almat.parse(data_al.getText()));
 
-            // Atualiza um registro de aluno existente
-            alunoCTR.alterarAluno(alunoDTO);
+            JOptionPane.showMessageDialog(null,
+                    alunoCTR.alterarAluno(alunoDTO)
+            );
         } catch (Exception e) {
-            // Trata exceções aqui
+            System.out.println("Erro ao Alterar: " + e.getMessage());
         }
-    }
+    }// Fecha método alterar()
 
+    /**
+     * Método utilizado para excluir os dados do aluno.
+     */
     private void excluir() {
-        if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o aluno?", "Aviso",
+        if (JOptionPane.showConfirmDialog(null, "Deseja Realmente excluir o Aluno?", "Aviso",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            // Exclui um registro de aluno existente
-            aluno.excluirAluno(alunoDTO);
+            JOptionPane.showMessageDialog(null,
+                    alunoCTR.excluirAluno(alunoDTO)
+            );
         }
-    }
+    }// Fecha método excluir()
 
-    public void liberaCampos(boolean a) {
+    /**
+     * Método utilizado para liberar/bloquear os campos da tela.
+     *
+     * @param a, boolean com true(libera) false(bloqueia).
+     */
+    private void liberaCampos(boolean a) {
         nome_al.setEnabled(a);
         email_al.setEnabled(a);
-        curso_id.setEnabled(a);
         data_al.setEnabled(a);
-    }
+
+    }//Fecha método liberaCampos(boolean a)
+
+    /**
+     * Método utilizado para liberar os botões da tela.
+     *
+     * @param a, boolean com true(libera) false(bloqueia) para o btnNovo.
+     * @param b, boolean com true(libera) false(bloqueia) para o btnSalvar.
+     * @param c, boolean com true(libera) false(bloqueia) para o btnCancelar.
+     * @param d, boolean com true(libera) false(bloqueia) para o btnExcluir.
+     * @param e, boolean com true(libera) false(bloqueia) para o btnSair.
+     */
+    private void liberaBotoes(boolean a, boolean b, boolean c, boolean d, boolean e) {
+        btnNovo.setEnabled(a);
+        btnSalvar.setEnabled(b);
+        btnCancelar.setEnabled(c);
+        btnExcluir.setEnabled(d);
+        btnSair.setEnabled(e);
+    }//Fecha método liberaBotoes(boolean a, boolean b, boolean c, boolean d, boolean e)
+
+    /**
+     * Método utilizado para limpar os campos da tela.
+     */
+    private void limpaCampos() {
+        nome_al.setText("");
+        email_al.setText("");
+        data_al.setText("");
+    }//Fecha método limpaCampos()
+
+    /**
+     * Método utilizado para preencher/contruir a Jtable.
+     *
+     * @param nome_al, String com o nome do aluno
+     */
+    private void preencheTabela(String nome_al) {
+        try {
+            //Limpa todas as linhas
+            modelo_jtl_consultar_al.setNumRows(0);
+            //Enquanto tiver linhas - faça
+            alunoDTO.setNome_al(nome_al);
+            rs = alunoCTR.consultarAluno(alunoDTO, 1); //1 = é a pesquisa por nome na classe DAO
+            while (rs.next()) {
+                modelo_jtl_consultar_al.addRow(new Object[]{
+                    rs.getString("id_al"),
+                    rs.getString("nome_al"),});
+            }
+        } catch (Exception erTab) {
+            System.out.println("Erro SQL: " + erTab);
+        } finally {
+            alunoCTR.CloseDB();
+        }
+    }//Fecha método preencheTabela(String nome_al)
+
+    /**
+     * Método utilizado para preencher os campos da tela com valores do aluno.
+     *
+     * @param id, int com o id do aluno.
+     */
+    private void preencheCampos(int id_aluno) {
+        try {
+            alunoDTO.setId(id_aluno);
+            rs = alunoCTR.consultarAluno(alunoDTO, 2); // 2 = é a pesquisa no id na classe DAO
+            if (rs.next()) {
+                limpaCampos();
+
+                nome_al.setText(rs.getString("nome_al"));
+                email_al.setText(rs.getString("email_al"));
+                data_al.setText(rs.getString("data_al"));
+
+                gravar_alterar = 2;
+                liberaCampos(true);
+            }
+        } catch (Exception erTab) {
+            System.out.println("Erro SQL: " + erTab);
+        } finally {
+            alunoCTR.CloseDB();
+        }
+    }//Fecha método preencheCampos(int id_aluno)
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn;
@@ -376,7 +480,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JTextField curso_id;
+    private javax.swing.JTextField curso_al;
     private javax.swing.JFormattedTextField data_al;
     private javax.swing.JTextField email_al;
     private javax.swing.JLabel jLabel1;
@@ -393,7 +497,4 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JTextField pesquisa_nome_al;
     // End of variables declaration//GEN-END:variables
 
-    void setPosicao() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

@@ -6,6 +6,7 @@ package br.com.avaliacao_2.view;
 
 import br.com.avaliacao_2.view.CursoVIEW;
 import br.com.avaliacao_2.ctr.CursoCTR;
+import br.com.avaliacao_2.dao.AlunoDAO;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dto.CursoDTO;
 import br.com.avaliacao_2.view.AlunoVIEW;
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +44,20 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         //Chama o método liberaBotoes
         liberaBotoes(true, false, false, false, true);
         modelo_jtl_consultar_curso = (DefaultTableModel) jtl_consultar_curso.getModel();
+        
+        // Inicializar a controladora do curso
+        cursoCTR = new CursoCTR();
+
+        // Criar o JComboBox para os alunos
+        JComboBox<String> cbAluno = new JComboBox<>();
+
+        // Adicionar o JComboBox ao painel ou frame do CursoView
+        // ...
+
+        // Carregar os alunos no JComboBox
+        cursoCTR.carregarAlunosNoComboBox(cbAluno);
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -61,7 +76,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         descri_cur = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        comboBoxAlunos = new javax.swing.JComboBox<>();
+        comboBoxAlunos = new javax.swing.JComboBox();
         jPanel5 = new javax.swing.JPanel();
         pesquisa_nome_cur = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -149,7 +164,15 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel4.setText("LISTA DE ALUNOS");
 
-        comboBoxAlunos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxAlunos.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                comboBoxAlunosAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -364,6 +387,24 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private void pesquisa_nome_curActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisa_nome_curActionPerformed
         preencheTabela(pesquisa_nome_cur.getText());
     }//GEN-LAST:event_pesquisa_nome_curActionPerformed
+
+    private void comboBoxAlunosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_comboBoxAlunosAncestorAdded
+        AlunoDAO dao = new AlunoDAO();
+        List<AlunoDTO> lista = dao.listarAlunos();
+        
+    //Remove todos os itens de um combobox
+    comboBoxAlunos.removeAllItems();
+    
+    //para cada item da lista monte um objeto fornecedor
+    for (AlunoDTO aluno : lista) {
+        comboBoxAlunos.addItem(aluno.getNome_al());
+        
+    }//GEN-LAST:event_comboBoxAlunosAncestorAdded
+    
+    }
+    
+    
+    
     /**
      * Método para centralizar o internalFrame.
      */
@@ -505,7 +546,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPesquisar_cur;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> comboBoxAlunos;
+    private javax.swing.JComboBox comboBoxAlunos;
     private javax.swing.JTextField descri_cur;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

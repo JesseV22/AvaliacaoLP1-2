@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package br.com.avaliacao_2.view;
 
 import br.com.avaliacao_2.ctr.MatriculaCTR;
@@ -18,7 +14,7 @@ import java.text.SimpleDateFormat;
  */
 public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
-    SimpleDateFormat data_mar = new SimpleDateFormat("dd/mm/yyyy");
+    SimpleDateFormat data_marmat = new SimpleDateFormat("dd/mm/yyyy");
 
     MatriculaDTO matriculaDTO = new MatriculaDTO(); //Cria um objeto matriculaDTO
     MatriculaCTR matriculaCTR = new MatriculaCTR(); //Cria um objeto matriculaCTR
@@ -27,6 +23,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
     ResultSet rs; //Variavel usada para preenchimeto da tabela e dos campos
     DefaultTableModel modelo_jtl_consultar_mar; //Variavel para guardar o modelo da tabela
+
     public MatriculaVIEW() {
         initComponents();
 
@@ -36,9 +33,10 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         // Chama o método liberaBotoes
         liberaBotoes(true, false, false, false, true);
 
-        // Inicializa o modelo_jtl_consultar_al
+        // Inicializa o modelo_jtl_consultar_mar
         modelo_jtl_consultar_mar = (DefaultTableModel) jtl_consultar_mar.getModel();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -336,7 +334,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
     private void btnCancelar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar3ActionPerformed
         limpaCampos();
         liberaCampos(false);
-        modelo_jtl_consultar_al.setNumRows(0);
+        modelo_jtl_consultar_mar.setNumRows(0);
         liberaBotoes(true, false, false, false, true);
         gravar_alterar = 0;
     }//GEN-LAST:event_btnCancelar3ActionPerformed
@@ -345,71 +343,137 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         excluir();
         limpaCampos();
         liberaCampos(false);
-        liberaBotoes(true, false, false, false, true)
+        liberaBotoes(true, false, false, false, true);
     }//GEN-LAST:event_btnExcluir3ActionPerformed
 
     private void btnSair3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSair3ActionPerformed
 
-     public void setPosicao() {
+    public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
         this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
     }//Fecha método setPosicao()
-     
-     private void gravar() {
-    try {
-        MatriculaDTO matriculaDTO = new MatriculaDTO();
-        matriculaDTO.setAluno_mar(aluno_mar.getText());
-        matriculaDTO.setCurso_mar(curso_mar.getText());
-        matriculaDTO.setData_mar(data_mar.pa
 
-        JOptionPane.showMessageDialog(null,
-                matriculaCTR.inserirMatricula(matriculaDTO)
-        );
-    } catch (Exception e) {
-        System.out.println("Erro ao Gravar: " + e.getMessage());
+    private void gravar() {
+        try {
+            MatriculaDTO matriculaDTO = new MatriculaDTO();
+            matriculaDTO.setAluno_mar(aluno_mar.getText());
+            matriculaDTO.setCurso_mar(curso_mar.getText());
+            matriculaDTO.setData_mar(data_marmat.parse(data_mar.getText()));
+
+            JOptionPane.showMessageDialog(null,
+                    matriculaCTR.inserirMatricula(matriculaDTO)
+            );
+        } catch (Exception e) {
+            System.out.println("Erro ao Gravar: " + e.getMessage());
+        }
     }
-}
 
-private void alterar() {
-    try {
-        MatriculaDTO matriculaDTO = new MatriculaDTO();        
-        matriculaDTO.setAluno_mar(aluno_mar.getText());
-        matriculaDTO.setCurso_mar(curso_mar.getText());
-        matriculaDTO.setData_mar(data_mar.pa
+    private void alterar() {
+        try {
+            MatriculaDTO matriculaDTO = new MatriculaDTO();
+            matriculaDTO.setAluno_mar(aluno_mar.getText());
+            matriculaDTO.setCurso_mar(curso_mar.getText());
+            matriculaDTO.setData_mar(data_marmat.parse(data_mar.getText()));
 
-        JOptionPane.showMessageDialog(null,
-                matriculaCTR.alterarMatricula(matriculaDTO)
-        );
-    } catch (Exception e) {
-        System.out.println("Erro ao Alterar: " + e.getMessage());
+            JOptionPane.showMessageDialog(null,
+                    matriculaCTR.alterarMatricula(matriculaDTO)
+            );
+        } catch (Exception e) {
+            System.out.println("Erro ao Alterar: " + e.getMessage());
+        }
     }
-}
 
-private void excluir() {
-    if (JOptionPane.showConfirmDialog(null, "Deseja Realmente excluir o Aluno?", "Aviso",
-            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-        JOptionPane.showMessageDialog(null,
-                matriculaCTR.excluirMatricula(id)
-        );
+    private void excluir() {
+        if (JOptionPane.showConfirmDialog(null, "Deseja Realmente excluir o Aluno?", "Aviso",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null,
+                    matriculaCTR.excluirMatricula(matriculaDTO)
+            );
+        }
     }
-}
+    //Fecha método excluir()
+    //Método utilizado para liberar/bloquear os campos da tela.
+        // * @param a, boolean com true(libera) false(bloqueia).
 
+    private void liberaCampos(boolean a) {
+        aluno_mar.setEnabled(a);
+        curso_mar.setEnabled(a);
+        data_mar.setEnabled(a);
+
+    }//Fecha método liberaCampos(boolean a)
+    /**
+     * Método utilizado para liberar os botões da tela.
+     *
+     * @param a, boolean com true(libera) false(bloqueia) para o btnNovo.
+     * @param b, boolean com true(libera) false(bloqueia) para o btnSalvar.
+     * @param c, boolean com true(libera) false(bloqueia) para o btnCancelar.
+     * @param d, boolean com true(libera) false(bloqueia) para o btnExcluir.
+     * @param e, boolean com true(libera) false(bloqueia) para o btnSair.
+     */
+    private void liberaBotoes(boolean a, boolean b, boolean c, boolean d, boolean e) {
+        btnNovo3.setEnabled(a);
+        btnSalvar3.setEnabled(b);
+        btnCancelar3.setEnabled(c);
+        btnExcluir3.setEnabled(d);
+        btnSair3.setEnabled(e);
+    }//Fecha método liberaBotoes(boolean a, boolean b, boolean c, boolean d, boolean e)
+    /**
+     * Método utilizado para limpar os campos da tela.
+     */
+    private void limpaCampos() {
+        aluno_mar.setText("");
+        curso_mar.setText("");
+        data_mar.setText("");
+    }//Fecha método limpaCampos()
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    /**
+     * Método utilizado para preencher/contruir a Jtable.
+     *
+     * @param nome_al, String com o nome do aluno
+     */
+        private void preencheTabela(String aluno_mar) {
+        try {
+            //Limpa todas as linhas
+            modelo_jtl_consultar_mar.setNumRows(0);
+            //Enquanto tiver linhas - faça
+            matriculaDTO.setAluno_mar(aluno_mar);
+            rs = matriculaCTR.consultarMatricula(matriculaDTO, 1); //1 = é a pesquisa por nome na classe DAO
+            while (rs.next()) {
+                modelo_jtl_consultar_mar.addRow(new Object[]{
+                    rs.getString("id_al"),
+                    rs.getString("nome_al"),});
+            }
+        } catch (Exception erTab) {
+            System.out.println("Erro SQL: " + erTab);
+        } finally {
+            matriculaCTR.CloseDB();
+        }
+    }//Fecha método preencheTabela(String nome_al)
+        
+        private void preencheCampos(int id) {
+        try {
+            matriculaDTO.setId(id);
+            rs = matriculaCTR.consultarMatricula(matriculaDTO, 2); // 2 = é a pesquisa no id na classe DAO
+            if (rs.next()) {
+                limpaCampos();
+
+                aluno_mar.setText(rs.getString("aluno_mar"));
+                curso_mar.setText(rs.getString("curso_mar"));
+                data_mar.setText(rs.getString("data_mar"));
+
+                gravar_alterar = 2;
+                liberaCampos(true);
+            }
+        } catch (Exception erTab) {
+            System.out.println("Erro SQL: " + erTab);
+        } finally {
+            matriculaCTR.CloseDB();
+        }
+    }//Fecha método preencheCampos(int id_matricula)
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField aluno_mar;
@@ -453,7 +517,4 @@ private void excluir() {
     private javax.swing.JTable jtl_consultar_mar;
     // End of variables declaration//GEN-END:variables
 
-    void setPosicao() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

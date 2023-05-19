@@ -15,6 +15,7 @@ import java.util.List;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 
+
 /**
  *
  * @author Jesse
@@ -87,7 +88,7 @@ public class CursoCTR {
     public String excluirCurso(CursoDTO cursoDTO) {
         try {
             // Obtém o ID do curso do objeto CursoDTO
-            int id = cursoDTO.getId();
+            int id = cursoDTO.getId_cur();
 
             // Chama o método da classe DAO para excluir o curso
             if (cursoDAO.excluirCurso(id)) {
@@ -142,13 +143,15 @@ public class CursoCTR {
     }//Fecha o método lista
 
     public void carregarAlunosNoComboBox(JComboBox<String> comboBox) {
-        List<AlunoDTO> alunos = alunoDAO.listarAlunos();
+        List<AlunoDTO> lista = alunoDAO.listarAlunos();
 
-        comboBox.removeAllItems();
+        comboBox.removeAllItems();// Usar removeAllItems() em vez de removeAll()
 
-        for (AlunoDTO aluno : alunos) {
+        for (AlunoDTO aluno : lista) {
             comboBox.addItem(aluno.getNome_al());
         }
     }
+    
+    
 
 }//Fecha classe CursoCTR

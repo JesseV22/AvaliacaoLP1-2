@@ -393,6 +393,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         nome_al.setEnabled(a);
         email_al.setEnabled(a);
         data_al.setEnabled(a);
+        
 
     }//Fecha método liberaCampos(boolean a)
 

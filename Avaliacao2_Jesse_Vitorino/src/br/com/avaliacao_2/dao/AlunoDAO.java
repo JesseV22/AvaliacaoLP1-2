@@ -139,7 +139,7 @@ public class AlunoDAO {
         List<AlunoDTO> alunos = new ArrayList<>();
 
         try {
-            String query = "SELECT * FROM alunoview_alunos";
+            String query = "SELECT * FROM alunoview_aluno";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 

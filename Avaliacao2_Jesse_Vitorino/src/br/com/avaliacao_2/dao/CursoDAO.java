@@ -49,7 +49,7 @@ public class CursoDAO {
             String comando = "Insert into curso (nome_cur, descri_cur, id_cur) values ( "
                     + "'" + cursoDTO.getNome_cur() + "', "
                     + "'" + cursoDTO.getDescri_cur() + "', "
-                    + cursoDTO.getId() + ") ";
+                    + cursoDTO.getId_cur()+ ") ";
 
             // Executa o comando SQL no banco de Dados
             stmt.execute(comando.toUpperCase());
@@ -75,7 +75,7 @@ public class CursoDAO {
             stmt = ConexaoDAO.con.createStatement();
             String comando = "UPDATE curso SET nome_cur = '" + cursoDTO.getNome_cur() + "', "
                     + "descri_cur = '" + cursoDTO.getDescri_cur() + "' "
-                    + "WHERE id_cur = " + cursoDTO.getId();
+                    + "WHERE id_cur = " + cursoDTO.getId_cur();
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
             stmt.close();
@@ -105,19 +105,19 @@ public class CursoDAO {
         }
     }
 
-    public CursoDTO consultarCurso(CursoDTO cursoDTO, int id) {
+    public CursoDTO consultarCurso(CursoDTO cursoDTO, int id_cur) {
         CursoDTO curso = null;
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "SELECT * FROM curso WHERE id_cur = " + id;
+            String comando = "SELECT * FROM curso WHERE id_cur = " + id_cur;
             rs = stmt.executeQuery(comando.toUpperCase());
 
             // Verifica se a consulta retornou algum resultado
             if (rs.next()) {
                 // Cria um novo objeto CursoDTO com os dados retornados na consulta
                 curso = new CursoDTO();
-                curso.setId(rs.getInt("id"));
+                curso.setId_cur(rs.getInt("id"));
                 curso.setNome_cur(rs.getString("nome_cur"));
                 curso.setDescri_cur(rs.getString("descri_cur"));
             }

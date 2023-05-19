@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class CursoDTO {
     private String nome_cur ,descri_cur  ;
-    private int  id;
+    private int  id_cur;
     private List<AlunoDTO> alunos; // atributo que representa o relacionamento 1-N com a tabela aluno
 
     /**
@@ -56,18 +56,17 @@ public class CursoDTO {
     }
 
     /**
-     * @return the id
+     * @return the id_cur
      */
-    public int getId() {
-        return id;
+    public int getId_cur() {
+        return id_cur;
     }
 
     /**
-     * @param id the id to set
+     * @param id_cur the id_cur to set
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setId_cur(int id_cur) {
+        this.id_cur = id_cur;
     }
 
-  
 }

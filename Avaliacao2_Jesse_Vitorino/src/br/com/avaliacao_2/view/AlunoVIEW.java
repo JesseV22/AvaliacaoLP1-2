@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 
 /**
  *
- * @author izbel
+ * @author Jesse
  */
 public class AlunoVIEW extends javax.swing.JInternalFrame {
 

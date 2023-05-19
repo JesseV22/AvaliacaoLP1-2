@@ -137,6 +137,7 @@ public class AlunoDAO {
 
     public List<AlunoDTO> listarAlunos() {
         List<AlunoDTO> alunos = new ArrayList<>();
+        AlunoDAO alunoDAO = new AlunoDAO();
 
         try {
             String query = "SELECT * FROM alunoview_aluno";
@@ -157,15 +158,23 @@ public class AlunoDAO {
 
             rs.close();
             stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            
+        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+          //console com o que esta acontecendo.
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            
+        } //Independente de dar erro ou não ele vai fechar o banco de dados.
+        finally {
+            //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
+            ConexaoDAO.CloseDB();
         }
-
         return alunos;
     }
+    
 
     
 
       
 
-}//fecha classe cliente dao
+}//fecha classe aluno dao

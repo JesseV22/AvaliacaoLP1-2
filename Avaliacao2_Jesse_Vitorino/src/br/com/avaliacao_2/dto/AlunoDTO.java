@@ -102,5 +102,10 @@ public class AlunoDTO {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return this.getNome_al();
+    }
+
 
 }

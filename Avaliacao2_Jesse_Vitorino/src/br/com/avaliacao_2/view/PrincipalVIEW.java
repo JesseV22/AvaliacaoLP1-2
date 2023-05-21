@@ -39,11 +39,19 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         menuGerenciamento = new javax.swing.JMenu();
         itemMenuAluno = new javax.swing.JMenuItem();
-        itemMenuMatricula = new javax.swing.JMenuItem();
         itemMenuCurso = new javax.swing.JMenuItem();
+        itemMenuProfessor = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        itemMenuMatricula = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        menuBar.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                menuBarComponentHidden(evt);
+            }
+        });
 
         menuGerenciamento.setMnemonic('f');
         menuGerenciamento.setText("Gerenciamento Acadêmico");
@@ -57,15 +65,6 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         });
         menuGerenciamento.add(itemMenuAluno);
 
-        itemMenuMatricula.setMnemonic('s');
-        itemMenuMatricula.setText("Matricula");
-        itemMenuMatricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemMenuMatriculaActionPerformed(evt);
-            }
-        });
-        menuGerenciamento.add(itemMenuMatricula);
-
         itemMenuCurso.setMnemonic('a');
         itemMenuCurso.setText("Curso");
         itemMenuCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +74,28 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         });
         menuGerenciamento.add(itemMenuCurso);
 
+        itemMenuProfessor.setText("Professor");
+        itemMenuProfessor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuProfessorActionPerformed(evt);
+            }
+        });
+        menuGerenciamento.add(itemMenuProfessor);
+
         menuBar.add(menuGerenciamento);
+
+        jMenu1.setText("Matricula");
+
+        itemMenuMatricula.setMnemonic('s');
+        itemMenuMatricula.setText("Matricula");
+        itemMenuMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuMatriculaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(itemMenuMatricula);
+
+        menuBar.add(jMenu1);
 
         menuSair.setMnemonic('h');
         menuSair.setText("Sair");
@@ -122,6 +142,14 @@ public class PrincipalVIEW extends javax.swing.JFrame {
        abreCursoVIEW();
     }//GEN-LAST:event_itemMenuCursoActionPerformed
 
+    private void menuBarComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_menuBarComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuBarComponentHidden
+
+    private void itemMenuProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuProfessorActionPerformed
+        abreProfessorVIEW();
+    }//GEN-LAST:event_itemMenuProfessorActionPerformed
+
      /**
      * Método para fechar o sistema.
      */ 
@@ -164,7 +192,13 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         matriculaVIEW.setVisible(true); 
         matriculaVIEW.setPosicao();
     }
-    
+    private void abreProfessorVIEW(){
+        ProfessorVIEW professorVIEW = new ProfessorVIEW();
+        this.desktopPane.add(professorVIEW);
+        professorVIEW.setVisible(true); 
+        professorVIEW.setPosicao();
+
+    }
    
     /**
      * @param args the command line arguments
@@ -200,12 +234,15 @@ public class PrincipalVIEW extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem itemMenuAluno;
     private javax.swing.JMenuItem itemMenuCurso;
     private javax.swing.JMenuItem itemMenuMatricula;
+    private javax.swing.JMenuItem itemMenuProfessor;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuGerenciamento;
     private javax.swing.JMenu menuSair;

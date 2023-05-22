@@ -1,17 +1,29 @@
-CREATE TABLE aluno (
-id INT PRIMARY KEY,
-nome_al VARCHAR(50),
-email_al VARCHAR(50),
-idade_al INT,
-curso_id INT,
-FOREIGN KEY (curso_id) REFERENCES curso(id)
+CREATE TABLE curso (
+    id INT PRIMARY KEY,
+    nome_cur VARCHAR(50),
+    descricao_cur VARCHAR(200)
 );
 
-CREATE TABLE curso (
-id INT PRIMARY KEY,
-nome_cur VARCHAR(50),
-descricao_cur VARCHAR(200)
+
+CREATE TABLE aluno (
+    id INT PRIMARY KEY,
+    nome_al VARCHAR(50),
+    email_al VARCHAR(50),
+    idade_al INT,
+    curso_id INT,
+    FOREIGN KEY (curso_id) REFERENCES curso(id)
 );
+
+
+CREATE TABLE professor (
+    id INT PRIMARY KEY,
+    nome_prof VARCHAR(50),
+    email_prof VARCHAR(50),
+    especialidade VARCHAR(50),
+    curso_id INT,
+    FOREIGN KEY (curso_id) REFERENCES curso(id)
+);
+
 
 CREATE TABLE matricula (
     id INT PRIMARY KEY,
@@ -21,4 +33,5 @@ CREATE TABLE matricula (
     FOREIGN KEY (aluno_mar) REFERENCES aluno(id),
     FOREIGN KEY (curso_mar) REFERENCES curso(id)
 );
+
 

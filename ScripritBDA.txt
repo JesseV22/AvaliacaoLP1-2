@@ -35,3 +35,4 @@ CREATE TABLE matricula (
 );
 
 
+Inserir em cada tabela na hora do INSERT INTO your_table (id, name) VALUES (nextval('serial_id') para geeear o id de cada tabela 

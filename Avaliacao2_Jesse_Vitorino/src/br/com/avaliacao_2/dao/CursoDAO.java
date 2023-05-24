@@ -8,6 +8,7 @@ import br.com.avaliacao_2.dto.CursoDTO;
 import br.com.avaliacao_2.dao.CursoDAO;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dao.ConexaoDAO;
+import br.com.avaliacao_2.dto.ProfessorDTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,10 +47,10 @@ public class CursoDAO {
             // Instancia o Statement que sera responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
             // Comando SQL que sera executado no banco de dados
-            String comando = "Insert into curso (nome_cur, descri_cur, id_cur) values ( "
+            String comando = "Insert into curso (nome_cur, descricao_cur, id) values ( "
                     + "'" + cursoDTO.getNome_cur() + "', "
                     + "'" + cursoDTO.getDescri_cur() + "', "
-                    + cursoDTO.getId_cur()+ ") ";
+                    + "nextval('serial_id')) ";
 
             // Executa o comando SQL no banco de Dados
             stmt.execute(comando.toUpperCase());
@@ -75,7 +76,7 @@ public class CursoDAO {
             stmt = ConexaoDAO.con.createStatement();
             String comando = "UPDATE curso SET nome_cur = '" + cursoDTO.getNome_cur() + "', "
                     + "descri_cur = '" + cursoDTO.getDescri_cur() + "' "
-                    + "WHERE id_cur = " + cursoDTO.getId_cur();
+                    + "WHERE id = " + cursoDTO.getId();
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
             stmt.close();
@@ -92,7 +93,7 @@ public class CursoDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "DELETE FROM curso WHERE id_cur = " + id;
+            String comando = "DELETE FROM curso WHERE id = " + id;
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
             stmt.close();
@@ -105,19 +106,18 @@ public class CursoDAO {
         }
     }
 
-    public CursoDTO consultarCurso(CursoDTO cursoDTO, int id_cur) {
+    public CursoDTO consultarCurso(CursoDTO cursoDTO, int id) {
         CursoDTO curso = null;
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "SELECT * FROM curso WHERE id_cur = " + id_cur;
+            String comando = "SELECT * FROM curso WHERE id = " + id;
             rs = stmt.executeQuery(comando.toUpperCase());
-
             // Verifica se a consulta retornou algum resultado
             if (rs.next()) {
                 // Cria um novo objeto CursoDTO com os dados retornados na consulta
                 curso = new CursoDTO();
-                curso.setId_cur(rs.getInt("id"));
+                curso.setId(rs.getInt("id"));
                 curso.setNome_cur(rs.getString("nome_cur"));
                 curso.setDescri_cur(rs.getString("descri_cur"));
             }
@@ -171,5 +171,13 @@ public class CursoDAO {
     }
     return listaAlunos;
 }
+
+    public List<ProfessorDTO> obterProfessoresDoCurso(int idCurso) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public List<CursoDTO> listarCursos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

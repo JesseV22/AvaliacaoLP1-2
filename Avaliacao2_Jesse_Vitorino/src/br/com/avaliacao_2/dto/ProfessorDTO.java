@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package br.com.avaliacao_2.dto;
 
 /**
@@ -9,10 +6,12 @@ package br.com.avaliacao_2.dto;
  * @author Jesse
  */
 public class ProfessorDTO {
+
     private int id;
     private String nome;
     private String email;
     private String especialidade;
+    private CursoDTO curso; // atributo que representa a chave estrangeira para a tabela curso
 
     /**
      * @return the id
@@ -70,6 +69,18 @@ public class ProfessorDTO {
         this.especialidade = especialidade;
     }
 
-    
-}
+    /**
+     * @return the curso
+     */
+    public CursoDTO getCurso() {
+        return curso;
+    }
 
+    /**
+     * @param curso the curso to set
+     */
+    public void setCurso(CursoDTO curso) {
+        this.curso = curso;
+    }
+
+}

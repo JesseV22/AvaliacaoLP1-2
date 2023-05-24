@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import br.com.avaliacao_2.dto.ProfessorDTO;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -40,8 +42,8 @@ public class ProfessorDAO {
             //Instancia o Statement que sera responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
             //Comando SQL que sera executado no banco de dados
-            String comando = "INSERT INTO professor (id ) "
-                    + "VALUES (" + professorDTO.getNome() + ", " + professorDTO.getEmail() + ", "
+            String comando = "INSERT INTO professor(id, nome_prof, email_prof, especialidade ) "
+                    + "VALUES(nextval('serial_id'),'" + professorDTO.getNome() + "', '" + professorDTO.getEmail() + "', "
                     + "'" + professorDTO.getEspecialidade() + "')";
 
             //Executa o comando SQL no banco de Dados
@@ -82,51 +84,91 @@ public class ProfessorDAO {
             ConexaoDAO.CloseDB();
         }
     }//Fecha metodo alterar pofessor
-        /**
+
+    /**
      * Método utilizado para excluir um
+     *
      * @param id
-     * @return 
+     * @return
      */
     public boolean excluirProfessor(int id) {
-    try {
-        ConexaoDAO.ConectDB();
-        stmt = ConexaoDAO.con.createStatement();
-        String comando = "DELETE FROM professor WHERE id_mat = " + id;
-        stmt.executeUpdate(comando.toUpperCase());
-        ConexaoDAO.con.commit();
-        stmt.close();
-        return true;
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
-        return false;
-    } finally {
-        ConexaoDAO.CloseDB();
-    }
-}
-    public ProfessorDTO consultarProfessor(ProfessorDTO professorDTO, int id) {
-    ProfessorDTO professor = null;
-    try {
-        ConexaoDAO.ConectDB();
-        stmt = ConexaoDAO.con.createStatement();
-        String comando = "SELECT * FROM professor WHERE id_mar = " + id;
-        rs = stmt.executeQuery(comando.toUpperCase());
-        if (rs.next()) {
-            professor = new ProfessorDTO();
-            professor.setId(rs.getInt("id"));
-            professor.setNome(String.valueOf(rs.getInt("nome_prof")));
-            professor.setEmail(String.valueOf(rs.getInt("email_prof")));
-            professor.setEspecialidade(String.valueOf(rs.getInt("especialidade_prof")));
-            
+        try {
+            ConexaoDAO.ConectDB();
+            stmt = ConexaoDAO.con.createStatement();
+            String comando = "DELETE FROM professor WHERE id_mat = " + id;
+            stmt.executeUpdate(comando.toUpperCase());
+            ConexaoDAO.con.commit();
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            ConexaoDAO.CloseDB();
         }
-        rs.close();
-        stmt.close();
-        return professor;
-    } catch (SQLException e) {
-        System.out.println(e.getMessage());
-        return null;
-    } finally {
-        ConexaoDAO.CloseDB();
     }
-}//fecha metodo consultar professor
+
+    public ProfessorDTO consultarProfessor(ProfessorDTO professorDTO, int id) {
+        ProfessorDTO professor = null;
+        try {
+            ConexaoDAO.ConectDB();
+            stmt = ConexaoDAO.con.createStatement();
+            String comando = "SELECT * FROM professor WHERE id_mar = " + id;
+            rs = stmt.executeQuery(comando.toUpperCase());
+            if (rs.next()) {
+                professor = new ProfessorDTO();
+                professor.setId(rs.getInt("id"));
+                professor.setNome(String.valueOf(rs.getInt("nome_prof")));
+                professor.setEmail(String.valueOf(rs.getInt("email_prof")));
+                professor.setEspecialidade(String.valueOf(rs.getInt("especialidade_prof")));
+
+            }
+            rs.close();
+            stmt.close();
+            return professor;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            ConexaoDAO.CloseDB();
+        }
+    }//fecha metodo consultar professor
+
+    public List<ProfessorDTO> listarProfessores() {
+        List<ProfessorDTO> professores = new ArrayList<>();
+        ProfessorDAO professorDAO = new ProfessorDAO();
+
+        try {
+            ConexaoDAO.ConectDB();
+            String query = "SELECT * FROM professor";
+
+            Statement stmt = ConexaoDAO.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                ProfessorDTO professor = new ProfessorDTO();
+                professor.setId(rs.getInt("id"));
+                professor.setNome(rs.getString("nome_prof"));
+                professor.setEmail(rs.getString("email_prof"));
+                professor.setEspecialidade(rs.getString("especialidade"));
+
+                // Adicionar professor à lista de professores
+                professores.add(professor);
+            }
+
+            rs.close();
+            stmt.close();
+            //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+          //console com o que esta acontecendo.
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        } finally { //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
+            ConexaoDAO.CloseDB();
+        }
+
+        return professores;
+    }
 
 }

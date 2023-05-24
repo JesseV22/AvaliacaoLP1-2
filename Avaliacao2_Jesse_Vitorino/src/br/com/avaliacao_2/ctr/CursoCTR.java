@@ -10,11 +10,12 @@ import br.com.avaliacao_2.dao.CursoDAO;
 import br.com.avaliacao_2.dao.ConexaoDAO;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dao.AlunoDAO;
+import br.com.avaliacao_2.dto.ProfessorDTO;
+import br.com.avaliacao_2.dao.ProfessorDAO;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
-
 
 /**
  *
@@ -24,7 +25,7 @@ public class CursoCTR {
 
     CursoDAO cursoDAO = new CursoDAO();
     AlunoDAO alunoDAO = new AlunoDAO();
-    
+    ProfessorDAO professorDAO = new ProfessorDAO();
 
     /**
      * Método construtor da classe
@@ -88,7 +89,7 @@ public class CursoCTR {
     public String excluirCurso(CursoDTO cursoDTO) {
         try {
             // Obtém o ID do curso do objeto CursoDTO
-            int id = cursoDTO.getId_cur();
+            int id = cursoDTO.getId();
 
             // Chama o método da classe DAO para excluir o curso
             if (cursoDAO.excluirCurso(id)) {
@@ -142,6 +143,22 @@ public class CursoCTR {
         return listaAlunos;
     }//Fecha o método lista
 
+    public List<ProfessorDTO> listarProfessoresDoCurso(int idCurso) {
+        List<ProfessorDTO> listaProfessores = new ArrayList<>();
+
+        try {
+            // Chamar o método da classe DAO para obter os professores do curso
+            List<ProfessorDTO> professoresDoCurso = cursoDAO.obterProfessoresDoCurso(idCurso);
+
+            // Adicionar os professores à lista de retorno
+            listaProfessores.addAll(professoresDoCurso);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaProfessores;
+    }
+
     public void carregarAlunosNoComboBox(JComboBox<String> comboBox) {
         List<AlunoDTO> lista = alunoDAO.listarAlunos();
 
@@ -150,8 +167,17 @@ public class CursoCTR {
         for (AlunoDTO aluno : lista) {
             comboBox.addItem(aluno.getNome_al());
         }
+
     }
-    
-    
+
+    public void carregarProfessoresNoComboBox(JComboBox<String> comboBox) {
+        List<ProfessorDTO> lista = professorDAO.listarProfessores();
+
+        comboBox.removeAllItems();
+
+        for (ProfessorDTO professor : lista) {
+            comboBox.addItem(professor.getNome());
+        }
+    }
 
 }//Fecha classe CursoCTR

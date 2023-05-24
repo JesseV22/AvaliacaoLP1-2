@@ -45,10 +45,10 @@ public class AlunoDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "INSERT INTO aluno (nome_al, email_al, id, curso_id, data_al) VALUES ("
+            String comando = "INSERT INTO aluno (id, nome_al, email_al, curso_id, data_al) VALUES ("
+                    + "nextval('serial_id'), "
                     + "'" + alunoDTO.getNome_al() + "', "
                     + "'" + alunoDTO.getEmail_al() + "', "
-                    + alunoDTO.getId() + ", "
                     + alunoDTO.getCurso_id() + ", "
                     + "'" + alunoDTO.getData_al() + "')";
 
@@ -140,8 +140,10 @@ public class AlunoDAO {
         AlunoDAO alunoDAO = new AlunoDAO();
 
         try {
-            String query = "SELECT * FROM alunoview_aluno";
-            Statement stmt = con.createStatement();
+            ConexaoDAO.ConectDB();
+            String query = "SELECT * from aluno";
+            
+            Statement stmt =  ConexaoDAO.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {

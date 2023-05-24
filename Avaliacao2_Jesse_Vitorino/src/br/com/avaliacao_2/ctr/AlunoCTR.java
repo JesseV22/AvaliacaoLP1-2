@@ -8,7 +8,12 @@ import java.sql.ResultSet;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dao.AlunoDAO;
 import br.com.avaliacao_2.dao.ConexaoDAO;
+import br.com.avaliacao_2.dto.CursoDTO;
+import br.com.avaliacao_2.dao.CursoDAO;
 import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JComboBox;
+
 
 /**
  *
@@ -17,6 +22,7 @@ import java.sql.SQLException;
 public class AlunoCTR {
 
     AlunoDAO alunoDAO = new AlunoDAO();
+    CursoDAO cursoDAO = new CursoDAO();
 
     /**
      * Método construtor da classe
@@ -118,5 +124,15 @@ public class AlunoCTR {
     public void CloseDB() {
         ConexaoDAO.CloseDB();
     }//Fecha o método CloseDB
+
+    public void carregarCursosNoComboBox(JComboBox<String> comboBox) {
+    List<CursoDTO> lista = cursoDAO.listarCursos();
+
+    comboBox.removeAllItems();
+
+    for (CursoDTO curso : lista) {
+        comboBox.addItem(curso.getNome_cur());
+    }
+}
 
 }//Fecha classe AlunoCTR

@@ -10,6 +10,7 @@ import br.com.avaliacao_2.dao.CursoDAO;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dto.CursoDTO;
+import br.com.avaliacao_2.dto.CursoDTO;
 import java.awt.Dimension;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -367,7 +368,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
 
 // Para cada item da lista, adicione um objeto curso ao combobox
         for (CursoDTO curso : lista) {
-            comboBoxCurso.addItem(curso.getNome_curso());
+            comboBoxCurso.addItem(curso.getNome_cur());
         }
     }//GEN-LAST:event_comboBoxCursoAncestorAdded
     /**
@@ -384,6 +385,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
             alunoDTO.setNome_al(nome_al.getText());
             alunoDTO.setEmail_al(email_al.getText());
             alunoDTO.setData_al(data_almat.parse(data_al.getText()));
+            List<CursoDTO> CursoVIEW = null;
+
+            alunoDTO.setCursos(CursoVIEW);
 
             JOptionPane.showMessageDialog(null,
                     alunoCTR.inserirAluno(alunoDTO)
@@ -402,8 +406,10 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
             alunoDTO.setNome_al(nome_al.getText());
             alunoDTO.setEmail_al(email_al.getText());
             alunoDTO.setData_al(data_almat.parse(data_al.getText()));
+            List<CursoDTO> CursoVIEW = null;
 
             JOptionPane.showMessageDialog(null,
+                    // Atualiza um registro de curso existente
                     alunoCTR.alterarAluno(alunoDTO)
             );
         } catch (Exception e) {

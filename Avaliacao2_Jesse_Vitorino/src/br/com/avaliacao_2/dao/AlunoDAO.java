@@ -6,6 +6,8 @@ package br.com.avaliacao_2.dao;
 
 import static br.com.avaliacao_2.dao.ConexaoDAO.con;
 import br.com.avaliacao_2.dto.AlunoDTO;
+import br.com.avaliacao_2.dto.CursoDTO;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -173,6 +175,44 @@ public class AlunoDAO {
         }
         return alunos;
     }
+    public List<CursoDTO> obterCursosDoAluno(int idAluno) {
+    List<CursoDTO> listaCursos = new ArrayList<>();
+    try {
+        // Estabelecer a conexão com o banco de dados (assumindo que já existe uma classe de conexão)
+
+        // Criar a consulta SQL para obter os cursos do aluno
+        String consulta = "SELECT * FROM curso WHERE aluno_id = ?";
+
+        // Preparar a declaração SQL
+        PreparedStatement stmt = ConexaoDAO.con.prepareStatement(consulta);
+        stmt.setInt(1, idAluno);
+
+        // Executar a consulta e obter o resultado
+        ResultSet rs = stmt.executeQuery();
+
+        // Percorrer o resultado e criar objetos CursoDTO
+        while (rs.next()) {
+            CursoDTO curso = new CursoDTO();
+            curso.setId(rs.getInt("id"));
+            curso.setNome_cur(rs.getString("nome_cur"));
+            curso.setDescri_cur(rs.getString("descri_cur"));
+            // Preencher outros atributos do curso, se necessário
+
+            // Adicionar o curso à lista de cursos
+            listaCursos.add(curso);
+        }
+
+        // Fechar o ResultSet, o PreparedStatement e a conexão
+        rs.close();
+        stmt.close();
+        // Fechar a conexão com o banco de dados
+
+    } catch (SQLException e) {
+        System.out.println("Erro ao obter os cursos do aluno: " + e.getMessage());
+    }
+    return listaCursos;
+}
+
     
 
     

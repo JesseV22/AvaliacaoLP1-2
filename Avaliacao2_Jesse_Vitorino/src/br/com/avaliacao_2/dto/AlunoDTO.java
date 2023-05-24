@@ -5,16 +5,19 @@
 package br.com.avaliacao_2.dto;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author Jesse
  */
 public class AlunoDTO {
-    private String nome_al,email_al;
-    private int id ,curso_id;
+
+    private String nome_al, email_al;
+    private int id, curso_id;
     private Date data_al;
     private CursoDTO curso; // atributo que representa a chave estrangeira para a tabela curso
+    private List<CursoDTO> cursos; // atributo que representa o relacionamento 1-N com a tabela aluno
 
     /**
      * @return the nome_al
@@ -43,8 +46,6 @@ public class AlunoDTO {
     public void setEmail_al(String email_al) {
         this.email_al = email_al;
     }
-
-
 
     /**
      * @return the curso_id
@@ -107,5 +108,18 @@ public class AlunoDTO {
         return this.getNome_al();
     }
 
+    /**
+     * @return the cursos
+     */
+    public List<CursoDTO> getCursos() {
+        return cursos;
+    }
+
+    /**
+     * @param cursos the cursos to set
+     */
+    public void setCursos(List<CursoDTO> cursos) {
+        this.cursos = cursos;
+    }
 
 }

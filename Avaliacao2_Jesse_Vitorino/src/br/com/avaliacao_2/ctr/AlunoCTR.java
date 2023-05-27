@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 public class AlunoCTR {
 
     AlunoDAO alunoDAO = new AlunoDAO();
-    CursoDAO cursoDAO = new CursoDAO();
+    
 
     /**
      * Método construtor da classe
@@ -125,14 +125,7 @@ public class AlunoCTR {
         ConexaoDAO.CloseDB();
     }//Fecha o método CloseDB
 
-    public void carregarCursosNoComboBox(JComboBox<String> comboBox) {
-    List<CursoDTO> lista = cursoDAO.listarCursos();
+  
 
-    comboBox.removeAllItems();
-
-    for (CursoDTO curso : lista) {
-        comboBox.addItem(curso.getNome_cur());
-    }
-}
 
 }//Fecha classe AlunoCTR

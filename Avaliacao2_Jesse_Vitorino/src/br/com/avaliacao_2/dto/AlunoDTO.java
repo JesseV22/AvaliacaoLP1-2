@@ -13,11 +13,9 @@ import java.util.List;
  */
 public class AlunoDTO {
 
-    private String nome_al, email_al;
-    private int id, curso_id;
+    private String nome_al, email_al, tel_al;
+    private int id;
     private Date data_al;
-    private CursoDTO curso; // atributo que representa a chave estrangeira para a tabela curso
-    private List<CursoDTO> cursos; // atributo que representa o relacionamento 1-N com a tabela aluno
 
     /**
      * @return the nome_al
@@ -48,45 +46,17 @@ public class AlunoDTO {
     }
 
     /**
-     * @return the curso_id
+     * @return the tel_al
      */
-    public int getCurso_id() {
-        return curso_id;
+    public String getTel_al() {
+        return tel_al;
     }
 
     /**
-     * @param curso_id the curso_id to set
+     * @param tel_al the tel_al to set
      */
-    public void setCurso_id(int curso_id) {
-        this.curso_id = curso_id;
-    }
-
-    /**
-     * @return the data_al
-     */
-    public Date getData_al() {
-        return data_al;
-    }
-
-    /**
-     * @param data_al the data_al to set
-     */
-    public void setData_al(Date data_al) {
-        this.data_al = data_al;
-    }
-
-    /**
-     * @return the curso
-     */
-    public CursoDTO getCurso() {
-        return curso;
-    }
-
-    /**
-     * @param curso the curso to set
-     */
-    public void setCurso(CursoDTO curso) {
-        this.curso = curso;
+    public void setTel_al(String tel_al) {
+        this.tel_al = tel_al;
     }
 
     /**
@@ -103,23 +73,21 @@ public class AlunoDTO {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return this.getNome_al();
+    /**
+     * @return the data_al
+     */
+    public Date getData_al() {
+        return data_al;
     }
 
     /**
-     * @return the cursos
+     * @param data_al the data_al to set
      */
-    public List<CursoDTO> getCursos() {
-        return cursos;
+    public void setData_al(Date data_al) {
+        this.data_al = data_al;
     }
+    
 
-    /**
-     * @param cursos the cursos to set
-     */
-    public void setCursos(List<CursoDTO> cursos) {
-        this.cursos = cursos;
-    }
+   
 
 }

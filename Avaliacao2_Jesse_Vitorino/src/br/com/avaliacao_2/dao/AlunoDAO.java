@@ -47,12 +47,13 @@ public class AlunoDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "INSERT INTO aluno (id, nome_al, email_al, curso_id, data_al) VALUES ("
+            String comando = "INSERT INTO aluno (id, nome_al, email_al, data_al) VALUES ("
                     + "nextval('serial_id'), "
                     + "'" + alunoDTO.getNome_al() + "', "
                     + "'" + alunoDTO.getEmail_al() + "', "
-                    + alunoDTO.getCurso_id() + ", "
+                    + "'" + alunoDTO.getTel_al()+ "', "                    
                     + "'" + alunoDTO.getData_al() + "')";
+            
 
             stmt.execute(comando.toUpperCase());
             ConexaoDAO.con.commit();
@@ -75,9 +76,9 @@ public class AlunoDAO {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
             String comando = "UPDATE aluno SET nome_al = '" + alunoDTO.getNome_al() + "', "
-                    + "email_al = '" + alunoDTO.getEmail_al() + "', "
-                    + "curso_id = " + alunoDTO.getCurso_id() + ", "
+                    + "email_al = '" + alunoDTO.getEmail_al() + "', "                    
                     + "data_al = '" + alunoDTO.getData_al() + "' "
+                    + "tel_al = '" + alunoDTO.getTel_al()+ "' "
                     + "WHERE id = " + alunoDTO.getId();
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
@@ -122,7 +123,7 @@ public class AlunoDAO {
                 aluno.setId(rs.getInt("id"));
                 aluno.setNome_al(rs.getString("nome_al"));
                 aluno.setEmail_al(rs.getString("email_al"));
-                aluno.setCurso_id(rs.getInt("curso_id"));
+                aluno.setTel_al(rs.getString("tel_al"));                
                 aluno.setData_al(rs.getDate("data_al"));
             }
             rs.close();
@@ -137,82 +138,7 @@ public class AlunoDAO {
     }
 //fecha metodo consultar aluno
 
-    public List<AlunoDTO> listarAlunos() {
-        List<AlunoDTO> alunos = new ArrayList<>();
-        AlunoDAO alunoDAO = new AlunoDAO();
-
-        try {
-            ConexaoDAO.ConectDB();
-            String query = "SELECT * from aluno";
-            
-            Statement stmt =  ConexaoDAO.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                AlunoDTO aluno = new AlunoDTO();
-                aluno.setId(rs.getInt("id"));
-                aluno.setNome_al(rs.getString("nome_al"));
-                aluno.setEmail_al(rs.getString("email_al"));
-                aluno.setCurso_id(rs.getInt("curso_id"));
-                aluno.setData_al(rs.getDate("data_al"));
-
-                // Adicionar aluno à lista de alunos
-                alunos.add(aluno);
-            }
-
-            rs.close();
-            stmt.close();
-            
-        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
-          //console com o que esta acontecendo.
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            
-        } //Independente de dar erro ou não ele vai fechar o banco de dados.
-        finally {
-            //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
-            ConexaoDAO.CloseDB();
-        }
-        return alunos;
-    }
-    public List<CursoDTO> obterCursosDoAluno(int idAluno) {
-    List<CursoDTO> listaCursos = new ArrayList<>();
-    try {
-        // Estabelecer a conexão com o banco de dados (assumindo que já existe uma classe de conexão)
-
-        // Criar a consulta SQL para obter os cursos do aluno
-        String consulta = "SELECT * FROM curso WHERE aluno_id = ?";
-
-        // Preparar a declaração SQL
-        PreparedStatement stmt = ConexaoDAO.con.prepareStatement(consulta);
-        stmt.setInt(1, idAluno);
-
-        // Executar a consulta e obter o resultado
-        ResultSet rs = stmt.executeQuery();
-
-        // Percorrer o resultado e criar objetos CursoDTO
-        while (rs.next()) {
-            CursoDTO curso = new CursoDTO();
-            curso.setId(rs.getInt("id"));
-            curso.setNome_cur(rs.getString("nome_cur"));
-            curso.setDescri_cur(rs.getString("descri_cur"));
-            // Preencher outros atributos do curso, se necessário
-
-            // Adicionar o curso à lista de cursos
-            listaCursos.add(curso);
-        }
-
-        // Fechar o ResultSet, o PreparedStatement e a conexão
-        rs.close();
-        stmt.close();
-        // Fechar a conexão com o banco de dados
-
-    } catch (SQLException e) {
-        System.out.println("Erro ao obter os cursos do aluno: " + e.getMessage());
-    }
-    return listaCursos;
-}
-
+    
     
 
     

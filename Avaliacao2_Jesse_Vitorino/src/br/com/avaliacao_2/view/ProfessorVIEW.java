@@ -53,7 +53,7 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         especialidade = new javax.swing.JTextField();
         pesquisa_nome_prof = new javax.swing.JTextField();
-        btn = new javax.swing.JButton();
+        btnPesquisar_pro = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
@@ -63,6 +63,10 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
         btnSair = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtl_consultar_prof = new javax.swing.JTable();
+        tel_prof = new javax.swing.JTextField();
+        end_prof = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel1.setText("NOME");
@@ -75,9 +79,14 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
         jLabel3.setText("EMAIL");
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel4.setText("ESPECIALIDADE");
+        jLabel4.setText("ÁREA DE ESPECIALIDADE");
 
-        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/pesquisar.png"))); // NOI18N
+        btnPesquisar_pro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/pesquisar.png"))); // NOI18N
+        btnPesquisar_pro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisar_proActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel5.setText("NOME");
@@ -154,17 +163,18 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
 
         jtl_consultar_prof.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "NOME", "EMAIL", "CURSO", "IDADE"
+                "NOME", "ESPECIALIZAÇÃO", "ENDEREÇO", "TELEFONE", "EMAIL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -173,6 +183,12 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtl_consultar_prof);
 
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel6.setText("TELEFONE");
+
+        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel7.setText("ENDEREÇO:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -180,13 +196,15 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(383, 383, 383)
                 .addComponent(jLabel2)
-                .addContainerGap(474, Short.MAX_VALUE))
+                .addContainerGap(615, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,17 +212,19 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(email_prof, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                             .addComponent(nome_prof, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                            .addComponent(especialidade, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
-                        .addGap(195, 195, 195)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(especialidade, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(tel_prof, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(end_prof, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pesquisa_nome_prof)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(pesquisa_nome_prof, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPesquisar_pro))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 59, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,22 +243,30 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btn, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnPesquisar_pro, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel5)
                                         .addComponent(pesquisa_nome_prof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(email_prof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(especialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                            .addComponent(jLabel4))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(end_prof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tel_prof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(email_prof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(9, Short.MAX_VALUE))
         );
@@ -300,6 +328,10 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnPesquisar_proActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar_proActionPerformed
+        preencheTabela(pesquisa_nome_prof.getText());
+    }//GEN-LAST:event_btnPesquisar_proActionPerformed
     /**
      * Método para centralizar o internalFrame.
      */
@@ -337,7 +369,8 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
             System.out.println("Erro ao Alterar: " + e.getMessage());
         }
     }
-private void excluir() {
+
+    private void excluir() {
         if (JOptionPane.showConfirmDialog(null, "Deseja Realmente excluir o Aluno?", "Aviso",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null,
@@ -347,14 +380,16 @@ private void excluir() {
     }
     //Fecha método excluir()
     //Método utilizado para liberar/bloquear os campos da tela.
-        // * @param a, boolean com true(libera) false(bloqueia).
-private void liberaCampos(boolean a) {
+    // * @param a, boolean com true(libera) false(bloqueia).
+
+    private void liberaCampos(boolean a) {
         nome_prof.setEnabled(a);
         email_prof.setEnabled(a);
         especialidade.setEnabled(a);
 
     }//Fecha método liberaCampos(boolean a)
- /**
+
+    /**
      * Método utilizado para liberar os botões da tela.
      *
      * @param a, boolean com true(libera) false(bloqueia) para o btnNovo.
@@ -370,6 +405,7 @@ private void liberaCampos(boolean a) {
         btnExcluir.setEnabled(d);
         btnSair.setEnabled(e);
     }//Fecha método liberaBotoes(boolean a, boolean b, boolean c, boolean d, boolean e)
+
     /**
      * Método utilizado para limpar os campos da tela.
      */
@@ -378,8 +414,7 @@ private void liberaCampos(boolean a) {
         email_prof.setText("");
         especialidade.setText("");
     }//Fecha método limpaCampos()
-    
-    
+
     /**
      * Método utilizado para preencher/contruir a Jtable.
      *
@@ -394,8 +429,8 @@ private void liberaCampos(boolean a) {
             rs = professorCTR.consultarProfessor(professorDTO, 1); //1 = é a pesquisa por nome na classe DAO
             while (rs.next()) {
                 modelo_jtl_consultar_prof.addRow(new Object[]{
-                    rs.getString("id_al"),
-                    rs.getString("nome_al"),});
+                    rs.getString("id"),
+                    rs.getString("nome_prof"),});
             }
         } catch (Exception erTab) {
             System.out.println("Erro SQL: " + erTab);
@@ -403,6 +438,7 @@ private void liberaCampos(boolean a) {
             professorCTR.CloseDB();
         }
     }//Fecha método preencheTabela(String nome_al)
+
     private void preencheCampos(int id) {
         try {
             professorDTO.setId(id);
@@ -424,24 +460,28 @@ private void liberaCampos(boolean a) {
         }
     }//Fecha método preencheCampos(int id_professor)
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar_pro;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField email_prof;
+    private javax.swing.JTextField end_prof;
     private javax.swing.JTextField especialidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtl_consultar_prof;
     private javax.swing.JTextField nome_prof;
     private javax.swing.JTextField pesquisa_nome_prof;
+    private javax.swing.JTextField tel_prof;
     // End of variables declaration//GEN-END:variables
 }

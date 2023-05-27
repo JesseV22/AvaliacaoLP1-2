@@ -10,8 +10,7 @@ public class ProfessorDTO {
     private int id;
     private String nome;
     private String email;
-    private String especialidade;
-    private CursoDTO curso; // atributo que representa a chave estrangeira para a tabela curso
+    private String especialidade , tel_prof, end_prof;
 
     /**
      * @return the id
@@ -70,17 +69,33 @@ public class ProfessorDTO {
     }
 
     /**
-     * @return the curso
+     * @return the tel_prof
      */
-    public CursoDTO getCurso() {
-        return curso;
+    public String getTel_prof() {
+        return tel_prof;
     }
 
     /**
-     * @param curso the curso to set
+     * @param tel_prof the tel_prof to set
      */
-    public void setCurso(CursoDTO curso) {
-        this.curso = curso;
+    public void setTel_prof(String tel_prof) {
+        this.tel_prof = tel_prof;
     }
 
+    /**
+     * @return the end_prof
+     */
+    public String getEnd_prof() {
+        return end_prof;
+    }
+
+    /**
+     * @param end_prof the end_prof to set
+     */
+    public void setEnd_prof(String end_prof) {
+        this.end_prof = end_prof;
+    }
+    
+
+    
 }

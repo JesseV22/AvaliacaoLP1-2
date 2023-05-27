@@ -47,7 +47,7 @@ public class CursoDAO {
             // Instancia o Statement que sera responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
             // Comando SQL que sera executado no banco de dados
-            String comando = "Insert into curso (nome_cur, descricao_cur, id) values ( "
+            String comando = "Insert into curso (nome_cur, descri_cur, id) values ( "
                     + "'" + cursoDTO.getNome_cur() + "', "
                     + "'" + cursoDTO.getDescri_cur() + "', "
                     + "nextval('serial_id')) ";

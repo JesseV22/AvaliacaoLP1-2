@@ -6,12 +6,7 @@ package br.com.avaliacao_2.view;
 
 import br.com.avaliacao_2.view.CursoVIEW;
 import br.com.avaliacao_2.ctr.CursoCTR;
-import br.com.avaliacao_2.dao.AlunoDAO;
-import br.com.avaliacao_2.dao.ProfessorDAO;
-import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dto.CursoDTO;
-import br.com.avaliacao_2.dto.ProfessorDTO;
-import br.com.avaliacao_2.view.AlunoVIEW;
 import java.awt.Dimension;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,8 +15,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import br.com.avaliacao_2.ctr.ProfessorCTR;
-import br.com.avaliacao_2.view.ProfessorVIEW;
+
 
 /**
  *
@@ -52,24 +46,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         // Inicializar a controladora do curso
         cursoCTR = new CursoCTR();
 
-        // Criar o JComboBox para os alunos
-        JComboBox<String> cbAluno = new JComboBox<>();
-
-        // Adicionar o JComboBox ao painel ou frame do CursoView
-        // ...
-        // Carregar os alunos no JComboBox
-        cursoCTR.carregarAlunosNoComboBox(cbAluno);
-
-        // Criar o JComboBox para os professores
-        JComboBox<String> cbProfessor = new JComboBox<>();
-
-        // Adicionar o JComboBox ao painel ou frame do CursoView
-        // ...
-        // Carregar os professores no JComboBox
-        cursoCTR.carregarProfessoresNoComboBox(cbProfessor);
-
-    }
-
+      }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -85,11 +62,9 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         nome_cur = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        descri_cur = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        comboBoxAlunos = new javax.swing.JComboBox();
-        comboBoxProfessor = new javax.swing.JComboBox();
+        carga_cur = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        descri_cur = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         pesquisa_nome_cur = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -174,54 +149,25 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel3.setText("DESCRIÇÃO");
 
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel4.setText("LISTA DE ALUNOS");
-
-        comboBoxAlunos.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                comboBoxAlunosAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
-        comboBoxProfessor.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                comboBoxProfessorAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel6.setText("PROFESSORES");
+        jLabel6.setText("CARGA HORÁRIA");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboBoxAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(descri_cur, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nome_cur, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboBoxProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(carga_cur, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nome_cur, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(descri_cur, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,15 +180,11 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(descri_cur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(23, 23, 23)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(comboBoxAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBoxProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(carga_cur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pesquisa_nome_cur.addActionListener(new java.awt.event.ActionListener() {
@@ -255,6 +197,11 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         jLabel5.setText("NOME");
 
         btnPesquisar_cur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/pesquisar.png"))); // NOI18N
+        btnPesquisar_cur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisar_curActionPerformed(evt);
+            }
+        });
 
         jtl_consultar_curso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -265,7 +212,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "NOME", "DESCRICAO", "ALUNOS"
+                "ID", "NOME", "DESCRICAO", "C.H"
             }
         ) {
             Class[] types = new Class [] {
@@ -310,7 +257,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5))
                     .addComponent(btnPesquisar_cur))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -325,9 +272,9 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
+                        .addGap(64, 64, 64)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(123, 123, 123)
@@ -341,11 +288,15 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
@@ -419,33 +370,10 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private void pesquisa_nome_curActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisa_nome_curActionPerformed
         preencheTabela(pesquisa_nome_cur.getText());
     }//GEN-LAST:event_pesquisa_nome_curActionPerformed
-
-    private void comboBoxAlunosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_comboBoxAlunosAncestorAdded
-        AlunoDAO dao = new AlunoDAO();
-        List<AlunoDTO> lista = dao.listarAlunos();
-
-        //Remove todos os itens de um combobox
-        comboBoxAlunos.removeAllItems();
-
-        //para cada item da lista monte um objeto fornecedor
-        for (AlunoDTO aluno : lista) {
-            comboBoxAlunos.addItem(aluno.getNome_al());
-
-    }//GEN-LAST:event_comboBoxAlunosAncestorAdded
-    }
-    private void comboBoxProfessorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_comboBoxProfessorAncestorAdded
-        ProfessorDAO dao = new ProfessorDAO();
-        List<ProfessorDTO> lista = dao.listarProfessores();
-
-// Remove todos os itens de um combobox
-        comboBoxProfessor.removeAllItems();
-
-// Para cada item da lista, adicione um objeto professor ao combobox
-        for (ProfessorDTO professor : lista) {
-            comboBoxProfessor.addItem(professor.getNome());
-        }
-
-    }//GEN-LAST:event_comboBoxProfessorAncestorAdded
+    
+    private void btnPesquisar_curActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar_curActionPerformed
+        preencheTabela(pesquisa_nome_cur.getText());
+    }//GEN-LAST:event_btnPesquisar_curActionPerformed
 
     /**
      * Método para centralizar o internalFrame.
@@ -458,12 +386,11 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private void gravar() {
         try {
             cursoDTO.setNome_cur(nome_cur.getText());
-            cursoDTO.setDescri_cur(descri_cur.getText());
-            List<AlunoDTO> AlunoVIEW = null;
-            List<ProfessorDTO> ProfessorVIEW = null;
+            cursoDTO.setDescri_cur(carga_cur.getText());
+            cursoDTO.setCarga_cur(carga_cur.getText());
+            
 
-            cursoDTO.setAlunos(AlunoVIEW);
-            cursoDTO.setProfessores(ProfessorVIEW);
+           
 
             // Insere um novo registro de curso
             cursoCTR.inserirCurso(cursoDTO);
@@ -475,10 +402,8 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private void alterar() {
         try {
             cursoDTO.setNome_cur(nome_cur.getText());
-            cursoDTO.setDescri_cur(descri_cur.getText());
-            List<AlunoDTO> AlunoVIEW = null;
-            List<ProfessorDTO> ProfessorVIEW = null;
-            cursoDTO.setAlunos(AlunoVIEW);
+            cursoDTO.setDescri_cur(carga_cur.getText());            
+            cursoDTO.setCarga_cur(carga_cur.getText());
 
             // Atualiza um registro de curso existente
             cursoCTR.alterarCurso(cursoDTO);
@@ -497,6 +422,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
 
     public void liberaCampos(boolean a) {
         nome_cur.setEnabled(a);
+        carga_cur.setEnabled(a);
         descri_cur.setEnabled(a);
     }
 
@@ -522,7 +448,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
      */
     private void limpaCampos() {
         nome_cur.setText("");
-        descri_cur.setText("");
+        carga_cur.setText("");
     }//Fecha método limpaCampos()
 
     /**
@@ -540,8 +466,8 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             ResultSet rs = cursoCTR.consultarCurso(cursoDTO, 1); // 1 = é a pesquisa por nome na classe DAO
             while (rs.next()) {
                 modelo_jtl_consultar_curso.addRow(new Object[]{
-                    rs.getString("id_cli"),
-                    rs.getString("nome_cli"),});
+                    rs.getString("id"),
+                    rs.getString("nome_cur"),});
             }
         } catch (SQLException erTab) {
             System.out.println("Erro SQL: " + erTab);
@@ -558,12 +484,16 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
      */
     public void preencheCampos(int id) {
         try {
-            CursoDTO cursoDTO = obterCursoPorId(id);
+             cursoDTO.setId(id);
+            rs = cursoCTR.consultarCurso(cursoDTO, 2); // 2 = é a pesquisa no id na classe DAO
+            
             if (cursoDTO != null) {
                 limpaCampos();
 
                 nome_cur.setText(cursoDTO.getNome_cur());
                 descri_cur.setText(cursoDTO.getDescri_cur());
+                carga_cur.setText(cursoDTO.getCarga_cur());
+                
 
                 // Preencher outros campos relacionados ao curso, se houver
                 gravar_alterar = 2;
@@ -574,15 +504,8 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         }
     }
 
-    private CursoDTO obterCursoPorId(int id) {
-        // Lógica para obter informações do curso com base no ID fornecido
-        // Retorna um objeto CursoDTO com as informações do curso
-        // Caso o curso não seja encontrado, retorne null  
-        return null;
-        // Lógica para obter informações do curso com base no ID fornecido
-        // Retorna um objeto CursoDTO com as informações do curso
-        // Caso o curso não seja encontrado, retorne null  
-    }
+  
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -592,13 +515,11 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPesquisar_cur;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox comboBoxAlunos;
-    private javax.swing.JComboBox comboBoxProfessor;
+    private javax.swing.JTextField carga_cur;
     private javax.swing.JTextField descri_cur;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

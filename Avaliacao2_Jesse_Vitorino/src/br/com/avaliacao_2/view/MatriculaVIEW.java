@@ -44,16 +44,16 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        aluno_mar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         data_mar = new javax.swing.JFormattedTextField();
-        curso_mar = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
+        pesquisa_nome_mar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        btnPesquisar_pro = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtl_consultar_mar = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -89,31 +89,30 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel3)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(aluno_mar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(data_mar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(curso_mar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(data_mar, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aluno_mar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(curso_mar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(data_mar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -123,7 +122,12 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel5.setText("NOME");
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/pesquisar.png"))); // NOI18N
+        btnPesquisar_pro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/pesquisar.png"))); // NOI18N
+        btnPesquisar_pro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisar_proActionPerformed(evt);
+            }
+        });
 
         jtl_consultar_mar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,9 +162,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pesquisa_nome_mar, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6))))
+                        .addComponent(btnPesquisar_pro))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,9 +172,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pesquisa_nome_mar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
-                    .addComponent(jButton6))
+                    .addComponent(btnPesquisar_pro))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                 .addContainerGap())
@@ -260,9 +264,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
                         .addGap(340, 340, 340)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
+                        .addGap(58, 58, 58)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(11, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,11 +279,11 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(156, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(363, 363, 363)
@@ -300,10 +304,6 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void data_marActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_data_marActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_data_marActionPerformed
 
     private void btnNovo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovo3ActionPerformed
         liberaCampos(true);
@@ -347,6 +347,14 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
     private void btnSair3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSair3ActionPerformed
+
+    private void btnPesquisar_proActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar_proActionPerformed
+        preencheTabela(pesquisa_nome_mar.getText());
+    }//GEN-LAST:event_btnPesquisar_proActionPerformed
+
+    private void data_marActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_data_marActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_data_marActionPerformed
 
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
@@ -393,7 +401,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
     }
     //Fecha método excluir()
     //Método utilizado para liberar/bloquear os campos da tela.
-        // * @param a, boolean com true(libera) false(bloqueia).
+    // * @param a, boolean com true(libera) false(bloqueia).
 
     private void liberaCampos(boolean a) {
         aluno_mar.setEnabled(a);
@@ -401,6 +409,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         data_mar.setEnabled(a);
 
     }//Fecha método liberaCampos(boolean a)
+
     /**
      * Método utilizado para liberar os botões da tela.
      *
@@ -417,6 +426,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         btnExcluir3.setEnabled(d);
         btnSair3.setEnabled(e);
     }//Fecha método liberaBotoes(boolean a, boolean b, boolean c, boolean d, boolean e)
+
     /**
      * Método utilizado para limpar os campos da tela.
      */
@@ -425,14 +435,13 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         curso_mar.setText("");
         data_mar.setText("");
     }//Fecha método limpaCampos()
-    
-    
+
     /**
      * Método utilizado para preencher/contruir a Jtable.
      *
      * @param nome_al, String com o nome do aluno
      */
-        private void preencheTabela(String aluno_mar) {
+    private void preencheTabela(String aluno_mar) {
         try {
             //Limpa todas as linhas
             modelo_jtl_consultar_mar.setNumRows(0);
@@ -441,8 +450,8 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
             rs = matriculaCTR.consultarMatricula(matriculaDTO, 1); //1 = é a pesquisa por nome na classe DAO
             while (rs.next()) {
                 modelo_jtl_consultar_mar.addRow(new Object[]{
-                    rs.getString("id_al"),
-                    rs.getString("nome_al"),});
+                    rs.getString("id"),
+                    rs.getString("nome_mar"),});
             }
         } catch (SQLException erTab) {
             System.out.println("Erro SQL: " + erTab);
@@ -450,8 +459,8 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
             matriculaCTR.CloseDB();
         }
     }//Fecha método preencheTabela(String nome_al)
-        
-        private void preencheCampos(int id) {
+
+    private void preencheCampos(int id) {
         try {
             matriculaDTO.setId(id);
             rs = matriculaCTR.consultarMatricula(matriculaDTO, 2); // 2 = é a pesquisa no id na classe DAO
@@ -472,17 +481,16 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         }
     }//Fecha método preencheCampos(int id_matricula)
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField aluno_mar;
     private javax.swing.JButton btnCancelar3;
     private javax.swing.JButton btnExcluir3;
     private javax.swing.JButton btnNovo3;
+    private javax.swing.JButton btnPesquisar_pro;
     private javax.swing.JButton btnSair3;
     private javax.swing.JButton btnSalvar3;
-    private javax.swing.JTextField curso_mar;
     private javax.swing.JFormattedTextField data_mar;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -493,8 +501,8 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable jtl_consultar_mar;
+    private javax.swing.JTextField pesquisa_nome_mar;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -6,11 +6,8 @@ package br.com.avaliacao_2.view;
 
 import br.com.avaliacao_2.view.AlunoVIEW;
 import br.com.avaliacao_2.ctr.AlunoCTR;
-import br.com.avaliacao_2.dao.CursoDAO;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dto.AlunoDTO;
-import br.com.avaliacao_2.dto.CursoDTO;
-import br.com.avaliacao_2.dto.CursoDTO;
 import java.awt.Dimension;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -54,7 +51,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         pesquisa_nome_al = new javax.swing.JTextField();
-        btn = new javax.swing.JButton();
+        btnPesquisar_al = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
@@ -71,8 +68,8 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        tel_al = new javax.swing.JTextField();
         email_al = new javax.swing.JTextField();
-        comboBoxCurso = new javax.swing.JComboBox<>();
 
         setTitle("Aluno");
 
@@ -80,7 +77,12 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/alunos (1).png"))); // NOI18N
         jLabel2.setText("Aluno ");
 
-        btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/pesquisar.png"))); // NOI18N
+        btnPesquisar_al.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/avaliacao_2/view/imagens/pesquisar.png"))); // NOI18N
+        btnPesquisar_al.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisar_alActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel5.setText("NOME");
@@ -160,14 +162,15 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "NOME", "EMAIL", "CURSO", "IDADE"
+                "NOME", "IDADE", "TELEFONE", "EMAIL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -188,7 +191,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel4.setText("CURSO");
+        jLabel4.setText("TELEFONE");
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel3.setText("EMAIL");
@@ -199,53 +202,54 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel6.setText("IDADE");
 
-        comboBoxCurso.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                comboBoxCursoAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(email_al)
-                    .addComponent(nome_al)
-                    .addComponent(data_al, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBoxCurso, 0, 205, Short.MAX_VALUE))
-                .addGap(0, 83, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nome_al, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(data_al))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(email_al, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(14, 14, 14)
+                        .addComponent(tel_al, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(nome_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(email_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(17, 17, 17)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(comboBoxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nome_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(data_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)))
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tel_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(email_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -259,20 +263,20 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(90, 90, 90)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pesquisa_nome_al)
                         .addGap(18, 18, 18)
-                        .addComponent(btn))
+                        .addComponent(btnPesquisar_al))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78))
+                .addGap(137, 137, 137))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,18 +284,18 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnPesquisar_al, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
                                 .addComponent(pesquisa_nome_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(35, 35, 35))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -359,18 +363,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         gravar_alterar = 1;
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void comboBoxCursoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_comboBoxCursoAncestorAdded
-        CursoDAO dao = new CursoDAO();
-        List<CursoDTO> lista = dao.listarCursos();
-
-// Remove todos os itens de um combobox
-        comboBoxCurso.removeAllItems();
-
-// Para cada item da lista, adicione um objeto curso ao combobox
-        for (CursoDTO curso : lista) {
-            comboBoxCurso.addItem(curso.getNome_cur());
-        }
-    }//GEN-LAST:event_comboBoxCursoAncestorAdded
+    private void btnPesquisar_alActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar_alActionPerformed
+        preencheTabela(pesquisa_nome_al.getText());
+    }//GEN-LAST:event_btnPesquisar_alActionPerformed
     /**
      * Método para centralizar o internalFrame.
      */
@@ -383,11 +378,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         try {
             AlunoDTO alunoDTO = new AlunoDTO();
             alunoDTO.setNome_al(nome_al.getText());
-            alunoDTO.setEmail_al(email_al.getText());
+            alunoDTO.setEmail_al(tel_al.getText());
             alunoDTO.setData_al(data_almat.parse(data_al.getText()));
-            List<CursoDTO> CursoVIEW = null;
-
-            alunoDTO.setCursos(CursoVIEW);
+            
 
             JOptionPane.showMessageDialog(null,
                     alunoCTR.inserirAluno(alunoDTO)
@@ -405,8 +398,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
             AlunoDTO alunoDTO = new AlunoDTO();
             alunoDTO.setNome_al(nome_al.getText());
             alunoDTO.setEmail_al(email_al.getText());
+            alunoDTO.setTel_al(tel_al.getText());
             alunoDTO.setData_al(data_almat.parse(data_al.getText()));
-            List<CursoDTO> CursoVIEW = null;
+           
 
             JOptionPane.showMessageDialog(null,
                     // Atualiza um registro de curso existente
@@ -427,7 +421,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                     alunoCTR.excluirAluno(alunoDTO)
             );
         }
-    }// Fecha método excluir()
+    }// Fecha método excuir()
 
     /**
      * Método utilizado para liberar/bloquear os campos da tela.
@@ -436,8 +430,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
      */
     private void liberaCampos(boolean a) {
         nome_al.setEnabled(a);
-        email_al.setEnabled(a);
+        tel_al.setEnabled(a);
         data_al.setEnabled(a);
+        email_al.setEnabled(a);
 
     }//Fecha método liberaCampos(boolean a)
 
@@ -463,8 +458,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
      */
     private void limpaCampos() {
         nome_al.setText("");
-        email_al.setText("");
+        tel_al.setText("");
         data_al.setText("");
+        email_al.setText("");
     }//Fecha método limpaCampos()
 
     /**
@@ -478,11 +474,14 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
             modelo_jtl_consultar_al.setNumRows(0);
             //Enquanto tiver linhas - faça
             alunoDTO.setNome_al(nome_al);
-            rs = alunoCTR.consultarAluno(alunoDTO, 1); //1 = é a pesquisa por nome na classe DAO
+            rs = alunoCTR.consultarAluno(alunoDTO, WIDTH); //1 = é a pesquisa por nome na classe DAO
             while (rs.next()) {
                 modelo_jtl_consultar_al.addRow(new Object[]{
-                    rs.getString("id_al"),
-                    rs.getString("nome_al"),});
+                    rs.getString("id"),
+                    rs.getString("nome_al")
+                        
+                });
+                
             }
         } catch (Exception erTab) {
             System.out.println("Erro SQL: " + erTab);
@@ -496,16 +495,17 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
      *
      * @param id, int com o id do aluno.
      */
-    private void preencheCampos(int id_aluno) {
+    private void preencheCampos(int id) {
         try {
-            alunoDTO.setId(id_aluno);
+            alunoDTO.setId(id);
             rs = alunoCTR.consultarAluno(alunoDTO, 2); // 2 = é a pesquisa no id na classe DAO
             if (rs.next()) {
                 limpaCampos();
 
                 nome_al.setText(rs.getString("nome_al"));
-                email_al.setText(rs.getString("email_al"));
+                tel_al.setText(rs.getString("email_al"));
                 data_al.setText(rs.getString("data_al"));
+                email_al.setText(rs.getString("email_al"));
 
                 gravar_alterar = 2;
                 liberaCampos(true);
@@ -519,13 +519,12 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar_al;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> comboBoxCurso;
     private javax.swing.JFormattedTextField data_al;
     private javax.swing.JTextField email_al;
     private javax.swing.JLabel jLabel1;
@@ -541,6 +540,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtl_consultar_al;
     private javax.swing.JTextField nome_al;
     private javax.swing.JTextField pesquisa_nome_al;
+    private javax.swing.JTextField tel_al;
     // End of variables declaration//GEN-END:variables
 
 }

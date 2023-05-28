@@ -5,6 +5,7 @@
 package br.com.avaliacao_2.dto;
 
 import java.util.Date;
+import java.util.List;
 /**
  *
  * @author Jesse
@@ -13,6 +14,9 @@ public class MatriculaDTO {
     private  String aluno_mar , curso_mar ;
     private int id ;
     private Date data_mar;
+    private List<AlunoDTO> alunos; // atributo que representa o relacionamento 1-N com a tabela aluno
+    private List<CursoDTO> cursos; // atributo que representa o relacionamento 1-N com a tabela aluno
+
 
     /**
      * @return the aluno_mar
@@ -70,6 +74,34 @@ public class MatriculaDTO {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the alunos
+     */
+    public List<AlunoDTO> getAlunos() {
+        return alunos;
+    }
+
+    /**
+     * @param alunos the alunos to set
+     */
+    public void setAlunos(List<AlunoDTO> alunos) {
+        this.alunos = alunos;
+    }
+
+    /**
+     * @return the cursos
+     */
+    public List<CursoDTO> getCursos() {
+        return cursos;
+    }
+
+    /**
+     * @param cursos the cursos to set
+     */
+    public void setCursos(List<CursoDTO> cursos) {
+        this.cursos = cursos;
     }
     
     

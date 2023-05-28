@@ -346,6 +346,8 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
             professorDTO.setNome(nome_prof.getText());
             professorDTO.setEmail(email_prof.getText());
             professorDTO.setEspecialidade(email_prof.getText());
+            professorDTO.setEnd_prof(end_prof.getText());
+            professorDTO.setTel_prof(tel_prof.getText());
 
             JOptionPane.showMessageDialog(null,
                     professorCTR.inserirProfessor(professorDTO)
@@ -361,6 +363,8 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
             professorDTO.setNome(nome_prof.getText());
             professorDTO.setEmail(email_prof.getText());
             professorDTO.setEspecialidade(email_prof.getText());
+            professorDTO.setEnd_prof(end_prof.getText());
+            professorDTO.setTel_prof(tel_prof.getText());
 
             JOptionPane.showMessageDialog(null,
                     professorCTR.alterarProfessor(professorDTO)
@@ -386,6 +390,8 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
         nome_prof.setEnabled(a);
         email_prof.setEnabled(a);
         especialidade.setEnabled(a);
+        end_prof.setEnabled(a);
+        tel_prof.setEnabled(a);
 
     }//Fecha método liberaCampos(boolean a)
 
@@ -413,6 +419,9 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
         nome_prof.setText("");
         email_prof.setText("");
         especialidade.setText("");
+        tel_prof.setText("");
+        end_prof.setText("");
+        
     }//Fecha método limpaCampos()
 
     /**
@@ -449,6 +458,8 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
                 nome_prof.setText(rs.getString("nome_prof"));
                 email_prof.setText(rs.getString("email_prof"));
                 especialidade.setText(rs.getString("especialidade"));
+                tel_prof.setText(rs.getString("tel_prof"));
+                end_prof.setText(rs.getString("end_prof"));
 
                 gravar_alterar = 2;
                 liberaCampos(true);

@@ -47,13 +47,12 @@ public class AlunoDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "INSERT INTO aluno (id, nome_al, email_al, data_al) VALUES ("
+            String comando = "INSERT INTO aluno (id, nome_al, email_al, data_al,tel_al) VALUES ("
                     + "nextval('serial_id'), "
                     + "'" + alunoDTO.getNome_al() + "', "
                     + "'" + alunoDTO.getEmail_al() + "', "
-                    + "'" + alunoDTO.getTel_al()+ "', "                    
+                    + "'" + alunoDTO.getTel_al() + "', "
                     + "'" + alunoDTO.getData_al() + "')";
-            
 
             stmt.execute(comando.toUpperCase());
             ConexaoDAO.con.commit();
@@ -76,9 +75,9 @@ public class AlunoDAO {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
             String comando = "UPDATE aluno SET nome_al = '" + alunoDTO.getNome_al() + "', "
-                    + "email_al = '" + alunoDTO.getEmail_al() + "', "                    
+                    + "email_al = '" + alunoDTO.getEmail_al() + "', "
                     + "data_al = '" + alunoDTO.getData_al() + "' "
-                    + "tel_al = '" + alunoDTO.getTel_al()+ "' "
+                    + "tel_al = '" + alunoDTO.getTel_al() + "' "
                     + "WHERE id = " + alunoDTO.getId();
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
@@ -123,7 +122,7 @@ public class AlunoDAO {
                 aluno.setId(rs.getInt("id"));
                 aluno.setNome_al(rs.getString("nome_al"));
                 aluno.setEmail_al(rs.getString("email_al"));
-                aluno.setTel_al(rs.getString("tel_al"));                
+                aluno.setTel_al(rs.getString("tel_al"));
                 aluno.setData_al(rs.getDate("data_al"));
             }
             rs.close();
@@ -138,11 +137,41 @@ public class AlunoDAO {
     }
 //fecha metodo consultar aluno
 
-    
-    
+    public List<AlunoDTO> listarAlunos() {
+        List<AlunoDTO> alunos = new ArrayList<>();
+        AlunoDAO alunoDAO = new AlunoDAO();
 
-    
+        try {
+            String query = "SELECT * FROM alunoview_aluno";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
 
-      
+            while (rs.next()) {
+                AlunoDTO aluno = new AlunoDTO();
+                aluno.setId(rs.getInt("id"));
+                aluno.setNome_al(rs.getString("nome_al"));
+                aluno.setEmail_al(rs.getString("email_al"));
+                aluno.setTel_al(rs.getString("tel_al"));
+                aluno.setData_al(rs.getDate("data_al"));
+
+                // Adicionar aluno à lista de alunos
+                alunos.add(aluno);
+            }
+
+            rs.close();
+            stmt.close();
+
+        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+        //console com o que esta acontecendo.
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        } //Independente de dar erro ou não ele vai fechar o banco de dados.
+        finally {
+            //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
+            ConexaoDAO.CloseDB();
+        }
+        return alunos;
+    }
 
 }//fecha classe aluno dao

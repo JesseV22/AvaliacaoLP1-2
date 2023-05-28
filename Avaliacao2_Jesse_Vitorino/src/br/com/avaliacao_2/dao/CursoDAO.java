@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package br.com.avaliacao_2.dao;
 
 import br.com.avaliacao_2.dto.CursoDTO;
 import br.com.avaliacao_2.dao.CursoDAO;
-import br.com.avaliacao_2.dto.AlunoDTO;
+import br.com.avaliacao_2.dto.CursoDTO;
 import br.com.avaliacao_2.dao.ConexaoDAO;
+import static br.com.avaliacao_2.dao.ConexaoDAO.con;
 import br.com.avaliacao_2.dto.ProfessorDTO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -134,50 +132,40 @@ public class CursoDAO {
         }
 
     }
+     public List<CursoDTO> listarCursos() {
+        List<CursoDTO> cursos = new ArrayList<>();
+        CursoDAO cursoDAO = new CursoDAO();
 
-    public List<AlunoDTO> obterAlunosDoCurso(int idCurso) {
-    List<AlunoDTO> listaAlunos = new ArrayList<>();
-    try {
-        // Estabelecer a conexão com o banco de dados (assumindo que já existe uma classe de conexão)
+        try {
+            String query = "SELECT * FROM cursoview_curso";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
 
-        // Criar a consulta SQL para obter os alunos do curso
-        String consulta = "SELECT * FROM aluno WHERE curso_id = ?";
+            while (rs.next()) {
+                CursoDTO curso = new CursoDTO();
+                curso.setId(rs.getInt("id"));
+                curso.setNome_cur(rs.getString("nome_cur"));
+                curso.setDescri_cur(rs.getString("descri_cur"));
 
-        // Preparar a declaração SQL
-        PreparedStatement stmt = ConexaoDAO.con.prepareStatement(consulta);
-        stmt.setInt(1, idCurso);
+                // Adicionar curso à lista de cursos
+                cursos.add(curso);
+            }
 
-        // Executar a consulta e obter o resultado
-        ResultSet rs = stmt.executeQuery();
-
-        // Percorrer o resultado e criar objetos AlunoDTO
-        while (rs.next()) {
-            AlunoDTO aluno = new AlunoDTO();
-            aluno.setId(rs.getInt("id"));
-            aluno.setNome_al(rs.getString("nome"));
-            // Preencher outros atributos do aluno, se necessário
-
-            // Adicionar o aluno à lista de alunos
-            listaAlunos.add(aluno);
+            rs.close();
+            stmt.close();
+            
+        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+          //console com o que esta acontecendo.
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            
+        } //Independente de dar erro ou não ele vai fechar o banco de dados.
+        finally {
+            //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
+            ConexaoDAO.CloseDB();
         }
-
-        // Fechar o ResultSet, o PreparedStatement e a conexão
-        rs.close();
-        stmt.close();
-        // Fechar a conexão com o banco de dados
-
-    } catch (SQLException e) {
-        System.out.println("Erro ao obter os alunos do curso: " + e.getMessage());
-    }
-    return listaAlunos;
-}
-
-    public List<ProfessorDTO> obterProfessoresDoCurso(int idCurso) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return cursos;
     }
 
-    public List<CursoDTO> listarCursos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }

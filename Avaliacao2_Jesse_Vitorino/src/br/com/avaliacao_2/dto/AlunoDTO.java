@@ -16,6 +16,7 @@ public class AlunoDTO {
     private String nome_al, email_al, tel_al;
     private int id;
     private Date data_al;
+    private List<AlunoDTO> alunos; // atributo que representa o relacionamento 1-N com a tabela aluno
 
     /**
      * @return the nome_al
@@ -85,6 +86,20 @@ public class AlunoDTO {
      */
     public void setData_al(Date data_al) {
         this.data_al = data_al;
+    }
+
+    /**
+     * @return the alunos
+     */
+    public List<AlunoDTO> getAlunos() {
+        return alunos;
+    }
+
+    /**
+     * @param alunos the alunos to set
+     */
+    public void setAlunos(List<AlunoDTO> alunos) {
+        this.alunos = alunos;
     }
     
 

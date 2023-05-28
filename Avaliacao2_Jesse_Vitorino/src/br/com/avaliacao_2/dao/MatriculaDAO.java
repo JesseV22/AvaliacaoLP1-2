@@ -117,7 +117,7 @@ public MatriculaDTO consultarMatricula(MatriculaDTO matriculaDTO, int id) {
     try {
         ConexaoDAO.ConectDB();
         stmt = ConexaoDAO.con.createStatement();
-        String comando = "SELECT * FROM matricula WHERE id_mar = " + id;
+        String comando = "SELECT * FROM matricula WHERE id = " + id;
         rs = stmt.executeQuery(comando.toUpperCase());
         if (rs.next()) {
             matricula = new MatriculaDTO();

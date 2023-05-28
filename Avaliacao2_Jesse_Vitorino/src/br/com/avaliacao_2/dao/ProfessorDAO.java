@@ -11,6 +11,7 @@ import br.com.avaliacao_2.dto.ProfessorDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import br.com.avaliacao_2.dao.ProfessorDAO;
 
 /**
  *
@@ -37,42 +38,39 @@ public class ProfessorDAO {
      */
     public boolean inserirProfessor(ProfessorDTO professorDTO) {
         try {
-            //Chama o metodo que esta na classe ConexaoDAO para abrir o banco de dados
             ConexaoDAO.ConectDB();
-            //Instancia o Statement que sera responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
-            //Comando SQL que sera executado no banco de dados
-            String comando = "INSERT INTO professor(id, nome_prof, email_prof, especialidade ) "
-                    + "VALUES(nextval('serial_id'),'" + professorDTO.getNome() + "', '" + professorDTO.getEmail() + "', "
-                    + "'" + professorDTO.getEspecialidade() + "')";
+            String comando = "INSERT INTO professor (id, nome_prof, email_prof, especialidade, end_prof, tel_prof) VALUES ( "
+                    + "nextval('serial_id'), "
+                    + "'" + professorDTO.getNome() + "', "
+                    + "'" + professorDTO.getEmail() + "', "
+                    + "'" + professorDTO.getEspecialidade() + "', "
+                    + "'" + professorDTO.getEnd_prof() + "', "
+                    + "'" + professorDTO.getTel_prof() + "') ";
 
-            //Executa o comando SQL no banco de Dados
             stmt.execute(comando.toUpperCase());
-            //Da um commit no banco de dados
             ConexaoDAO.con.commit();
-            //Fecha o statement
             stmt.close();
             return true;
-        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
-        //console com o que esta acontecendo.
-        catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
-        } //Independente de dar erro ou não ele vai fechar o banco de dados.
-        finally {
-            //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
+        } finally {
             ConexaoDAO.CloseDB();
         }
     }//Fecha metodo inserir professor
 
-    public boolean alterarProfessor(ProfessorDTO pofessorDTO) {
+    public boolean alterarProfessor(ProfessorDTO professorDTO) {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "UPDATE pofessor SET aluno_id = " + pofessorDTO.getNome() + ", "
-                    + "curso_id = " + pofessorDTO.getEmail() + ", "
-                    + "data_mat = '" + pofessorDTO.getEspecialidade() + "' "
-                    + "WHERE id_mat = " + pofessorDTO.getId();
+            String comando = "UPDATE professor SET "
+                    + "nome_prof = '" + professorDTO.getNome() + "', "
+                    + "email_prof = '" + professorDTO.getEmail() + "', "
+                    + "especialidade = '" + professorDTO.getEspecialidade() + "', "
+                    + "end_prof = '" + professorDTO.getEnd_prof() + "', "
+                    + "tel_prof = '" + professorDTO.getTel_prof() + "' "
+                    + "WHERE id = " + professorDTO.getId();
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
             stmt.close();
@@ -83,8 +81,33 @@ public class ProfessorDAO {
         } finally {
             ConexaoDAO.CloseDB();
         }
-    }//Fecha metodo alterar pofessor
 
+    }//Fecha metodo inserir professor
+
+    public boolean alterarProfessorPorDTO(ProfessorDTO professorDTO) {
+        try {
+            ConexaoDAO.ConectDB();
+            stmt = ConexaoDAO.con.createStatement();
+            String comando = "UPDATE professor SET "
+                    + "nome_prof = '" + professorDTO.getNome() + "', "
+                    + "email_prof = '" + professorDTO.getEmail() + "', "
+                    + "especialidade = '" + professorDTO.getEspecialidade() + "', "
+                    + "end_prof = '" + professorDTO.getEnd_prof() + "', "
+                    + "tel_prof = '" + professorDTO.getTel_prof() + "' "
+                    + "WHERE id = " + professorDTO.getId();
+            stmt.executeUpdate(comando.toUpperCase());
+            ConexaoDAO.con.commit();
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        } finally {
+            ConexaoDAO.CloseDB();
+        }
+    }
+
+//Fecha metodo alterar pofessor
     /**
      * Método utilizado para excluir um
      *
@@ -113,14 +136,16 @@ public class ProfessorDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "SELECT * FROM professor WHERE id_mar = " + id;
+            String comando = "SELECT * FROM professor WHERE id = " + id;
             rs = stmt.executeQuery(comando.toUpperCase());
             if (rs.next()) {
                 professor = new ProfessorDTO();
                 professor.setId(rs.getInt("id"));
-                professor.setNome(String.valueOf(rs.getInt("nome_prof")));
-                professor.setEmail(String.valueOf(rs.getInt("email_prof")));
-                professor.setEspecialidade(String.valueOf(rs.getInt("especialidade_prof")));
+                professor.setNome(rs.getString("nome_prof"));
+                professor.setEmail(rs.getString("email_prof"));
+                professor.setEspecialidade(rs.getString("especialidade_prof"));
+                professor.setEnd_prof(rs.getString("end_prof"));
+                professor.setTel_prof(rs.getString("tel_prof"));
 
             }
             rs.close();
@@ -159,7 +184,7 @@ public class ProfessorDAO {
             rs.close();
             stmt.close();
             //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
-          //console com o que esta acontecendo.
+            //console com o que esta acontecendo.
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

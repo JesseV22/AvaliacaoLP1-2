@@ -66,21 +66,6 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuSairMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuGeral">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Geral"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itemMenuGeral">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Geral"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuGeralActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
@@ -126,7 +111,7 @@
     <Container class="javax.swing.JDesktopPane" name="desktopPane">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane(){&#xd;&#xa;    public void paintComponent(Graphics graphics){&#xd;&#xa;        graphics.drawImage(image, 0, 0, getWidth(), getHeight(), this);&#xd;&#xa;    }&#xd;&#xa;}&#xd;&#xa;&#xd;&#xa;"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon imageicon = new ImageIcon(getClass().getResource(&quot;imagens/Gerenciamento.png&quot;));&#xd;&#xa;Image image = imageicon.getImage();&#xd;&#xa;&#xd;&#xa;"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon imageicon = new ImageIcon(getClass().getResource(&quot;imagens/Aluno.png&quot;));&#xd;&#xa;Image image = imageicon.getImage();&#xd;&#xa;&#xd;&#xa;"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">

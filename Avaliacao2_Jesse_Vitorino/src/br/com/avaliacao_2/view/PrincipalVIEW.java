@@ -26,7 +26,7 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon imageicon = new ImageIcon(getClass().getResource("imagens/Gerenciamento.png"));
+        ImageIcon imageicon = new ImageIcon(getClass().getResource("imagens/Aluno.png"));
         Image image = imageicon.getImage();
 
         desktopPane = new javax.swing.JDesktopPane(){
@@ -44,8 +44,6 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         itemMenuMatricula = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
-        menuGeral = new javax.swing.JMenu();
-        itemMenuGeral = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,18 +106,6 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         });
         menuBar.add(menuSair);
 
-        menuGeral.setText("Geral");
-
-        itemMenuGeral.setText("Geral");
-        itemMenuGeral.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemMenuGeralActionPerformed(evt);
-            }
-        });
-        menuGeral.add(itemMenuGeral);
-
-        menuBar.add(menuGeral);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,11 +150,6 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         abreProfessorVIEW();
     }//GEN-LAST:event_itemMenuProfessorActionPerformed
 
-    private void itemMenuGeralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuGeralActionPerformed
-               abreGeralVIEW();
-
-    }//GEN-LAST:event_itemMenuGeralActionPerformed
-
      /**
      * Método para fechar o sistema.
      */ 
@@ -184,13 +165,7 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     /**
      * Método para abrir a classe GeralVIEW.
      */
-    private void abreGeralVIEW(){
-        GeralVIEW geralVIEW = new GeralVIEW();
-        this.desktopPane.add(geralVIEW);
-        geralVIEW.setVisible(true); 
-        geralVIEW.setPosicao();
 
-    }
     /**
      * Método para abrir a classe AlunoVIEW.
      */
@@ -271,12 +246,10 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem itemMenuAluno;
     private javax.swing.JMenuItem itemMenuCurso;
-    private javax.swing.JMenuItem itemMenuGeral;
     private javax.swing.JMenuItem itemMenuMatricula;
     private javax.swing.JMenuItem itemMenuProfessor;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenu menuGeral;
     private javax.swing.JMenu menuGerenciamento;
     private javax.swing.JMenu menuSair;
     // End of variables declaration//GEN-END:variables

@@ -33,7 +33,7 @@ public class ProfessorDAO {
     /**
      * Método utilizado para inserir um objeto professorDTO no banco de dados
      *
-     * @param professorDTO, que vem da classe ProfessorCTR
+     * @param professorDTO, que vem da classe ProfessorCTRINSERT
      * @return Um boolean
      */
     public boolean inserirProfessor(ProfessorDTO professorDTO) {

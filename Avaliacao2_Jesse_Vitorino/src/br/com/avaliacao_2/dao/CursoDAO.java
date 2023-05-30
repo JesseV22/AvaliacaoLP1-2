@@ -1,4 +1,3 @@
-
 package br.com.avaliacao_2.dao;
 
 import br.com.avaliacao_2.dto.CursoDTO;
@@ -45,10 +44,11 @@ public class CursoDAO {
             // Instancia o Statement que sera responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
             // Comando SQL que sera executado no banco de dados
-            String comando = "Insert into curso (nome_cur, descri_cur, id) values ( "
+            String comando = "INSERT INTO curso (nome_cur, descri_cur, id , carga_cur) VALUES ( "
+                    + "nextval('serial_id') ,"
                     + "'" + cursoDTO.getNome_cur() + "', "
                     + "'" + cursoDTO.getDescri_cur() + "', "
-                    + "nextval('serial_id')) ";
+                    + "'" + cursoDTO.getCarga_cur() + "')";
 
             // Executa o comando SQL no banco de Dados
             stmt.execute(comando.toUpperCase());
@@ -72,9 +72,12 @@ public class CursoDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "UPDATE curso SET nome_cur = '" + cursoDTO.getNome_cur() + "', "
-                    + "descri_cur = '" + cursoDTO.getDescri_cur() + "' "
+            String comando = "UPDATE curso SET nome_cur = '"
+                    + cursoDTO.getNome_cur() + "', "
+                    + "descri_cur = '" + cursoDTO.getDescri_cur() + "', "
+                    + "carga_cur = '" + cursoDTO.getCarga_cur() + "' "
                     + "WHERE id = " + cursoDTO.getId();
+
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
             stmt.close();
@@ -118,13 +121,14 @@ public class CursoDAO {
                 curso.setId(rs.getInt("id"));
                 curso.setNome_cur(rs.getString("nome_cur"));
                 curso.setDescri_cur(rs.getString("descri_cur"));
+                curso.setCarga_cur(rs.getString("carga_cur"));
             }
 
             // Fecha o ResultSet e o Statement
             rs.close();
             stmt.close();
             return curso;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         } finally {
@@ -132,7 +136,8 @@ public class CursoDAO {
         }
 
     }
-     public List<CursoDTO> listarCursos() {
+
+    public List<CursoDTO> listarCursos() {
         List<CursoDTO> cursos = new ArrayList<>();
         CursoDAO cursoDAO = new CursoDAO();
 
@@ -146,6 +151,7 @@ public class CursoDAO {
                 curso.setId(rs.getInt("id"));
                 curso.setNome_cur(rs.getString("nome_cur"));
                 curso.setDescri_cur(rs.getString("descri_cur"));
+                curso.setCarga_cur(rs.getString("carga_cur"));
 
                 // Adicionar curso à lista de cursos
                 cursos.add(curso);
@@ -153,12 +159,12 @@ public class CursoDAO {
 
             rs.close();
             stmt.close();
-            
+
         } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
-          //console com o que esta acontecendo.
-        catch (Exception e) {
+        //console com o que esta acontecendo.
+        catch (SQLException e) {
             System.out.println(e.getMessage());
-            
+
         } //Independente de dar erro ou não ele vai fechar o banco de dados.
         finally {
             //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
@@ -166,6 +172,5 @@ public class CursoDAO {
         }
         return cursos;
     }
-
 
 }

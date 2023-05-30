@@ -378,9 +378,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         try {
             AlunoDTO alunoDTO = new AlunoDTO();
             alunoDTO.setNome_al(nome_al.getText());
-            alunoDTO.setEmail_al(tel_al.getText());
+            alunoDTO.setEmail_al(email_al.getText());
             alunoDTO.setData_al(data_almat.parse(data_al.getText()));
-            
+            alunoDTO.setTel_al(tel_al.getSelectedText());
 
             JOptionPane.showMessageDialog(null,
                     alunoCTR.inserirAluno(alunoDTO)
@@ -398,9 +398,8 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
             AlunoDTO alunoDTO = new AlunoDTO();
             alunoDTO.setNome_al(nome_al.getText());
             alunoDTO.setEmail_al(email_al.getText());
-            alunoDTO.setTel_al(tel_al.getText());
             alunoDTO.setData_al(data_almat.parse(data_al.getText()));
-           
+            alunoDTO.setTel_al(tel_al.getText());
 
             JOptionPane.showMessageDialog(null,
                     // Atualiza um registro de curso existente
@@ -430,9 +429,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
      */
     private void liberaCampos(boolean a) {
         nome_al.setEnabled(a);
-        tel_al.setEnabled(a);
-        data_al.setEnabled(a);
         email_al.setEnabled(a);
+        data_al.setEnabled(a);
+        tel_al.setEnabled(a);
 
     }//Fecha método liberaCampos(boolean a)
 
@@ -458,9 +457,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
      */
     private void limpaCampos() {
         nome_al.setText("");
-        tel_al.setText("");
-        data_al.setText("");
         email_al.setText("");
+        data_al.setText("");
+        tel_al.setText("");
     }//Fecha método limpaCampos()
 
     /**
@@ -479,9 +478,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                 modelo_jtl_consultar_al.addRow(new Object[]{
                     rs.getString("id"),
                     rs.getString("nome_al")
-                        
+
                 });
-                
+
             }
         } catch (Exception erTab) {
             System.out.println("Erro SQL: " + erTab);
@@ -503,9 +502,9 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                 limpaCampos();
 
                 nome_al.setText(rs.getString("nome_al"));
-                tel_al.setText(rs.getString("email_al"));
-                data_al.setText(rs.getString("data_al"));
                 email_al.setText(rs.getString("email_al"));
+                data_al.setText(rs.getString("data_al"));
+                tel_al.setText(rs.getString("email_al"));
 
                 gravar_alterar = 2;
                 liberaCampos(true);

@@ -47,12 +47,12 @@ public class AlunoDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "INSERT INTO aluno (id, nome_al, email_al, data_al,tel_al) VALUES ("
+            String comando = "INSERT INTO aluno (id, nome_al, email_al, data_al, tel_al) VALUES ("
                     + "nextval('serial_id'), "
                     + "'" + alunoDTO.getNome_al() + "', "
                     + "'" + alunoDTO.getEmail_al() + "', "
-                    + "'" + alunoDTO.getTel_al() + "', "
-                    + "'" + alunoDTO.getData_al() + "')";
+                    + "'" + alunoDTO.getData_al() + "', "
+                    + "'" + alunoDTO.getTel_al() + "')";
 
             stmt.execute(comando.toUpperCase());
             ConexaoDAO.con.commit();
@@ -75,9 +75,9 @@ public class AlunoDAO {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
             String comando = "UPDATE aluno SET nome_al = '" + alunoDTO.getNome_al() + "', "
-                    + "email_al = '" + alunoDTO.getEmail_al() + "', "
+                     + "email_al = '" + alunoDTO.getEmail_al() + "', "
                     + "data_al = '" + alunoDTO.getData_al() + "' "
-                    + "tel_al = '" + alunoDTO.getTel_al() + "' "
+                    + "tel_al = '" + alunoDTO.getTel_al() + "', "                    
                     + "WHERE id = " + alunoDTO.getId();
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
@@ -122,8 +122,9 @@ public class AlunoDAO {
                 aluno.setId(rs.getInt("id"));
                 aluno.setNome_al(rs.getString("nome_al"));
                 aluno.setEmail_al(rs.getString("email_al"));
-                aluno.setTel_al(rs.getString("tel_al"));
                 aluno.setData_al(rs.getDate("data_al"));
+                aluno.setTel_al(rs.getString("tel_al"));
+                
             }
             rs.close();
             stmt.close();
@@ -151,8 +152,9 @@ public class AlunoDAO {
                 aluno.setId(rs.getInt("id"));
                 aluno.setNome_al(rs.getString("nome_al"));
                 aluno.setEmail_al(rs.getString("email_al"));
-                aluno.setTel_al(rs.getString("tel_al"));
                 aluno.setData_al(rs.getDate("data_al"));
+                aluno.setTel_al(rs.getString("tel_al"));
+                
 
                 // Adicionar aluno à lista de alunos
                 alunos.add(aluno);

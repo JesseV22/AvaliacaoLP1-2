@@ -345,7 +345,7 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
             ProfessorDTO professorDTO = new ProfessorDTO();
             professorDTO.setNome(nome_prof.getText());
             professorDTO.setEmail(email_prof.getText());
-            professorDTO.setEspecialidade(email_prof.getText());
+            professorDTO.setEspecialidade(especialidade.getText());
             professorDTO.setEnd_prof(end_prof.getText());
             professorDTO.setTel_prof(tel_prof.getText());
 
@@ -362,7 +362,7 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
             ProfessorDTO professorDTO = new ProfessorDTO();
             professorDTO.setNome(nome_prof.getText());
             professorDTO.setEmail(email_prof.getText());
-            professorDTO.setEspecialidade(email_prof.getText());
+            professorDTO.setEspecialidade(especialidade.getText());
             professorDTO.setEnd_prof(end_prof.getText());
             professorDTO.setTel_prof(tel_prof.getText());
 

@@ -386,7 +386,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private void gravar() {
         try {
             cursoDTO.setNome_cur(nome_cur.getText());
-            cursoDTO.setDescri_cur(carga_cur.getText());
+            cursoDTO.setDescri_cur(descri_cur.getText());
             cursoDTO.setCarga_cur(carga_cur.getText());
             
 
@@ -402,7 +402,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private void alterar() {
         try {
             cursoDTO.setNome_cur(nome_cur.getText());
-            cursoDTO.setDescri_cur(carga_cur.getText());            
+            cursoDTO.setDescri_cur(descri_cur.getText());            
             cursoDTO.setCarga_cur(carga_cur.getText());
 
             // Atualiza um registro de curso existente
@@ -421,9 +421,9 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     }//Fecha método excluir()
 
     public void liberaCampos(boolean a) {
-        nome_cur.setEnabled(a);
-        carga_cur.setEnabled(a);
+        nome_cur.setEnabled(a);        
         descri_cur.setEnabled(a);
+        carga_cur.setEnabled(a);
     }
 
     /**
@@ -447,7 +447,8 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
      * Método utilizado para limpar os campos da tela.
      */
     private void limpaCampos() {
-        nome_cur.setText("");
+        nome_cur.setText("");        
+        descri_cur.setText("");
         carga_cur.setText("");
     }//Fecha método limpaCampos()
 

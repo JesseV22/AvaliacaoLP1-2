@@ -6,7 +6,6 @@ package br.com.avaliacao_2.ctr;
 
 import java.sql.ResultSet;
 import br.com.avaliacao_2.dto.ProfessorDTO;
-
 import br.com.avaliacao_2.dao.ConexaoDAO;
 import br.com.avaliacao_2.dao.ProfessorDAO;
 

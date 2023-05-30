@@ -11,7 +11,7 @@ CREATE TABLE aluno (
     id INT PRIMARY KEY,
     nome_al VARCHAR(50),
     email_al VARCHAR(50),
-    idade_al INT,
+    data_al INT,
     tel_al VARCHAR(50),
     
 );
@@ -39,3 +39,5 @@ CREATE TABLE matricula (
     FOREIGN KEY (AlunoID) REFERENCES Aluno(ID),
     FOREIGN KEY (CursoID) REFERENCES Curso(ID)
 );
+
+CREATE SEQUENCE serial_id;

@@ -166,7 +166,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "NOME", "IDADE", "TELEFONE", "EMAIL"
+                "NOME", "EMAIL", "TELEFONE", "DATA"
             }
         ) {
             Class[] types = new Class [] {
@@ -175,6 +175,11 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jtl_consultar_al.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtl_consultar_alMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jtl_consultar_al);
@@ -207,28 +212,25 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
+                            .addComponent(jLabel3)
                             .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nome_al, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addComponent(data_al))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(email_al, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(nome_al, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(email_al, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(data_al, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel4)
-                        .addGap(14, 14, 14)
+                        .addGap(18, 18, 18)
                         .addComponent(tel_al, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,18 +240,18 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                     .addComponent(nome_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(email_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(data_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel6)
+                    .addComponent(data_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tel_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(email_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 11, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(tel_al, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -366,6 +368,14 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
     private void btnPesquisar_alActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar_alActionPerformed
         preencheTabela(pesquisa_nome_al.getText());
     }//GEN-LAST:event_btnPesquisar_alActionPerformed
+
+    private void jtl_consultar_alMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtl_consultar_alMouseClicked
+           //Pega o id do cliente selecionado e chama preencheCampos
+        preencheCampos(Integer.parseInt(String.valueOf(
+                jtl_consultar_al.getValueAt(
+                jtl_consultar_al.getSelectedRow(), 0))));
+        liberaBotoes(false, true, true, true, true);
+    }//GEN-LAST:event_jtl_consultar_alMouseClicked
     /**
      * Método para centralizar o internalFrame.
      */
@@ -471,17 +481,20 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
         try {
             //Limpa todas as linhas
             modelo_jtl_consultar_al.setNumRows(0);
+          
             //Enquanto tiver linhas - faça
             alunoDTO.setNome_al(nome_al);
-            rs = alunoCTR.consultarAluno(alunoDTO, WIDTH); //1 = é a pesquisa por nome na classe DAO
-            while (rs.next()) {
+            rs = alunoCTR.consultarAluno(alunoDTO, 1); //1 = é a pesquisa por nome na classe DAO
+            while(rs.next()){
                 modelo_jtl_consultar_al.addRow(new Object[]{
-                    rs.getString("id"),
-                    rs.getString("nome_al")
-
+                  rs.getString("id"),
+                  rs.getString("nome_al"), 
+                  rs.getString("email_al"),
+                  rs.getString("data_al"),
+                  rs.getString("tel_al")
                 });
-
             }
+           
         } catch (Exception erTab) {
             System.out.println("Erro SQL: " + erTab);
         } finally {
@@ -504,7 +517,7 @@ public class AlunoVIEW extends javax.swing.JInternalFrame {
                 nome_al.setText(rs.getString("nome_al"));
                 email_al.setText(rs.getString("email_al"));
                 data_al.setText(rs.getString("data_al"));
-                tel_al.setText(rs.getString("email_al"));
+                tel_al.setText(rs.getString("tel_al"));
 
                 gravar_alterar = 2;
                 liberaCampos(true);

@@ -10,7 +10,10 @@ import br.com.avaliacao_2.dao.MatriculaDAO;
 import br.com.avaliacao_2.dao.ConexaoDAO;
 import br.com.avaliacao_2.dto.AlunoDTO;
 import br.com.avaliacao_2.dao.AlunoDAO;
+import br.com.avaliacao_2.dao.ProfessorDAO;
+import br.com.avaliacao_2.dto.ProfessorDTO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 
@@ -22,6 +25,9 @@ public class MatriculaCTR {
 
     MatriculaDAO matriculaDAO = new MatriculaDAO();
     AlunoDAO alunoDAO = new AlunoDAO();
+    ProfessorDAO professorDAO = new ProfessorDAO();
+
+    
 
     /**
      * Método construtor da classe
@@ -123,6 +129,38 @@ public class MatriculaCTR {
         ConexaoDAO.CloseDB();
     }//Fecha o método CloseDB
 
+     public List<AlunoDTO> listarAlunosDoCurso(int idMatricula) {
+        List<AlunoDTO> listaAlunos = new ArrayList<>();
+
+        try {
+            // Chamar o método da classe DAO para obter os alunos do curso
+            List<AlunoDTO> alunosDoCurso = matriculaDAO.obterAlunosDoMatricula(idMatricula);
+
+            // Adicionar os alunos à lista de retorno
+            listaAlunos.addAll(alunosDoCurso);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaAlunos;
+    }//Fecha o método lista
+
+    public List<ProfessorDTO> listarProfessoresDoMatricula(int idMatricula) {
+        List<ProfessorDTO> listaProfessores = new ArrayList<>();
+
+        try {
+            // Chamar o método da classe DAO para obter os professores do curso
+            List<ProfessorDTO> professoresDoCurso = matriculaDAO.obterProfessoresDoCurso(idMatricula);
+
+            // Adicionar os professores à lista de retorno
+            listaProfessores.addAll(professoresDoCurso);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listaProfessores;
+    }
+
     public void carregarAlunosNoComboBox(JComboBox<String> comboBox) {
         List<AlunoDTO> lista = alunoDAO.listarAlunos();
 
@@ -130,6 +168,17 @@ public class MatriculaCTR {
 
         for (AlunoDTO aluno : lista) {
             comboBox.addItem(aluno.getNome_al());
+        }
+
+    }
+
+    public void carregarProfessoresNoComboBox(JComboBox<String> comboBox) {
+        List<ProfessorDTO> lista = professorDAO.listarProfessores();
+
+        comboBox.removeAllItems();
+
+        for (ProfessorDTO professor : lista) {
+            comboBox.addItem(professor.getNome());
         }
     }
 }//Fecha classe MatriculaCTR

@@ -1,15 +1,17 @@
- 
 package br.com.avaliacao_2.dto;
 
 import java.util.List;
+import br.com.avaliacao_2.dto.MatriculaDTO;
 
 /**
  *
  * @author Jesse
  */
 public class CursoDTO {
-    private String nome_cur ,descri_cur, carga_cur ;
-    private int  id;
+
+    private String nome_cur, descri_cur, carga_cur;
+    private int id;
+    private MatriculaDTO matricula; // atributo que representa a chave estrangeira para a tabela curso
 
     /**
      * @return the nome_cur
@@ -66,6 +68,21 @@ public class CursoDTO {
     public void setId(int id) {
         this.id = id;
     }
-   
+
+    /**
+     * @return the matricula
+     */
+    public MatriculaDTO getMatricula() {
+        return matricula;
+    }
+
+    /**
+     * @param matricula the matricula to set
+     */
+    public void setMatricula(MatriculaDTO matricula) {
+        this.matricula = matricula;
+    }
+
+  
 
 }

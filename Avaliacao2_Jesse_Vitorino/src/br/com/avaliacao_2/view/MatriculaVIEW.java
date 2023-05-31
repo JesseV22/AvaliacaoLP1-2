@@ -43,13 +43,12 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
         // Inicializa o modelo_jtl_consultar_mar
         modelo_jtl_consultar_mar = (DefaultTableModel) jtl_consultar_mar.getModel();
-        
+
         // Criar o JComboBox para os alunos
         JComboBox<String> cbAluno = new JComboBox<>();
 
         // Adicionar o JComboBox ao painel ou frame do CursoView
         // ...
-
         // Carregar os alunos no JComboBox
         matriculaCTR.carregarAlunosNoComboBox(cbAluno);
     }
@@ -405,7 +404,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboBoxAlunosAncestorAdded
     }
     private void comboBoxCursosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_comboBoxCursosAncestorAdded
-       CursoDAO dao = new CursoDAO();
+        CursoDAO dao = new CursoDAO();
         List<CursoDTO> lista = dao.listarCursos();
 
         //Remove todos os itens de um combobox
@@ -416,8 +415,6 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
             comboBoxCursos.addItem(curso.getNome_cur());
     }//GEN-LAST:event_comboBoxCursosAncestorAdded
     }
-    
-    
 
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
@@ -425,11 +422,12 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
     }//Fecha método setPosicao()
 
     private void gravar() {
-        try {            
+        try {
             matriculaDTO.setData_mar(data_marmat.parse(data_mar.getText()));
             List<AlunoDTO> AlunoVIEW = null;
-            matriculaDTO.setAlunos(AlunoVIEW);
             List<CursoDTO> CursoVIEW = null;
+
+            matriculaDTO.setAlunos(AlunoVIEW);
             matriculaDTO.setCursos(CursoVIEW);
 
             JOptionPane.showMessageDialog(null,
@@ -445,8 +443,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
             MatriculaDTO matriculaDTO = new MatriculaDTO();
             matriculaDTO.setData_mar(data_marmat.parse(data_mar.getText()));
             List<AlunoDTO> AlunoVIEW = null;
-            matriculaDTO.setAlunos(AlunoVIEW);
             List<CursoDTO> CursoVIEW = null;
+
+            matriculaDTO.setAlunos(AlunoVIEW);
             matriculaDTO.setCursos(CursoVIEW);
 
             JOptionPane.showMessageDialog(null,
@@ -506,55 +505,59 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
      * @param nome_al, String com o nome do aluno
      */
     private void preencheTabela(String aluno_mar) {
-    try {
-        // Limpa todas as linhas
-        modelo_jtl_consultar_mar.setNumRows(0);
+        try {
+            // Limpa todas as linhas
+            modelo_jtl_consultar_mar.setNumRows(0);
 
-        matriculaDTO.setAluno_mar(aluno_mar);
-        rs = matriculaCTR.consultarMatricula(matriculaDTO, 1); // 1 = é a pesquisa por nome na classe DAO
+            matriculaDTO.setAluno_mar(aluno_mar);
+            rs = matriculaCTR.consultarMatricula(matriculaDTO, 1); // 1 = é a pesquisa por nome na classe DAO
 
-        List<CursoDTO> CursoVIEW = null; // Declaração da lista CursoVIEW
-        matriculaDTO.setCursos(CursoVIEW); // Atribuição da lista à propriedade cursos
+            List<CursoDTO> CursoVIEW = null; // Declaração da lista CursoVIEW
+            matriculaDTO.setCursos(CursoVIEW); // Atribuição da lista à propriedade cursos
+            List<AlunoDTO> AlunoVIEW = null; // Declaração da lista AlunoVIEW
+            matriculaDTO.setAlunos(AlunoVIEW); // Atribuição da lista à propriedade cursos
 
-        while (rs.next()) {
-            modelo_jtl_consultar_mar.addRow(new Object[]{
-                rs.getString("id"),
-                rs.getString("nome_mar")
-            });
+            while (rs.next()) {
+                modelo_jtl_consultar_mar.addRow(new Object[]{
+                    rs.getString("id"),
+                    rs.getString("nome_mar")
+                });
+            }
+        } catch (SQLException erTab) {
+            System.out.println("Erro SQL: " + erTab);
+        } finally {
+            matriculaCTR.CloseDB();
         }
-    } catch (SQLException erTab) {
-        System.out.println("Erro SQL: " + erTab);
-    } finally {
-        matriculaCTR.CloseDB();
     }
-}
 //Fecha método preencheTabela(String nome_al)
 
     private void preencheCampos(int id) {
-    try {
-        matriculaDTO.setId(id);
-        rs = matriculaCTR.consultarMatricula(matriculaDTO, 2); // 2 = é a pesquisa no id na classe DAO
-        if (rs.next()) {
-            limpaCampos();
+        try {
+            matriculaDTO.setId(id);
+            rs = matriculaCTR.consultarMatricula(matriculaDTO, 2); // 2 = é a pesquisa no id na classe DAO
+            if (rs.next()) {
+                limpaCampos();
 
-            data_mar.setText(rs.getString("data_mar"));
+                data_mar.setText(rs.getString("data_mar"));
 
-            // Criar uma lista de cursos e preenchê-la com os dados desejados
-            List<CursoDTO> cursoVIEW = new ArrayList<>();
-            // Lógica para preencher a lista de cursos
+                // Criar uma lista de cursos e preenchê-la com os dados desejados
+                List<CursoDTO> cursoVIEW = new ArrayList<>();
+                List<AlunoDTO> alunoVIEW = new ArrayList<>();
+                // Lógica para preencher a lista de cursos
 
-            // Definir a lista de cursos no objeto matriculaDTO
-            matriculaDTO.setCursos(cursoVIEW);
+                // Definir a lista de cursos no objeto matriculaDTO
+                matriculaDTO.setCursos(cursoVIEW);
+                matriculaDTO.setAlunos (alunoVIEW);
 
-            gravar_alterar = 2;
-            liberaCampos(true);
+                gravar_alterar = 2;
+                liberaCampos(true);
+            }
+        } catch (SQLException erTab) {
+            System.out.println("Erro SQL: " + erTab);
+        } finally {
+            matriculaCTR.CloseDB();
         }
-    } catch (SQLException erTab) {
-        System.out.println("Erro SQL: " + erTab);
-    } finally {
-        matriculaCTR.CloseDB();
     }
-}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

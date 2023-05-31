@@ -38,20 +38,20 @@ public class ConexaoDAO {
         }
     }
     
-    // Método para realizar a ligação entre os alunos do cursoVIEW e do AlunoVIEW
+    // Método para realizar a ligação entre os alunos do matriculaVIEW e do AlunoVIEW
     public void realizarLigacaoAlunos() {
         try {
-            // Consulta para obter a lista de alunos do cursoVIEW
-            String cursoviewQuery = "SELECT * FROM cursoview_alunos";
-            PreparedStatement cursoviewStatement = con.prepareStatement(cursoviewQuery);
-            ResultSet cursoviewResult = cursoviewStatement.executeQuery();
+            // Consulta para obter a lista de alunos do matriculaVIEW
+            String matriculaviewQuery = "SELECT * FROM matriculaview_alunos";
+            PreparedStatement matriculaviewStatement = con.prepareStatement(matriculaviewQuery);
+            ResultSet matriculaviewResult = matriculaviewStatement.executeQuery();
 
             // Consulta para obter os alunos cadastrados no banco do AlunoVIEW
             String alunoviewQuery = "SELECT * FROM alunoview_alunos WHERE numero_identificacao = ?";
             PreparedStatement alunoviewStatement = con.prepareStatement(alunoviewQuery);
 
-            while (cursoviewResult.next()) {
-                int numeroIdentificacao = cursoviewResult.getInt("numero_identificacao");
+            while (matriculaviewResult.next()) {
+                int numeroIdentificacao = matriculaviewResult.getInt("numero_identificacao");
 
                 // Realiza a ligação utilizando o número de identificação do aluno
                 alunoviewStatement.setInt(1, numeroIdentificacao);
@@ -59,13 +59,13 @@ public class ConexaoDAO {
 
                 // Exibe os resultados da ligação
                 while (alunoviewResult.next()) {
-                    int alunoCursoViewId = cursoviewResult.getInt("id");
-                    String alunoCursoViewNome = cursoviewResult.getString("nome");
+                    int alunoMatriculaViewId = matriculaviewResult.getInt("id");
+                    String alunoMatriculaViewNome = matriculaviewResult.getString("nome");
 
                     int alunoAlunoViewId = alunoviewResult.getInt("id");
                     String alunoAlunoViewNome = alunoviewResult.getString("nome");
 
-                    System.out.println("Aluno do cursoVIEW: " + alunoCursoViewId + " - " + alunoCursoViewNome);
+                    System.out.println("Aluno do matriculaVIEW: " + alunoMatriculaViewId + " - " + alunoMatriculaViewNome);
                     System.out.println("Aluno do AlunoVIEW: " + alunoAlunoViewId + " - " + alunoAlunoViewNome);
                     System.out.println("---------------------------------------");
                 }
@@ -73,9 +73,9 @@ public class ConexaoDAO {
                 alunoviewResult.close();
             }
 
-            cursoviewResult.close();
+            matriculaviewResult.close();
             alunoviewStatement.close();
-            cursoviewStatement.close();
+            matriculaviewStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

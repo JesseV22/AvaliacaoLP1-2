@@ -1,8 +1,9 @@
 CREATE TABLE curso (
     id INT PRIMARY KEY,
+	carga_cur INT,
     nome_cur VARCHAR(50),
     descri_cur VARCHAR(200)
-    carga_cur INT
+    
 
 );
 
@@ -13,6 +14,8 @@ CREATE TABLE aluno (
     email_al VARCHAR(50),
     data_al INT,
     tel_al VARCHAR(50),
+   
+
     
 );
 
@@ -23,7 +26,7 @@ CREATE TABLE professor (
     email_prof VARCHAR(50),
     end_prof VARCHAR(100),
     tel_prof VARCHAR(20),   
-    especialidade VARCHAR(50),
+    especialidade VARCHAR(50)
     
     
     
@@ -31,8 +34,7 @@ CREATE TABLE professor (
 
 
 CREATE TABLE matricula (
-    id INT PRIMARY KEY,
-    ID INT PRIMARY KEY,
+    id INT PRIMARY KEY,    
     AlunoID INT,
     CursoID INT,
     DataMatricula DATE,

@@ -11,6 +11,7 @@ import br.com.avaliacao_2.dao.ConexaoDAO;
 import br.com.avaliacao_2.dto.CursoDTO;
 import br.com.avaliacao_2.dao.CursoDAO;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 
@@ -112,18 +113,18 @@ public class AlunoCTR {
         //É criado um atributo do tipo ResultSet, pois este método recebe o resultado de uma consulta.
         ResultSet rs = null;
         //O atributo rs recebe a consulta realizada pelo método da classe DAO
-        rs = (ResultSet) alunoDAO.consultarAluno(opcao);
-
+        rs = alunoDAO.consultarAluno(alunoDTO, opcao);
         return rs;
-    }
-
-//Fecha o método consultarAluno
+    }//Fecha o método consultarAluno
+    
+    
     /**
      * Método utilizado para fechar o banco de dados
      */
     public void CloseDB() {
         ConexaoDAO.CloseDB();
     }//Fecha o método CloseDB
+
 
   
 

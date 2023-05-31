@@ -6,6 +6,7 @@ package br.com.avaliacao_2.dto;
 
 import java.util.Date;
 import java.util.List;
+import br.com.avaliacao_2.dto.MatriculaDTO;
 
 /**
  *
@@ -16,7 +17,7 @@ public class AlunoDTO {
     private String nome_al, email_al, tel_al;
     private int id;
     private Date data_al;
-    private List<AlunoDTO> alunos; // atributo que representa o relacionamento 1-N com a tabela aluno
+    private MatriculaDTO matricula; // atributo que representa a chave estrangeira para a tabela curso
 
     /**
      * @return the nome_al
@@ -89,19 +90,20 @@ public class AlunoDTO {
     }
 
     /**
-     * @return the alunos
+     * @return the matricula
      */
-    public List<AlunoDTO> getAlunos() {
-        return alunos;
+    public MatriculaDTO getMatricula() {
+        return matricula;
     }
 
     /**
-     * @param alunos the alunos to set
+     * @param matricula the matricula to set
      */
-    public void setAlunos(List<AlunoDTO> alunos) {
-        this.alunos = alunos;
+    public void setMatricula(MatriculaDTO matricula) {
+        this.matricula = matricula;
     }
-    
+
+   
 
    
 

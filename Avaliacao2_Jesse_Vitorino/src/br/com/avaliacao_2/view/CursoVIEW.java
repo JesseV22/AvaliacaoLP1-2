@@ -16,7 +16,6 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Jesse
@@ -46,7 +45,8 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         // Inicializar a controladora do curso
         cursoCTR = new CursoCTR();
 
-      }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -370,7 +370,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private void pesquisa_nome_curActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisa_nome_curActionPerformed
         preencheTabela(pesquisa_nome_cur.getText());
     }//GEN-LAST:event_pesquisa_nome_curActionPerformed
-    
+
     private void btnPesquisar_curActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar_curActionPerformed
         preencheTabela(pesquisa_nome_cur.getText());
     }//GEN-LAST:event_btnPesquisar_curActionPerformed
@@ -388,9 +388,6 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             cursoDTO.setNome_cur(nome_cur.getText());
             cursoDTO.setDescri_cur(descri_cur.getText());
             cursoDTO.setCarga_cur(carga_cur.getText());
-            
-
-           
 
             // Insere um novo registro de curso
             cursoCTR.inserirCurso(cursoDTO);
@@ -402,7 +399,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private void alterar() {
         try {
             cursoDTO.setNome_cur(nome_cur.getText());
-            cursoDTO.setDescri_cur(descri_cur.getText());            
+            cursoDTO.setDescri_cur(descri_cur.getText());
             cursoDTO.setCarga_cur(carga_cur.getText());
 
             // Atualiza um registro de curso existente
@@ -421,7 +418,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     }//Fecha método excluir()
 
     public void liberaCampos(boolean a) {
-        nome_cur.setEnabled(a);        
+        nome_cur.setEnabled(a);
         descri_cur.setEnabled(a);
         carga_cur.setEnabled(a);
     }
@@ -447,7 +444,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
      * Método utilizado para limpar os campos da tela.
      */
     private void limpaCampos() {
-        nome_cur.setText("");        
+        nome_cur.setText("");
         descri_cur.setText("");
         carga_cur.setText("");
     }//Fecha método limpaCampos()
@@ -468,7 +465,10 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 modelo_jtl_consultar_curso.addRow(new Object[]{
                     rs.getString("id"),
-                    rs.getString("nome_cur"),});
+                    rs.getString("nome_cur"),
+                    rs.getString("descri_cur"),
+                    rs.getString("carga_cur")});
+
             }
         } catch (SQLException erTab) {
             System.out.println("Erro SQL: " + erTab);
@@ -485,16 +485,15 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
      */
     public void preencheCampos(int id) {
         try {
-             cursoDTO.setId(id);
+            cursoDTO.setId(id);
             rs = cursoCTR.consultarCurso(cursoDTO, 2); // 2 = é a pesquisa no id na classe DAO
-            
+
             if (cursoDTO != null) {
                 limpaCampos();
 
                 nome_cur.setText(cursoDTO.getNome_cur());
                 descri_cur.setText(cursoDTO.getDescri_cur());
                 carga_cur.setText(cursoDTO.getCarga_cur());
-                
 
                 // Preencher outros campos relacionados ao curso, se houver
                 gravar_alterar = 2;
@@ -504,9 +503,6 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             System.out.println("Erro ao preencher campos do curso: " + e.getMessage());
         }
     }
-
-  
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

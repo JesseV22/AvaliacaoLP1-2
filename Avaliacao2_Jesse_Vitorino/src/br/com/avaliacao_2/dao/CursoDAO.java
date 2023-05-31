@@ -107,34 +107,25 @@ public class CursoDAO {
         }
     }
 
-    public CursoDTO consultarCurso(CursoDTO cursoDTO, int id) {
-        CursoDTO curso = null;
+    public ResultSet consultarCurso(CursoDTO cursoDTO, int opcao) {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "SELECT * FROM curso WHERE id = " + id;
-            rs = stmt.executeQuery(comando.toUpperCase());
-            // Verifica se a consulta retornou algum resultado
-            if (rs.next()) {
-                // Cria um novo objeto CursoDTO com os dados retornados na consulta
-                curso = new CursoDTO();
-                curso.setId(rs.getInt("id"));
-                curso.setNome_cur(rs.getString("nome_cur"));
-                curso.setDescri_cur(rs.getString("descri_cur"));
-                curso.setCarga_cur(rs.getString("carga_cur"));
+            String comando = "";
+            switch (opcao) {
+                case 1:
+                    comando = "SELECT id, nome_cur, descri_cur, carga_cur FROM curso WHERE nome_cur ILIKE '" + cursoDTO.getNome_cur() + "%' ORDER BY nome_cur";
+                    break;
+                case 2:
+                    comando = "SELECT nome_cur, descri_cur, carga_cur FROM curso WHERE id = " + cursoDTO.getId();
+                    break;
             }
-
-            // Fecha o ResultSet e o Statement
-            rs.close();
-            stmt.close();
-            return curso;
-        } catch (SQLException e) {
+            rs = stmt.executeQuery(comando);
+            return rs;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
-        } finally {
-            ConexaoDAO.CloseDB();
         }
-
     }
 
     public List<CursoDTO> listarCursos() {

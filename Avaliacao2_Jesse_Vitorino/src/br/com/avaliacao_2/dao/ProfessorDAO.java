@@ -60,54 +60,31 @@ public class ProfessorDAO {
         }
     }//Fecha metodo inserir professor
 
-    public boolean alterarProfessor(ProfessorDTO professorDTO) {
-        try {
-            ConexaoDAO.ConectDB();
-            stmt = ConexaoDAO.con.createStatement();
-            String comando = "UPDATE professor SET "
-                    + "nome_prof = '" + professorDTO.getNome() + "', "
-                    + "email_prof = '" + professorDTO.getEmail() + "', "
-                    + "especialidade = '" + professorDTO.getEspecialidade() + "', "
-                    + "end_prof = '" + professorDTO.getEnd_prof() + "', "
-                    + "tel_prof = '" + professorDTO.getTel_prof() + "' "
-                    + "WHERE id = " + professorDTO.getId();
-            stmt.executeUpdate(comando.toUpperCase());
-            ConexaoDAO.con.commit();
-            stmt.close();
-            return true;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
-        } finally {
-            ConexaoDAO.CloseDB();
-        }
-
-    }//Fecha metodo inserir professor
-
-    public boolean alterarProfessorPorDTO(ProfessorDTO professorDTO) {
-        try {
-            ConexaoDAO.ConectDB();
-            stmt = ConexaoDAO.con.createStatement();
-            String comando = "UPDATE professor SET "
-                    + "nome_prof = '" + professorDTO.getNome() + "', "
-                    + "email_prof = '" + professorDTO.getEmail() + "', "
-                    + "especialidade = '" + professorDTO.getEspecialidade() + "', "
-                    + "end_prof = '" + professorDTO.getEnd_prof() + "', "
-                    + "tel_prof = '" + professorDTO.getTel_prof() + "' "
-                    + "WHERE id = " + professorDTO.getId();
-            stmt.executeUpdate(comando.toUpperCase());
-            ConexaoDAO.con.commit();
-            stmt.close();
-            return true;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
-        } finally {
-            ConexaoDAO.CloseDB();
-        }
+public boolean alterarProfessor(ProfessorDTO professorDTO) {
+    try {
+        ConexaoDAO.ConectDB();
+        stmt = ConexaoDAO.con.createStatement();
+        String comando = "UPDATE professor SET "
+                + "nome_prof = '" + professorDTO.getNome() + "', "
+                + "email_prof = '" + professorDTO.getEmail() + "', "
+                + "especialidade = '" + professorDTO.getEspecialidade() + "', "
+                + "end_prof = '" + professorDTO.getEnd_prof() + "', "
+                + "tel_prof = '" + professorDTO.getTel_prof() + "' "
+                + "WHERE id = " + professorDTO.getId();
+        stmt.executeUpdate(comando.toUpperCase());
+        ConexaoDAO.con.commit();
+        stmt.close();
+        return true;
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+        return false;
+    } finally {
+        ConexaoDAO.CloseDB();
     }
+        
+    }//Fecha metodo alterar professor
 
-//Fecha metodo alterar pofessor
+    
     /**
      * Método utilizado para excluir um
      *
@@ -131,31 +108,24 @@ public class ProfessorDAO {
         }
     }
 
-    public ProfessorDTO consultarProfessor(ProfessorDTO professorDTO, int id) {
-        ProfessorDTO professor = null;
+    public ResultSet consultarProfessor(ProfessorDTO professorDTO, int opcao) {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "SELECT * FROM professor WHERE id = " + id;
-            rs = stmt.executeQuery(comando.toUpperCase());
-            if (rs.next()) {
-                professor = new ProfessorDTO();
-                professor.setId(rs.getInt("id"));
-                professor.setNome(rs.getString("nome_prof"));
-                professor.setEmail(rs.getString("email_prof"));
-                professor.setEspecialidade(rs.getString("especialidade_prof"));
-                professor.setEnd_prof(rs.getString("end_prof"));
-                professor.setTel_prof(rs.getString("tel_prof"));
-
+            String comando = "";
+            switch (opcao) {
+                case 1:
+                    comando = "SELECT id, nome_prof, email_prof, especialidade, tel_prof, end_prof FROM professor WHERE nome_prof ILIKE '" + professorDTO.getNome()+ "%' ORDER BY nome_prof";
+                    break;
+                case 2:
+                    comando = "SELECT nome_prof, email_prof, especialidade, tel_prof, end_prof FROM professor WHERE id = " + professorDTO.getId();
+                    break;
             }
-            rs.close();
-            stmt.close();
-            return professor;
-        } catch (SQLException e) {
+            rs = stmt.executeQuery(comando);
+            return rs;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
-        } finally {
-            ConexaoDAO.CloseDB();
         }
     }//fecha metodo consultar professor
 

@@ -11,8 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -75,10 +78,11 @@ public class AlunoDAO {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
             String comando = "UPDATE aluno SET nome_al = '" + alunoDTO.getNome_al() + "', "
-                     + "email_al = '" + alunoDTO.getEmail_al() + "', "
-                    + "data_al = '" + alunoDTO.getData_al() + "' "
-                    + "tel_al = '" + alunoDTO.getTel_al() + "', "                    
+                    + "email_al = '" + alunoDTO.getEmail_al() + "', "
+                    + "data_al = '" + alunoDTO.getData_al() + "', " // Verifique se há uma vírgula após essa linha
+                    + "tel_al = '" + alunoDTO.getTel_al() + "' " // Remova a vírgula após essa linha
                     + "WHERE id = " + alunoDTO.getId();
+
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
             stmt.close();
@@ -96,7 +100,7 @@ public class AlunoDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "DELETE FROM aluno WHERE id_al = " + id;
+            String comando = "DELETE FROM aluno WHERE aluno = ";
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
             stmt.close();
@@ -110,41 +114,50 @@ public class AlunoDAO {
 
     }
 
-    public AlunoDTO consultarAluno(int id) {
-        AlunoDTO aluno = null;
+    public ResultSet consultarAluno(AlunoDTO alunoDTO, int opcao) {
         try {
+            //Chama o metodo que esta na classe ConexaoDAO para abrir o banco de dados
             ConexaoDAO.ConectDB();
+            //Cria o Statement que responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "SELECT * FROM aluno WHERE id = " + id;
-            rs = stmt.executeQuery(comando.toUpperCase());
-            if (rs.next()) {
-                aluno = new AlunoDTO();
-                aluno.setId(rs.getInt("id"));
-                aluno.setNome_al(rs.getString("nome_al"));
-                aluno.setEmail_al(rs.getString("email_al"));
-                aluno.setData_al(rs.getDate("data_al"));
-                aluno.setTel_al(rs.getString("tel_al"));
-                
-            }
-            rs.close();
-            stmt.close();
-            return aluno;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        } finally {
-            ConexaoDAO.CloseDB();
-        }
-    }
-//fecha metodo consultar aluno
+            //Comando SQL que sera executado no banco de dados
+            String comando = "";
+            switch (opcao) {
+                case 1:
+                    comando = "SELECT a.id, a.nome_al, a.email_al,data_al, a.tel_al "
+                            + "FROM aluno a "
+                            + "WHERE a.nome_al ILIKE '" + alunoDTO.getNome_al() + "%' "
+                            + "ORDER BY a.nome_al";
+                    break;
+                case 2:
+                    comando = "SELECT a.nome_al, a.email_al,data_al, a.tel_al "
+                            + "FROM aluno a "
+                            + "WHERE a.id = " + alunoDTO.getId();
 
+                    break;
+            }
+            //Executa o comando SQL no banco de Dados
+            rs = stmt.executeQuery(comando.toUpperCase());
+            return rs;
+        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+        //console com o que esta acontecendo.
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return rs;
+        }
+    }//Fecha o método consultarFornecedor
+
+    
+    //metodo listar jcombobox
     public List<AlunoDTO> listarAlunos() {
         List<AlunoDTO> alunos = new ArrayList<>();
         AlunoDAO alunoDAO = new AlunoDAO();
 
         try {
-            String query = "SELECT * FROM alunoview_aluno";
-            Statement stmt = con.createStatement();
+            ConexaoDAO.ConectDB();
+            String query = "SELECT * from aluno";
+
+            Statement stmt = ConexaoDAO.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {

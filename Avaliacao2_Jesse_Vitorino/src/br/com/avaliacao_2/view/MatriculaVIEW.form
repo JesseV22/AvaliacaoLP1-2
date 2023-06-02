@@ -94,7 +94,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="data_mar" pref="177" max="32767" attributes="0"/>
+                          <Component id="data_mat" pref="177" max="32767" attributes="0"/>
                           <Component id="comboBoxCursos" max="32767" attributes="0"/>
                           <Component id="comboBoxAlunos" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -117,7 +117,7 @@
                       </Group>
                       <EmptySpace pref="31" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="data_mar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="data_mat" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -150,14 +150,14 @@
                 <Property name="text" type="java.lang.String" value="DATA"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="data_mar">
+            <Component class="javax.swing.JFormattedTextField" name="data_mat">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Format format="##/##/####" subtype="-1" type="5"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="data_marActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="data_matActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="comboBoxCursos">
@@ -178,12 +178,13 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="comboBoxAlunosAncestorAdded"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>
               </AuxValues>
             </Component>
           </SubComponents>

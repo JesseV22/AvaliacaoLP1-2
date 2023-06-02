@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,8 @@ public class MatriculaDAO {
     public MatriculaDAO() {
 
     }
+    SimpleDateFormat data_format = new SimpleDateFormat("dd/mm/yyyy");
+    //Atributo do tipo ResultSet utilizado para realizar consultas
     //Atributo do tipo ResultSet utilizado para realizar consultas
     private ResultSet rs = null;
     //Manipular o banco de dados
@@ -47,8 +50,9 @@ public class MatriculaDAO {
             stmt = ConexaoDAO.con.createStatement();
             //Comando SQL que sera executado no banco de dados
             String comando = "INSERT INTO matricula (aluno_id, curso_id, data_mat) "
-                    + "VALUES (" + matriculaDTO.getAluno_mar() + ", " + matriculaDTO.getAluno_mar() + ", "
-                    + "'" + matriculaDTO.getData_mar() + "')";
+                    + "VALUES (" + matriculaDTO.getAluno_id() 
+                    + ", " + matriculaDTO.getCurso_id() + ", "                    
+            +"to_date('" + data_format.format(matriculaDTO.getData_mat()) + "','dd/mm/yyyy')) ";
 
             //Executa o comando SQL no banco de Dados
             stmt.execute(comando.toUpperCase());
@@ -79,10 +83,12 @@ public class MatriculaDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "UPDATE matricula SET aluno_id = " + matriculaDTO.getAluno_mar() + ", "
-                    + "curso_id = " + matriculaDTO.getCurso_mar() + ", "
-                    + "data_mat = '" + matriculaDTO.getData_mar() + "' "
+            String comando = "UPDATE matricula SET aluno_id = "
+                    + matriculaDTO.getAluno_id() + ", "
+                    + "curso_id = " + matriculaDTO.getCurso_id() + ", "
+                    + "data_mat = to_date('" + data_format.format(matriculaDTO.getData_mat()) + "','dd/mm/yyyy') "
                     + "WHERE id_mat = " + matriculaDTO.getId();
+
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
             stmt.close();
@@ -118,30 +124,32 @@ public class MatriculaDAO {
         }
     }
 
-    public MatriculaDTO consultarMatricula(MatriculaDTO matriculaDTO, int id) {
-        MatriculaDTO matricula = null;
+    public ResultSet consultarMatricula(MatriculaDTO matriculaDTO, int opcao) {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "SELECT * FROM matricula WHERE id = " + id;
-            rs = stmt.executeQuery(comando.toUpperCase());
-            if (rs.next()) {
-                matricula = new MatriculaDTO();
-                matricula.setId(rs.getInt("id"));
-                matricula.setAluno_mar(String.valueOf(rs.getInt("aluno_mar")));
-                matricula.setCurso_mar(String.valueOf(rs.getInt("curso_mar")));
-                matricula.setData_mar(rs.getDate("data_mar"));
+            String comando = "";
+            switch (opcao) {
+                case 1:
+                    comando = "SELECT id, aluno_id, curso_id  , data_ma tFROM matricula WHERE nome_cur ILIKE '"
+                            + matriculaDTO.getId()
+                            + "%' ORDER BY nome_cur";
+                    break;
+                case 2:
+                    comando = "SELECT aluno_id, curso_id  ,data_mat FROM matricula "
+                            + "to_char(f.data_mat, 'dd/mm/yyyy') as data_mat "
+                            + "WHERE id = "
+                            + matriculaDTO.getId();
+                    break;
             }
-            rs.close();
-            stmt.close();
-            return matricula;
-        } catch (Exception e) {
+
+            rs = stmt.executeQuery(comando);
+            return rs;
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
-        } finally {
-            ConexaoDAO.CloseDB();
         }
-    }//fecha metodo consultar aluno
+    }
 
     public List<AlunoDTO> obterAlunosDoMatricula(int idMatricula) {
         List<AlunoDTO> listaAlunos = new ArrayList<>();
@@ -175,16 +183,47 @@ public class MatriculaDAO {
             // Fechar a conexão com o banco de dados
 
         } catch (SQLException e) {
-            System.out.println("Erro ao obter os alunos do curso: " + e.getMessage());
+            System.out.println("Erro ao obter os alunos da matricula: " + e.getMessage());
         }
         return listaAlunos;
     }
 
-    public List<ProfessorDTO> obterProfessoresDoCurso(int idMatricula) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<CursoDTO> obterCursosDaMatricula(int idMatricula) {
+        List<CursoDTO> listaCursos = new ArrayList<>();
+        try {
+            // Estabelecer a conexão com o banco de dados (assumindo que já existe uma classe de conexão)
+
+            // Criar a consulta SQL para obter os cursos do curso
+            String consulta = "SELECT * FROM curso WHERE matricula_id = ?";
+
+            // Preparar a declaração SQL
+            PreparedStatement stmt = ConexaoDAO.con.prepareStatement(consulta);
+            stmt.setInt(1, idMatricula);
+
+            // Executar a consulta e obter o resultado
+            ResultSet rs = stmt.executeQuery();
+
+            // Percorrer o resultado e criar objetos CursoDTO
+            while (rs.next()) {
+                CursoDTO curso = new CursoDTO();
+                curso.setId(rs.getInt("id"));
+                curso.setNome_cur(rs.getString("nome"));
+                // Preencher outros atributos do curso, se necessário
+
+                // Adicionar o curso à lista de cursos
+                listaCursos.add(curso);
+            }
+
+            // Fechar o ResultSet, o PreparedStatement e a conexão
+            rs.close();
+            stmt.close();
+            // Fechar a conexão com o banco de dados
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao obter os cursos da matricula: " + e.getMessage());
+        }
+        return listaCursos;
     }
 
-    public List<CursoDTO> listarCursos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
 }

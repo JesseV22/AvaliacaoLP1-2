@@ -9,9 +9,23 @@ import br.com.avaliacao_2.dto.MatriculaDTO;
  */
 public class CursoDTO {
 
-    private String nome_cur, descri_cur, carga_cur;
     private int id;
+    private String nome_cur, descri_cur, carga_cur;
     private MatriculaDTO matricula; // atributo que representa a chave estrangeira para a tabela curso
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
 
     /**
      * @return the nome_cur
@@ -56,20 +70,6 @@ public class CursoDTO {
     }
 
     /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
      * @return the matricula
      */
     public MatriculaDTO getMatricula() {
@@ -83,6 +83,6 @@ public class CursoDTO {
         this.matricula = matricula;
     }
 
-  
+    
 
 }

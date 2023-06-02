@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
  */
 public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
-    SimpleDateFormat data_marmat = new SimpleDateFormat("dd/mm/yyyy");
+    SimpleDateFormat data_matmat = new SimpleDateFormat("dd/mm/yyyy");
 
     MatriculaDTO matriculaDTO = new MatriculaDTO(); //Cria um objeto matriculaDTO
     MatriculaCTR matriculaCTR = new MatriculaCTR(); //Cria um objeto matriculaCTR
@@ -62,9 +62,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        data_mar = new javax.swing.JFormattedTextField();
+        data_mat = new javax.swing.JFormattedTextField();
         comboBoxCursos = new javax.swing.JComboBox<>();
-        comboBoxAlunos = new javax.swing.JComboBox();
+        comboBoxAlunos = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         pesquisa_nome_mar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -89,13 +89,13 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         jLabel4.setText("DATA");
 
         try {
-            data_mar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            data_mat.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        data_mar.addActionListener(new java.awt.event.ActionListener() {
+        data_mat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                data_marActionPerformed(evt);
+                data_matActionPerformed(evt);
             }
         });
 
@@ -109,6 +109,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
             }
         });
 
+        comboBoxAlunos.setToolTipText("");
         comboBoxAlunos.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 comboBoxAlunosAncestorAdded(evt);
@@ -131,7 +132,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(data_mar, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                    .addComponent(data_mat, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                     .addComponent(comboBoxCursos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comboBoxAlunos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(60, Short.MAX_VALUE))
@@ -149,7 +150,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
                     .addComponent(comboBoxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(data_mar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(data_mat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(26, 26, 26))
         );
@@ -387,9 +388,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         preencheTabela(pesquisa_nome_mar.getText());
     }//GEN-LAST:event_btnPesquisar_proActionPerformed
 
-    private void data_marActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_data_marActionPerformed
+    private void data_matActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_data_matActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_data_marActionPerformed
+    }//GEN-LAST:event_data_matActionPerformed
 
     private void comboBoxAlunosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_comboBoxAlunosAncestorAdded
         AlunoDAO dao = new AlunoDAO();
@@ -423,7 +424,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
     private void gravar() {
         try {
-            matriculaDTO.setData_mar(data_marmat.parse(data_mar.getText()));
+            matriculaDTO.setData_mat(data_matmat.parse(data_mat.getText()));
             List<AlunoDTO> AlunoVIEW = null;
             List<CursoDTO> CursoVIEW = null;
 
@@ -441,7 +442,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
     private void alterar() {
         try {
             MatriculaDTO matriculaDTO = new MatriculaDTO();
-            matriculaDTO.setData_mar(data_marmat.parse(data_mar.getText()));
+            matriculaDTO.setData_mat(data_matmat.parse(data_mat.getText()));
             List<AlunoDTO> AlunoVIEW = null;
             List<CursoDTO> CursoVIEW = null;
 
@@ -470,7 +471,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
     private void liberaCampos(boolean a) {
 
-        data_mar.setEnabled(a);
+        data_mat.setEnabled(a);
 
     }//Fecha método liberaCampos(boolean a)
 
@@ -496,7 +497,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
      */
     private void limpaCampos() {
 
-        data_mar.setText("");
+        data_mat.setText("");
     }//Fecha método limpaCampos()
 
     /**
@@ -504,12 +505,12 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
      *
      * @param nome_al, String com o nome do aluno
      */
-    private void preencheTabela(String aluno_mar) {
+    private void preencheTabela(String aluno_id) {
         try {
             // Limpa todas as linhas
             modelo_jtl_consultar_mar.setNumRows(0);
 
-            matriculaDTO.setAluno_mar(aluno_mar);
+            
             rs = matriculaCTR.consultarMatricula(matriculaDTO, 1); // 1 = é a pesquisa por nome na classe DAO
 
             List<CursoDTO> CursoVIEW = null; // Declaração da lista CursoVIEW
@@ -538,7 +539,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
             if (rs.next()) {
                 limpaCampos();
 
-                data_mar.setText(rs.getString("data_mar"));
+                data_mat.setText(rs.getString("data_mar"));
 
                 // Criar uma lista de cursos e preenchê-la com os dados desejados
                 List<CursoDTO> cursoVIEW = new ArrayList<>();
@@ -567,9 +568,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPesquisar_pro;
     private javax.swing.JButton btnSair3;
     private javax.swing.JButton btnSalvar3;
-    private javax.swing.JComboBox comboBoxAlunos;
+    private javax.swing.JComboBox<Object> comboBoxAlunos;
     private javax.swing.JComboBox<String> comboBoxCursos;
-    private javax.swing.JFormattedTextField data_mar;
+    private javax.swing.JFormattedTextField data_mat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -205,18 +205,18 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
 
         jtl_consultar_curso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "ID", "NOME", "DESCRICAO", "C.H"
+                "ID", "NOME"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -236,13 +236,13 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
                         .addComponent(pesquisa_nome_cur)
                         .addGap(18, 18, 18)
                         .addComponent(btnPesquisar_cur))))
@@ -257,8 +257,8 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5))
                     .addComponent(btnPesquisar_cur))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
@@ -274,7 +274,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(30, 30, 30)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(123, 123, 123)
@@ -361,7 +361,9 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
 
     private void jtl_consultar_cursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtl_consultar_cursoMouseClicked
         //Pega o id do cliente selecionado e chama preencheCampos
-        preencheCampos((int) jtl_consultar_curso.getValueAt(jtl_consultar_curso.getSelectedRow(), 0));
+        preencheCampos(Integer.parseInt(String.valueOf(
+                jtl_consultar_curso.getValueAt(
+                        jtl_consultar_curso.getSelectedRow(), 0))));
         liberaBotoes(false, true, true, true, true);
 
 
@@ -491,18 +493,20 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             if (cursoDTO != null) {
                 limpaCampos();
 
-                nome_cur.setText(cursoDTO.getNome_cur());
-                descri_cur.setText(cursoDTO.getDescri_cur());
-                carga_cur.setText(cursoDTO.getCarga_cur());
+                nome_cur.setText(rs.getString("nome_cur"));
+                descri_cur.setText(rs.getString("descri_cur"));
+                carga_cur.setText(rs.getString("carga_cur"));
 
                 // Preencher outros campos relacionados ao curso, se houver
                 gravar_alterar = 2;
                 liberaCampos(true);
             }
-        } catch (Exception e) {
-            System.out.println("Erro ao preencher campos do curso: " + e.getMessage());
+        } catch (Exception erTab) {
+            System.out.println("Erro SQL: " + erTab);
+        } finally {
+            cursoCTR.CloseDB();
         }
-    }
+    }//Fecha método preencheCampos(int id_aluno)
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

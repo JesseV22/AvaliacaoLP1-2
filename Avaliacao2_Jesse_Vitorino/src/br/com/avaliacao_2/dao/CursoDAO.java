@@ -44,7 +44,7 @@ public class CursoDAO {
             // Instancia o Statement que sera responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
             // Comando SQL que sera executado no banco de dados
-            String comando = "INSERT INTO curso (nome_cur, descri_cur, id , carga_cur) VALUES ( "
+            String comando = "INSERT INTO curso (id, nome_cur, descri_cur , carga_cur) VALUES ( "
                     + "nextval('serial_id') ,"
                     + "'" + cursoDTO.getNome_cur() + "', "
                     + "'" + cursoDTO.getDescri_cur() + "', "
@@ -114,10 +114,16 @@ public class CursoDAO {
             String comando = "";
             switch (opcao) {
                 case 1:
-                    comando = "SELECT id, nome_cur, descri_cur, carga_cur FROM curso WHERE nome_cur ILIKE '" + cursoDTO.getNome_cur() + "%' ORDER BY nome_cur";
+                    comando = "SELECT id, nome_cur, descri_cur, carga_cur "
+                            + "FROM curso "
+                            + "WHERE nome_cur ILIKE '"
+                            + cursoDTO.getNome_cur() + "%' "
+                            + "ORDER BY nome_cur";
                     break;
                 case 2:
-                    comando = "SELECT nome_cur, descri_cur, carga_cur FROM curso WHERE id = " + cursoDTO.getId();
+                    comando = "SELECT nome_cur, descri_cur, carga_cur "
+                            + "FROM curso "
+                            + "WHERE id = " + cursoDTO.getId();
                     break;
             }
             rs = stmt.executeQuery(comando);
@@ -151,14 +157,9 @@ public class CursoDAO {
             rs.close();
             stmt.close();
 
-        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
-        //console com o que esta acontecendo.
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-
-        } //Independente de dar erro ou não ele vai fechar o banco de dados.
-        finally {
-            //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
+        } finally {
             ConexaoDAO.CloseDB();
         }
         return cursos;

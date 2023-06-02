@@ -52,10 +52,12 @@ public class ProfessorDAO {
             ConexaoDAO.con.commit();
             stmt.close();
             return true;
+            //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+            //console com o que esta acontecendo.
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
-        } finally {
+        } finally {//Independente de dar erro ou não ele vai fechar o banco de dados.
             ConexaoDAO.CloseDB();
         }
     }//Fecha metodo inserir professor

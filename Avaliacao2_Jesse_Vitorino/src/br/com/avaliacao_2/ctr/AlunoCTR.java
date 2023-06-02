@@ -86,20 +86,19 @@ public class AlunoCTR {
      */
     public String excluirAluno(AlunoDTO alunoDTO) {
         try {
-            // Obtém o ID do aluno do objeto AlunoDTO
-            int id = alunoDTO.getId();
-
-            // Chama o método da classe DAO para excluir o aluno
-            if (alunoDAO.excluirAluno(id)) {
+            //Chama o metodo que esta na classe DAO aguardando uma resposta (true ou false)
+            if (alunoDAO.excluirAluno(alunoDTO)) {
                 return "Aluno Excluído com Sucesso!!!";
             } else {
                 return "Aluno NÃO Excluído!!!";
             }
-        } catch (Exception e) {
+        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+          //console com o que esta acontecendo.
+        catch (Exception e) {
             System.out.println(e.getMessage());
             return "Aluno NÃO Excluído!!!";
         }
-    }
+    }//Fecha o método excluirAluno
 
     /**
      * Método utilizado para controlar o acesso ao método consultarAluno da

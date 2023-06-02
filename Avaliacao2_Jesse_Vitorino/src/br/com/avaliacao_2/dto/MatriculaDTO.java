@@ -11,56 +11,11 @@ import java.util.List;
  * @author Jesse
  */
 public class MatriculaDTO {
-    private  String aluno_mar , curso_mar ;
-    private int id ;
-    private Date data_mar;
+
+    private int id ,aluno_id, curso_id ;
+    private Date data_mat;
     private List<AlunoDTO> alunos; // atributo que representa o relacionamento 1-N com a tabela aluno
     private List<CursoDTO> cursos; // atributo que representa o relacionamento 1-N com a tabela aluno
-
-
-    /**
-     * @return the aluno_mar
-     */
-    public String getAluno_mar() {
-        return aluno_mar;
-    }
-
-    /**
-     * @param aluno_mar the aluno_mar to set
-     */
-    public void setAluno_mar(String aluno_mar) {
-        this.aluno_mar = aluno_mar;
-    }
-
-    /**
-     * @return the curso_mar
-     */
-    public String getCurso_mar() {
-        return curso_mar;
-    }
-
-    /**
-     * @param curso_mar the curso_mar to set
-     */
-    public void setCurso_mar(String curso_mar) {
-        this.curso_mar = curso_mar;
-    }
-
-
-
-    /**
-     * @return the data_mar
-     */
-    public Date getData_mar() {
-        return data_mar;
-    }
-
-    /**
-     * @param data_mar the data_mar to set
-     */
-    public void setData_mar(Date data_mar) {
-        this.data_mar = data_mar;
-    }
 
     /**
      * @return the id
@@ -74,6 +29,48 @@ public class MatriculaDTO {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the aluno_id
+     */
+    public int getAluno_id() {
+        return aluno_id;
+    }
+
+    /**
+     * @param aluno_id the aluno_id to set
+     */
+    public void setAluno_id(int aluno_id) {
+        this.aluno_id = aluno_id;
+    }
+
+    /**
+     * @return the curso_id
+     */
+    public int getCurso_id() {
+        return curso_id;
+    }
+
+    /**
+     * @param curso_id the curso_id to set
+     */
+    public void setCurso_id(int curso_id) {
+        this.curso_id = curso_id;
+    }
+
+    /**
+     * @return the data_mat
+     */
+    public Date getData_mat() {
+        return data_mat;
+    }
+
+    /**
+     * @param data_mat the data_mat to set
+     */
+    public void setData_mat(Date data_mat) {
+        this.data_mat = data_mat;
     }
 
     /**
@@ -103,6 +100,7 @@ public class MatriculaDTO {
     public void setCursos(List<CursoDTO> cursos) {
         this.cursos = cursos;
     }
-    
+
+   
     
 }

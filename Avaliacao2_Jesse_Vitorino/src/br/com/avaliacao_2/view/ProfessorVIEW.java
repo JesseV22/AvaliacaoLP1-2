@@ -9,6 +9,7 @@ import br.com.avaliacao_2.dto.ProfessorDTO;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
@@ -229,11 +230,15 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7)))
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tel_prof)
-                            .addComponent(end_prof)
-                            .addComponent(especialidade, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(end_prof)
+                                    .addComponent(especialidade, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(tel_prof, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -274,10 +279,11 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 135, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(pesquisa_nome_prof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPesquisar_pro))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPesquisar_pro, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5)
+                                .addComponent(pesquisa_nome_prof, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(24, 24, 24)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
@@ -467,12 +473,7 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 modelo_jtl_consultar_prof.addRow(new Object[]{
                     rs.getString("id"),
-                    rs.getString("nome_prof"),
-                    rs.getString("email_prof"),
-                    rs.getString("end_prof"),
-                    rs.getString("tel_prof"),
-                    rs.getString("especialidade"),}
-                );
+                    rs.getString("nome_prof"),});
             }
         } catch (Exception erTab) {
             System.out.println("Erro SQL: " + erTab);
@@ -493,16 +494,19 @@ public class ProfessorVIEW extends javax.swing.JInternalFrame {
                 end_prof.setText(rs.getString("end_prof"));
                 tel_prof.setText(rs.getString("tel_prof"));
                 especialidade.setText(rs.getString("especialidade"));
-
+            
+                // Preencher outros campos relacionados ao curso, se houver
                 gravar_alterar = 2;
                 liberaCampos(true);
-            }
-        } catch (Exception erTab) {
+          }//fecha if(rs.next)
+        } //fecha try
+        catch (SQLException erTab) {
             System.out.println("Erro SQL: " + erTab);
         } finally {
             professorCTR.CloseDB();
         }
     }//Fecha método preencheCampos(int id_professor)
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;

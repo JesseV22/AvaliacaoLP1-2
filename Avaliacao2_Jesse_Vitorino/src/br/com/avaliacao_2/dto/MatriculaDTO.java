@@ -14,6 +14,7 @@ public class MatriculaDTO {
 
     private int id ,aluno_id, curso_id ;
     private Date data_mat;
+    private String comboBoxAlunos,comboBoxCursos;
     private List<AlunoDTO> alunos; // atributo que representa o relacionamento 1-N com a tabela aluno
     private List<CursoDTO> cursos; // atributo que representa o relacionamento 1-N com a tabela aluno
 
@@ -99,6 +100,34 @@ public class MatriculaDTO {
      */
     public void setCursos(List<CursoDTO> cursos) {
         this.cursos = cursos;
+    }
+
+    /**
+     * @return the comboBoxAlunos
+     */
+    public String getComboBoxAlunos() {
+        return comboBoxAlunos;
+    }
+
+    /**
+     * @param comboBoxAlunos the comboBoxAlunos to set
+     */
+    public void setComboBoxAlunos(String comboBoxAlunos) {
+        this.comboBoxAlunos = comboBoxAlunos;
+    }
+
+    /**
+     * @return the comboBoxCursos
+     */
+    public String getComboBoxCursos() {
+        return comboBoxCursos;
+    }
+
+    /**
+     * @param comboBoxCursos the comboBoxCursos to set
+     */
+    public void setComboBoxCursos(String comboBoxCursos) {
+        this.comboBoxCursos = comboBoxCursos;
     }
 
    

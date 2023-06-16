@@ -80,4 +80,46 @@ public class ConexaoDAO {
             e.printStackTrace();
         }
     }
+    // Método para realizar a ligação entre os cursos do matriculaVIEW e do CursoVIEW
+    public void realizarLigacaoCursos() {
+        try {
+            // Consulta para obter a lista de cursos do matriculaVIEW
+            String matriculaviewQuery = "SELECT * FROM matriculaview_cursos";
+            PreparedStatement matriculaviewStatement = con.prepareStatement(matriculaviewQuery);
+            ResultSet matriculaviewResult = matriculaviewStatement.executeQuery();
+
+            // Consulta para obter os cursos cadastrados no banco do CursoVIEW
+            String cursoviewQuery = "SELECT * FROM cursoview_cursos WHERE numero_identificacao = ?";
+            PreparedStatement cursoviewStatement = con.prepareStatement(cursoviewQuery);
+
+            while (matriculaviewResult.next()) {
+                int numeroIdentificacao = matriculaviewResult.getInt("numero_identificacao");
+
+                // Realiza a ligação utilizando o número de identificação do curso
+                cursoviewStatement.setInt(1, numeroIdentificacao);
+                ResultSet cursoviewResult = cursoviewStatement.executeQuery();
+
+                // Exibe os resultados da ligação
+                while (cursoviewResult.next()) {
+                    int cursoMatriculaViewId = matriculaviewResult.getInt("id");
+                    String cursoMatriculaViewNome = matriculaviewResult.getString("nome");
+
+                    int cursoCursoViewId = cursoviewResult.getInt("id");
+                    String cursoCursoViewNome = cursoviewResult.getString("nome");
+
+                    System.out.println("Curso do matriculaVIEW: " + cursoMatriculaViewId + " - " + cursoMatriculaViewNome);
+                    System.out.println("Curso do CursoVIEW: " + cursoCursoViewId + " - " + cursoCursoViewNome);
+                    System.out.println("---------------------------------------");
+                }
+
+                cursoviewResult.close();
+            }
+
+            matriculaviewResult.close();
+            cursoviewStatement.close();
+            matriculaviewStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

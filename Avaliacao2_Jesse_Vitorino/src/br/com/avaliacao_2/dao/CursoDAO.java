@@ -90,22 +90,34 @@ public class CursoDAO {
         }
     }
 
-    public boolean excluirCurso(int id) {
+    public boolean excluirCurso(CursoDTO cursoDTO) {
         try {
+            //Chama o metodo que esta na classe ConexaoDAO para abrir o banco de dados
             ConexaoDAO.ConectDB();
+            //Instancia o Statement que responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "DELETE FROM curso WHERE id = " + id;
-            stmt.executeUpdate(comando.toUpperCase());
+            //Comando SQL que sera executado no banco de dados
+            String comando = "Delete from curso where id = "
+                    + cursoDTO.getId();
+
+            //Executa o comando SQL no banco de Dados
+            stmt.execute(comando);
+            //Da um commit no banco de dados
             ConexaoDAO.con.commit();
+            //Fecha o statement
             stmt.close();
             return true;
-        } catch (Exception e) {
+        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+        //console com o que esta acontecendo.
+        catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
-        } finally {
+        } //Independente de dar erro ou não ele vai fechar o banco de dados.
+        finally {
+            //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
             ConexaoDAO.CloseDB();
         }
-    }
+    }//Fecha o método excluirCurso
 
     public ResultSet consultarCurso(CursoDTO cursoDTO, int opcao) {
         try {
@@ -116,32 +128,33 @@ public class CursoDAO {
                 case 1:
                     comando = "SELECT id, nome_cur, descri_cur, carga_cur "
                             + "FROM curso "
-                            + "WHERE nome_cur ILIKE '"
-                            + cursoDTO.getNome_cur() + "%' "
+                            + "WHERE nome_cur ILIKE '" + cursoDTO.getNome_cur() + "%' "
                             + "ORDER BY nome_cur";
                     break;
                 case 2:
-                    comando = "SELECT nome_cur, descri_cur, carga_cur "
+                    comando = "SELECT nome_cur, descri_cur ,carga_cur "
                             + "FROM curso "
                             + "WHERE id = " + cursoDTO.getId();
                     break;
+                    
             }
-            rs = stmt.executeQuery(comando);
+             rs = stmt.executeQuery(comando.toUpperCase());
             return rs;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return null;
+            return rs;
         }
     }
 
     public List<CursoDTO> listarCursos() {
         List<CursoDTO> cursos = new ArrayList<>();
-        CursoDAO cursoDAO = new CursoDAO();
 
         try {
-            String query = "SELECT * FROM cursoview_curso";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            ConexaoDAO.ConectDB();
+            String query = "SELECT * FROM curso";
+
+            stmt = ConexaoDAO.con.createStatement();
+            rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 CursoDTO curso = new CursoDTO();
@@ -156,12 +169,12 @@ public class CursoDAO {
 
             rs.close();
             stmt.close();
-
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
             ConexaoDAO.CloseDB();
         }
+
         return cursos;
     }
 

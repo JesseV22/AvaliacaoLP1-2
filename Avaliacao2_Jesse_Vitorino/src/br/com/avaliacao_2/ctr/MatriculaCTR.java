@@ -27,8 +27,6 @@ public class MatriculaCTR {
     AlunoDAO alunoDAO = new AlunoDAO();
     CursoDAO professorDAO = new CursoDAO();
 
-    
-
     /**
      * Método construtor da classe
      */
@@ -90,20 +88,19 @@ public class MatriculaCTR {
      */
     public String excluirMatricula(MatriculaDTO matriculaDTO) {
         try {
-            // Obtém o ID da matricula do objeto MatriculaDTO
-            int id = matriculaDTO.getId();
-
-            // Chama o método da classe DAO para excluir a matricula
-            if (matriculaDAO.excluirMatricula(id)) {
+            //Chama o metodo que esta na classe DAO aguardando uma resposta (true ou false)
+            if (matriculaDAO.excluirMatricula(matriculaDTO)) {
                 return "Matricula Excluído com Sucesso!!!";
             } else {
                 return "Matricula NÃO Excluído!!!";
             }
-        } catch (Exception e) {
+        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+        //console com o que esta acontecendo.
+        catch (Exception e) {
             System.out.println(e.getMessage());
             return "Matricula NÃO Excluído!!!";
         }
-    }
+    }//Fecha o método excluirMatricula
 
     /**
      * Método utilizado para controlar o acesso ao método consultarMatricula da
@@ -129,7 +126,7 @@ public class MatriculaCTR {
         ConexaoDAO.CloseDB();
     }//Fecha o método CloseDB
 
-     public List<AlunoDTO> listarAlunosDoMatricula(int idMatricula) {
+    public List<AlunoDTO> listarAlunosDoMatricula(int idMatricula) {
         List<AlunoDTO> listaAlunos = new ArrayList<>();
 
         try {

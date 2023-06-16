@@ -69,6 +69,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         pesquisa_nome_cur = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnPesquisar_cur = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtl_consultar_curso = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -230,35 +231,39 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jtl_consultar_curso);
 
+        jScrollPane1.setViewportView(jScrollPane2);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
-                        .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(pesquisa_nome_cur)
                         .addGap(18, 18, 18)
-                        .addComponent(btnPesquisar_cur))))
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(pesquisa_nome_cur, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPesquisar_cur)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(395, 395, 395))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(pesquisa_nome_cur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
                     .addComponent(btnPesquisar_cur))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
@@ -275,14 +280,14 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                         .addGap(64, 64, 64)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(450, 450, 450)
                         .addComponent(jLabel2)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +296,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -307,7 +312,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,20 +367,19 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private void jtl_consultar_cursoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtl_consultar_cursoMouseClicked
         //Pega o id do cliente selecionado e chama preencheCampos
         preencheCampos(Integer.parseInt(String.valueOf(
-                jtl_consultar_curso.getValueAt(
-                        jtl_consultar_curso.getSelectedRow(), 0))));
-        liberaBotoes(false, true, true, true, true);
-
+            jtl_consultar_curso.getValueAt(
+                jtl_consultar_curso.getSelectedRow(), 0))));
+liberaBotoes(false, true, true, true, true);
 
     }//GEN-LAST:event_jtl_consultar_cursoMouseClicked
-
-    private void pesquisa_nome_curActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisa_nome_curActionPerformed
-        preencheTabela(pesquisa_nome_cur.getText());
-    }//GEN-LAST:event_pesquisa_nome_curActionPerformed
 
     private void btnPesquisar_curActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar_curActionPerformed
         preencheTabela(pesquisa_nome_cur.getText());
     }//GEN-LAST:event_btnPesquisar_curActionPerformed
+
+    private void pesquisa_nome_curActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisa_nome_curActionPerformed
+        preencheTabela(pesquisa_nome_cur.getText());
+    }//GEN-LAST:event_pesquisa_nome_curActionPerformed
 
     /**
      * Método para centralizar o internalFrame.
@@ -467,9 +471,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
             while (rs.next()) {
                 modelo_jtl_consultar_curso.addRow(new Object[]{
                     rs.getString("id"),
-                    rs.getString("nome_cur"),
-                    rs.getString("descri_cur"),
-                    rs.getString("carga_cur")});
+                    rs.getString("nome_cur")});
 
             }
         } catch (SQLException erTab) {
@@ -489,8 +491,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
         try {
             cursoDTO.setId(id);
             rs = cursoCTR.consultarCurso(cursoDTO, 2); // 2 = é a pesquisa no id na classe DAO
-
-            if (cursoDTO != null) {
+            if (rs.next()) {
                 limpaCampos();
 
                 nome_cur.setText(rs.getString("nome_cur"));
@@ -527,6 +528,7 @@ public class CursoVIEW extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jtl_consultar_curso;
     private javax.swing.JTextField nome_cur;

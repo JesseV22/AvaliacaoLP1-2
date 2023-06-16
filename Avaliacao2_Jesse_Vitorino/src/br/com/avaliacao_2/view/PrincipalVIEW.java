@@ -4,6 +4,7 @@
  */
 package br.com.avaliacao_2.view;
 
+import br.com.avaliacao_2.dto.FuncionarioDTO;
 import javax.swing.JOptionPane;
 import java.awt.Image;
 import java.awt.Graphics;
@@ -18,8 +19,12 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     /**
      * Creates new form PrincipalVIEW
      */
-    public PrincipalVIEW() {
+    public PrincipalVIEW(FuncionarioDTO funcionarioDTO) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        if(funcionarioDTO.getTipo_fun().equalsIgnoreCase("COMUM")) {
+            itemMenuFuncionario.setVisible(false);
+    }
     }
 
     @SuppressWarnings("unchecked")
@@ -41,7 +46,8 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         itemMenuAluno = new javax.swing.JMenuItem();
         itemMenuCurso = new javax.swing.JMenuItem();
         itemMenuProfessor = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        itemMenuFuncionario = new javax.swing.JMenuItem();
+        menuMatricula = new javax.swing.JMenu();
         itemMenuMatricula = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
@@ -82,9 +88,17 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         });
         menuGerenciamento.add(itemMenuProfessor);
 
+        itemMenuFuncionario.setText("Funcionario");
+        itemMenuFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuFuncionarioActionPerformed(evt);
+            }
+        });
+        menuGerenciamento.add(itemMenuFuncionario);
+
         menuBar.add(menuGerenciamento);
 
-        jMenu1.setText("Matricula");
+        menuMatricula.setText("Matricula");
 
         itemMenuMatricula.setMnemonic('s');
         itemMenuMatricula.setText("Matricula");
@@ -93,9 +107,9 @@ public class PrincipalVIEW extends javax.swing.JFrame {
                 itemMenuMatriculaActionPerformed(evt);
             }
         });
-        jMenu1.add(itemMenuMatricula);
+        menuMatricula.add(itemMenuMatricula);
 
-        menuBar.add(jMenu1);
+        menuBar.add(menuMatricula);
 
         menuSair.setMnemonic('h');
         menuSair.setText("Sair");
@@ -134,10 +148,6 @@ public class PrincipalVIEW extends javax.swing.JFrame {
         abreAlunoVIEW();
     }//GEN-LAST:event_itemMenuAlunoActionPerformed
 
-    private void itemMenuMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuMatriculaActionPerformed
-       abreMatriculaVIEW();
-    }//GEN-LAST:event_itemMenuMatriculaActionPerformed
-
     private void itemMenuCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuCursoActionPerformed
        abreCursoVIEW();
     }//GEN-LAST:event_itemMenuCursoActionPerformed
@@ -149,6 +159,14 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     private void itemMenuProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuProfessorActionPerformed
         abreProfessorVIEW();
     }//GEN-LAST:event_itemMenuProfessorActionPerformed
+
+    private void itemMenuMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuMatriculaActionPerformed
+        abreMatriculaVIEW();
+    }//GEN-LAST:event_itemMenuMatriculaActionPerformed
+
+    private void itemMenuFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuFuncionarioActionPerformed
+        abreFuncionarioVIEW();
+    }//GEN-LAST:event_itemMenuFuncionarioActionPerformed
 
      /**
      * Método para fechar o sistema.
@@ -165,6 +183,16 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     /**
      * Método para abrir a classe GeralVIEW.
      */
+   /**
+     * Método para abrir a classe FuncionarioVIEW.
+     */
+    private void abreFuncionarioVIEW(){
+        FuncionarioVIEW funcionarioVIEW = new FuncionarioVIEW();
+        this.desktopPane.add(funcionarioVIEW);
+        funcionarioVIEW.setVisible(true); 
+        funcionarioVIEW.setPosicao();
+
+    }
 
     /**
      * Método para abrir a classe AlunoVIEW.
@@ -209,48 +237,50 @@ public class PrincipalVIEW extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrincipalVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrincipalVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrincipalVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrincipalVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PrincipalVIEW().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(PrincipalVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(PrincipalVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(PrincipalVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(PrincipalVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new PrincipalVIEW().setVisible(true);
+//            }
+//        });
+//    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem itemMenuAluno;
     private javax.swing.JMenuItem itemMenuCurso;
+    private javax.swing.JMenuItem itemMenuFuncionario;
     private javax.swing.JMenuItem itemMenuMatricula;
     private javax.swing.JMenuItem itemMenuProfessor;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuGerenciamento;
+    private javax.swing.JMenu menuMatricula;
     private javax.swing.JMenu menuSair;
     // End of variables declaration//GEN-END:variables
 

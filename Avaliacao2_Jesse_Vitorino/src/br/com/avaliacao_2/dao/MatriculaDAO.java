@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package br.com.avaliacao_2.dao;
 
 import br.com.avaliacao_2.dto.AlunoDTO;
@@ -26,16 +23,19 @@ public class MatriculaDAO {
     /**
      * Método construtor da classe
      */
-    public MatriculaDAO() {
-
-    }
-    SimpleDateFormat data_format = new SimpleDateFormat("dd/mm/yyyy");
     //Atributo do tipo ResultSet utilizado para realizar consultas
     //Atributo do tipo ResultSet utilizado para realizar consultas
     private ResultSet rs = null;
     //Manipular o banco de dados
-    private Statement stmt = null;
+    Statement stmt = null;
+    Statement stmt1 = null;
+    SimpleDateFormat data_format = new SimpleDateFormat("dd/mm/yyyy");
 
+    public MatriculaDAO() {
+
+    }
+
+// Preencha os demais campos da matriculaDTO, se necessário
     /**
      * Método utilizado para inserir um objeto matriculaDTO no banco de dados
      *
@@ -44,34 +44,26 @@ public class MatriculaDAO {
      */
     public boolean inserirMatricula(MatriculaDTO matriculaDTO) {
         try {
-            //Chama o metodo que esta na classe ConexaoDAO para abrir o banco de dados
             ConexaoDAO.ConectDB();
-            //Instancia o Statement que sera responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
-            //Comando SQL que sera executado no banco de dados
-            String comando = "INSERT INTO matricula (aluno_id, curso_id, data_mat) "
-                    + "VALUES (" + matriculaDTO.getAluno_id() 
-                    + ", " + matriculaDTO.getCurso_id() + ", "                    
-            +"to_date('" + data_format.format(matriculaDTO.getData_mat()) + "','dd/mm/yyyy')) ";
+            // Preencha os demais campos da matriculaDTO, se necessário
+            String comando = "INSERT INTO matricula (id, data_mat, AlunoID, CursoID) VALUES ("
+                    + "nextval('serial_id'), "
+                    + "to_date('" + data_format.format(matriculaDTO.getData_mat()) + "','dd/mm/yyyy') ,"
+                    + "" + matriculaDTO.getAluno_id() + ", "
+                    + "" + matriculaDTO.getCurso_id() + ") ";
 
-            //Executa o comando SQL no banco de Dados
             stmt.execute(comando.toUpperCase());
-            //Da um commit no banco de dados
             ConexaoDAO.con.commit();
-            //Fecha o statement
             stmt.close();
             return true;
-        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
-        //console com o que esta acontecendo.
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
-        } //Independente de dar erro ou não ele vai fechar o banco de dados.
-        finally {
-            //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
+        } finally {
             ConexaoDAO.CloseDB();
         }
-    }//Fecha metodo inserir matricula
+    }
 
     /**
      * Método utilizado para alterar um objeto matriculaDTO no banco de dados
@@ -83,11 +75,12 @@ public class MatriculaDAO {
         try {
             ConexaoDAO.ConectDB();
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "UPDATE matricula SET aluno_id = "
-                    + matriculaDTO.getAluno_id() + ", "
-                    + "curso_id = " + matriculaDTO.getCurso_id() + ", "
-                    + "data_mat = to_date('" + data_format.format(matriculaDTO.getData_mat()) + "','dd/mm/yyyy') "
-                    + "WHERE id_mat = " + matriculaDTO.getId();
+            String comando = "UPDATE matricula SET  "
+                    + "data_mat = to_date('" + data_format.format(matriculaDTO.getData_mat()) + "','dd/mm/yyyy'), "
+                    + "aluno_id = "+ matriculaDTO.getAluno_id()+ ","
+                    + "curso_id = "+ matriculaDTO.getCurso_id()+","
+                    + "WHERE id = " + matriculaDTO.getId();
+            
 
             stmt.executeUpdate(comando.toUpperCase());
             ConexaoDAO.con.commit();
@@ -107,22 +100,34 @@ public class MatriculaDAO {
      * @param id
      * @return
      */
-    public boolean excluirMatricula(int id) {
+    public boolean excluirMatricula(MatriculaDTO MatriculaDTO) {
         try {
+            //Chama o metodo que esta na classe ConexaoDAO para abrir o banco de dados
             ConexaoDAO.ConectDB();
+            //Instancia o Statement que responsavel por executar alguma coisa no banco de dados
             stmt = ConexaoDAO.con.createStatement();
-            String comando = "DELETE FROM matricula WHERE id_mat = " + id;
-            stmt.executeUpdate(comando.toUpperCase());
+            //Comando SQL que sera executado no banco de dados
+            String comando = "Delete from Matricula where id = "
+                    + MatriculaDTO.getId();
+
+            //Executa o comando SQL no banco de Dados
+            stmt.execute(comando);
+            //Da um commit no banco de dados
             ConexaoDAO.con.commit();
+            //Fecha o statement
             stmt.close();
             return true;
-        } catch (SQLException e) {
+        } //Caso tenha algum erro no codigo acima é enviado uma mensagem no 
+        //console com o que esta acontecendo.
+        catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
-        } finally {
+        } //Independente de dar erro ou não ele vai fechar o banco de dados.
+        finally {
+            //Chama o metodo da classe ConexaoDAO para fechar o banco de dados
             ConexaoDAO.CloseDB();
         }
-    }
+    }//Fecha o método excluirMatricula
 
     public ResultSet consultarMatricula(MatriculaDTO matriculaDTO, int opcao) {
         try {
@@ -131,12 +136,12 @@ public class MatriculaDAO {
             String comando = "";
             switch (opcao) {
                 case 1:
-                    comando = "SELECT id, aluno_id, curso_id  , data_ma tFROM matricula WHERE nome_cur ILIKE '"
+                    comando = "SELECT id,  data_ma FROM matricula WHERE nome_cur ILIKE '"
                             + matriculaDTO.getId()
                             + "%' ORDER BY nome_cur";
                     break;
                 case 2:
-                    comando = "SELECT aluno_id, curso_id  ,data_mat FROM matricula "
+                    comando = "SELECT data_mat FROM matricula "
                             + "to_char(f.data_mat, 'dd/mm/yyyy') as data_mat "
                             + "WHERE id = "
                             + matriculaDTO.getId();
@@ -225,5 +230,4 @@ public class MatriculaDAO {
         return listaCursos;
     }
 
-   
 }

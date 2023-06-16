@@ -167,40 +167,35 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
         jtl_consultar_mar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "ALUNO", "CURSO", "DATA"
+                "ID", "DATA"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jScrollPane2.setViewportView(jtl_consultar_mar);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pesquisa_nome_mar, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPesquisar_pro))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pesquisa_nome_mar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPesquisar_pro)
+                        .addGap(30, 30, 30))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,9 +206,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
                         .addComponent(pesquisa_nome_mar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5))
                     .addComponent(btnPesquisar_pro))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
@@ -294,22 +289,21 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(340, 340, 340)
+                        .addGap(400, 400, 400)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
+                        .addGap(367, 367, 367)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(11, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(65, 65, 65)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(65, Short.MAX_VALUE)))
+                        .addGap(270, 270, 270)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,12 +313,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(156, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(363, 363, 363)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(19, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -384,10 +375,6 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnSair3ActionPerformed
 
-    private void btnPesquisar_proActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar_proActionPerformed
-        preencheTabela(pesquisa_nome_mar.getText());
-    }//GEN-LAST:event_btnPesquisar_proActionPerformed
-
     private void data_matActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_data_matActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_data_matActionPerformed
@@ -416,6 +403,10 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
             comboBoxCursos.addItem(curso.getNome_cur());
     }//GEN-LAST:event_comboBoxCursosAncestorAdded
     }
+    private void btnPesquisar_proActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar_proActionPerformed
+        preencheTabela(pesquisa_nome_mar.getText());
+    }//GEN-LAST:event_btnPesquisar_proActionPerformed
+    
 
     public void setPosicao() {
         Dimension d = this.getDesktopPane().getSize();
@@ -424,13 +415,24 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
 
     private void gravar() {
         try {
+           AlunoDAO alunodao = new AlunoDAO();
+           CursoDAO cursodao = new CursoDAO();
+
+          int indiceSelecionadoaluno = comboBoxAlunos.getSelectedIndex();
+          List<AlunoDTO> listaaluno = alunodao.listarAlunos();
+          AlunoDTO alunodto = listaaluno.get( indiceSelecionadoaluno);
+
+          int indiceSelecionadocurso = comboBoxCursos.getSelectedIndex();
+          List<CursoDTO> listacurso = cursodao.listarCursos();
+          CursoDTO cursodto = listacurso.get(indiceSelecionadocurso);
+
+            System.out.println(alunodto.getNome_al());  //Prints "Hello Nepal"
+         
             matriculaDTO.setData_mat(data_matmat.parse(data_mat.getText()));
-            List<AlunoDTO> AlunoVIEW = null;
-            List<CursoDTO> CursoVIEW = null;
-
-            matriculaDTO.setAlunos(AlunoVIEW);
-            matriculaDTO.setCursos(CursoVIEW);
-
+            matriculaDTO.setAluno_id(alunodto.getId());
+            matriculaDTO.setCurso_id(cursodto.getId());
+ 
+            
             JOptionPane.showMessageDialog(null,
                     matriculaCTR.inserirMatricula(matriculaDTO)
             );
@@ -443,11 +445,7 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
         try {
             MatriculaDTO matriculaDTO = new MatriculaDTO();
             matriculaDTO.setData_mat(data_matmat.parse(data_mat.getText()));
-            List<AlunoDTO> AlunoVIEW = null;
-            List<CursoDTO> CursoVIEW = null;
 
-            matriculaDTO.setAlunos(AlunoVIEW);
-            matriculaDTO.setCursos(CursoVIEW);
 
             JOptionPane.showMessageDialog(null,
                     matriculaCTR.alterarMatricula(matriculaDTO)
@@ -470,9 +468,9 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
     // * @param a, boolean com true(libera) false(bloqueia).
 
     private void liberaCampos(boolean a) {
-
         data_mat.setEnabled(a);
-
+        comboBoxCursos.setEnabled(a);
+        comboBoxAlunos.setEnabled(a);
     }//Fecha método liberaCampos(boolean a)
 
     /**
@@ -496,40 +494,35 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
      * Método utilizado para limpar os campos da tela.
      */
     private void limpaCampos() {
-
         data_mat.setText("");
+        comboBoxCursos.setSelectedIndex(0);
+        comboBoxAlunos.setSelectedIndex(0);
     }//Fecha método limpaCampos()
 
     /**
      * Método utilizado para preencher/contruir a Jtable.
      *
-     * @param nome_al, String com o nome do aluno
+     * @param nome, String com o nome do cliente
      */
-    private void preencheTabela(String aluno_id) {
+    private void preencheTabela(String comboBoxAlunos) {
         try {
-            // Limpa todas as linhas
+            //Limpa todas as linhas
             modelo_jtl_consultar_mar.setNumRows(0);
-
-            
-            rs = matriculaCTR.consultarMatricula(matriculaDTO, 1); // 1 = é a pesquisa por nome na classe DAO
-
-            List<CursoDTO> CursoVIEW = null; // Declaração da lista CursoVIEW
-            matriculaDTO.setCursos(CursoVIEW); // Atribuição da lista à propriedade cursos
-            List<AlunoDTO> AlunoVIEW = null; // Declaração da lista AlunoVIEW
-            matriculaDTO.setAlunos(AlunoVIEW); // Atribuição da lista à propriedade cursos
-
+            //Enquanto tiver linhas - faça
+            matriculaDTO.setComboBoxAlunos(comboBoxAlunos);
+            rs = matriculaCTR.consultarMatricula(matriculaDTO, 1); //1 = é a pesquisa por nome na classe DAO
             while (rs.next()) {
                 modelo_jtl_consultar_mar.addRow(new Object[]{
-                    rs.getString("id"),
-                    rs.getString("nome_mar")
-                });
+                    rs.getString("id_cli"),                    
+                    rs.getString("aluno_id"),});
+                
             }
-        } catch (SQLException erTab) {
+        } catch (Exception erTab) {
             System.out.println("Erro SQL: " + erTab);
         } finally {
             matriculaCTR.CloseDB();
         }
-    }
+    }//Fecha método preencheTabela(String nome)
 //Fecha método preencheTabela(String nome_al)
 
     private void preencheCampos(int id) {
@@ -540,15 +533,6 @@ public class MatriculaVIEW extends javax.swing.JInternalFrame {
                 limpaCampos();
 
                 data_mat.setText(rs.getString("data_mar"));
-
-                // Criar uma lista de cursos e preenchê-la com os dados desejados
-                List<CursoDTO> cursoVIEW = new ArrayList<>();
-                List<AlunoDTO> alunoVIEW = new ArrayList<>();
-                // Lógica para preencher a lista de cursos
-
-                // Definir a lista de cursos no objeto matriculaDTO
-                matriculaDTO.setCursos(cursoVIEW);
-                matriculaDTO.setAlunos (alunoVIEW);
 
                 gravar_alterar = 2;
                 liberaCampos(true);

@@ -1,7 +1,32 @@
 # AvaliacaoLP1-2
 AvaliacaoLP1-2
 
-<img alt="Captura de tela 2023-05-19 193437.png" src="https://github.com/JesseV22/AvaliacaoLP1-2/blob/main/Captura%20de%20tela%202023-05-19%20193437.png?raw=true" data-hpc="true" class="Box-sc-g0xbh4-0 kzRgrI">
-<img alt="Captura de tela 2023-05-19 194211.png" src="https://github.com/JesseV22/AvaliacaoLP1-2/blob/main/Captura%20de%20tela%202023-05-19%20194211.png?raw=true" data-hpc="true" class="Box-sc-g0xbh4-0 kzRgrI">
-<img alt="Captura de tela 2023-05-19 194248.png" src="https://github.com/JesseV22/AvaliacaoLP1-2/blob/main/Captura%20de%20tela%202023-05-19%20194248.png?raw=true" data-hpc="true" class="Box-sc-g0xbh4-0 kzRgrI">
-<img alt="Captura de tela 2023-05-19 194308.png" src="https://github.com/JesseV22/AvaliacaoLP1-2/blob/main/Captura%20de%20tela%202023-05-19%20194308.png?raw=true" data-hpc="true" class="Box-sc-g0xbh4-0 kzRgrI">
+
+
+
+Entidades:
+
+Curso
+
+Atributos: id (chave primária), carga_cur, nome_cur, descri_cur.
+Aluno
+
+Atributos: id (chave primária), nome_al, email_al, data_al, tel_al.
+Professor
+
+Atributos: id (chave primária), nome_prof, email_prof, end_prof, tel_prof, especialidade.
+Relacionamentos:
+
+Relacionamento 1-N entre Aluno e Matricula:
+
+A tabela Matricula possui a chave estrangeira AlunoID, que referencia a chave primária id na tabela Aluno.
+Isso significa que um aluno pode ter várias matrículas, enquanto uma matrícula pertence a apenas um aluno.
+Relacionamento 1-N entre Curso e Matricula:
+
+A tabela Matricula possui a chave estrangeira CursoID, que referencia a chave primária id na tabela Curso.
+Isso significa que um curso pode ter várias matrículas, enquanto uma matrícula pertence a apenas um curso.
+Relacionamento N-N entre Aluno e Curso através da tabela Matricula:
+
+A tabela Matricula atua como uma tabela de associação que conecta as tabelas Aluno e Curso.
+Ela possui as chaves estrangeiras AlunoID e CursoID, que referenciam as chaves primárias id nas tabelas Aluno e Curso, respectivamente.
+Isso permite que um aluno esteja matriculado em vários cursos e que um curso tenha vários alunos matriculados.
